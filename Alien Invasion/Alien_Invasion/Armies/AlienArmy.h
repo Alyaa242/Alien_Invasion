@@ -1,0 +1,32 @@
+#pragma once
+#include "Army.h"
+#include "..\Units\Unit.h"
+
+
+class Unit;
+class Army;
+class AlienDrone;
+class AlienSoldier;
+class AlienMonster;
+
+class AlienArmy : public Army
+{
+	LinkedQueue<Unit*> ASList;
+	Array<Unit*> AMList;
+	Deque<Unit*> ADList;
+
+public:
+
+	//Getters for each list (return pointer)
+
+	virtual void addUnit(Unit* unit);
+	virtual void attack();
+	virtual void print();
+	LinkedQueue<Unit*> GetASList();
+	bool pickAS(Unit*& unit);
+	bool pickAM(Unit*& unit);
+	bool pickFrontAD(Unit*& front);
+	bool pickBackAD(Unit*& back);
+	~AlienArmy();
+};
+
