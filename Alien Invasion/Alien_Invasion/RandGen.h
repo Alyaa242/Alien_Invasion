@@ -20,7 +20,7 @@ class RandGen
 		lowCapE, upCapE,
 		lowPowA, upPowA,
 		lowHealA, upHealA,
-		lowCapA, upCapA,
+		lowCapA, upCapA,HUPer
 	};
 
 	Game* game;		//pointer to game

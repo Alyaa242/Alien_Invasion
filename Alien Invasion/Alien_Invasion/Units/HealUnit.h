@@ -3,12 +3,12 @@
 class HealUnit : public Unit
 {
 
-	int cap;
+	//int cap;
 
 
 public:
 	virtual void attack();
-	HealUnit(int heal, int pow, int cap);
+	HealUnit(int heal, int pow, int cap, int t);
  
 
 

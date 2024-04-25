@@ -21,8 +21,12 @@ void EarthArmy::addUnit(Unit* unit)
 	else if (dynamic_cast<EarthTank*>(unit)) {
 		ETList.push(unit);
 	}
-	else {
+	else if (dynamic_cast<EarthGunnery*>(unit)) {
 		EGList.enqueue(unit, unit->getHealth() + unit->getPower());
+	}
+	else
+	{
+		HUList.push(unit);
 	}
 }
 
@@ -89,7 +93,7 @@ bool EarthArmy::pickEG(Unit*& unit)
 
 bool EarthArmy::pickHU(Unit*& unit)
 {
-	if (HUList.dequeue(unit))
+	if (HUList.pop(unit))
 		return true;
 	return false;
 }
@@ -112,7 +116,7 @@ EarthArmy::~EarthArmy()
 	}
 
 	
-	while (HUList.dequeue(temp)) {
+	while (HUList.pop(temp)) {
 		delete temp;
 	}
 }

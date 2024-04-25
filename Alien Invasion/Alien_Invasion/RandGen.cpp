@@ -5,6 +5,7 @@
 #include "Units/EarthGunnery.h"
 #include "Units/EarthSoldier.h"
 #include "Units/EarthTank.h"
+#include "Units\HealUnit.h"
 #include <cstdlib>
 
 RandGen::RandGen(int* param, Game* g)
@@ -26,8 +27,12 @@ Unit* RandGen::CreateEarthUnit()
 	else if (B <= parameters[ESPer] + parameters[ETPer]) {
 		return new EarthTank( health, power, capacity, game->getTimestep());
 	}
-	else {
+	else if (B <= parameters[ESPer] + parameters[ETPer] + parameters [EGPer]) {
 		return new EarthGunnery( health, power, capacity, game->getTimestep());
+	}
+	else
+	{ 
+		return new HealUnit (health, power, capacity, game->getTimestep());
 	}
 }
 

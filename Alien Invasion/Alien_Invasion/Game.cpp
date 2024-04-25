@@ -78,6 +78,27 @@ void Game::addUnits()
 	delete arrAlien;
 }
 
+void Game::addToUML(Unit* unit)
+{
+ 	UML.enqueue(unit,unit->getCap());
+}
+
+
+void Game::UpdateUML()
+{
+	//for (int i{};i<)
+}
+
+void Game::Heal()
+{
+	Unit* unit;
+	int max_cap;
+	UML.dequeue(unit,max_cap);
+
+
+
+}
+
 void Game::start()
 {
 	while (timestep < 50) {

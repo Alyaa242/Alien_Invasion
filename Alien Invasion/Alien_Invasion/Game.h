@@ -17,6 +17,7 @@ class RandGen;
 class Game
 {
 	LinkedQueue<Unit*> killedList;
+	priQueue <Unit*> UML;
 	EarthArmy* earthArmy;
     AlienArmy* alienArmy;
 	RandGen* randGen;
@@ -29,6 +30,9 @@ public:
 	int* ReadInputParameters();		//Function to read parameters from the input file
 	void addToKilledList(Unit* unit);
 	void addUnits();	//A function that links between RandGen and each army to add units
+	void addToUML(Unit* unit);
+	void UpdateUML();
+	void Heal();
 	void start();	//The main function that implements the game logic
 	void print();
 	int getTimestep();

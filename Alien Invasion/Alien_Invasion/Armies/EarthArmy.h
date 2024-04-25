@@ -15,7 +15,7 @@ class EarthArmy : public Army
 	LinkedQueue<Unit*> ESList;
 	ArrayStack<Unit*> ETList;
 	priQueue<Unit*> EGList;
-	LinkedQueue<Unit*> HUList;
+	ArrayStack<Unit*> HUList;
 
 
 	//priQueue<Unit*> HUList;
