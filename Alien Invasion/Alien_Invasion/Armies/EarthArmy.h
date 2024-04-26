@@ -32,6 +32,9 @@ public:
 	bool pickET(Unit*& unit);
 	bool pickEG(Unit*& unit);
 	bool pickHU(Unit*& unit);
+	LinkedQueue<Unit*>* getESList();
+	ArrayStack<Unit*>* getETList();
+	priQueue<Unit*>* getEGList();
 	~EarthArmy();
 };
 

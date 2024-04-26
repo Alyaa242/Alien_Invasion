@@ -27,6 +27,9 @@ public:
 	bool pickAM(Unit*& unit);
 	bool pickFrontAD(Unit*& front);
 	bool pickBackAD(Unit*& back);
+	LinkedQueue<Unit*>* getASList();
+	Array<Unit*>* getAMList();
+	Deque<Unit*>* getADList();
 	~AlienArmy();
 };
 

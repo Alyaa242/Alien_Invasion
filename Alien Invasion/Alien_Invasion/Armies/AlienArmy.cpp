@@ -101,6 +101,20 @@ bool AlienArmy::pickBackAD(Unit*& back)
 		return true;
 	return false;
 }
+LinkedQueue<Unit*>* AlienArmy::getASList()
+{
+	return &ASList;
+}
+
+Array<Unit*>* AlienArmy::getAMList()
+{
+	return &AMList;
+}
+
+Deque<Unit*>* AlienArmy::getADList()
+{
+	return &ADList;
+}
 
 AlienArmy::~AlienArmy()
 {

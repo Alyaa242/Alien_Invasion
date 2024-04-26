@@ -98,6 +98,22 @@ bool EarthArmy::pickHU(Unit*& unit)
 	return false;
 }
 
+LinkedQueue<Unit*>* EarthArmy::getESList()
+{
+	return &ESList;
+}
+
+ArrayStack<Unit*>* EarthArmy::getETList()
+{
+	return &ETList;
+}
+
+priQueue<Unit*>* EarthArmy::getEGList()
+{
+	return &EGList;
+}
+
+
 EarthArmy::~EarthArmy()
 {
 	Unit* temp;
