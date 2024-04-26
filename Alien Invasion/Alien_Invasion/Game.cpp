@@ -30,14 +30,14 @@ int* Game::ReadInputParameters()
 	ifstream InFile;
 	InFile.open("read.txt");
 	if (!InFile.is_open())	return nullptr;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		InFile >> arr[i];
 	}
 	char c;
-	for (int i = 8; i < 21; i++)
+	for (int i = 9; i < 21; i++)
 	{
-		if (i % 2 == 0) InFile >> arr[i];
+		if (i % 2) InFile >> arr[i];
 		else InFile >> c >> arr[i];
 	}
 	InFile.close();

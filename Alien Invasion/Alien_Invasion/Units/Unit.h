@@ -4,12 +4,17 @@
 class Game;
 class Unit
 {
-	Game* game; 
 	int health, power, capacity;
-	int Tj, Ta, Td;
 	int ID;
+	int Tj, Ta, Td;
 	static int lastEarthID;
 	static int lastAlienID;
+	bool attacked;
+
+protected:
+	Game* game;
+	int blah;
+
 public:
 
 	//We need to add game ptr to constructor
@@ -24,6 +29,11 @@ public:
 	int getTa() const;
 	int getTd() const;
 	int getID() const;
+	bool isAttacked() const;
+	
+	void setAttacked(bool x);
+	void setTa(int t);
+	void setTd(int t);
 
 	void setEarthID();		//A function that sets units IDs automatically
 	void setAlienID();

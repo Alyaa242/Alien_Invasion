@@ -14,6 +14,7 @@ Unit::Unit(int heal, int pow, int cap, int t, Game* g)
 	capacity = cap;
 	Tj = t;
 	game = g;
+	attacked = false;
 }
 
 int Unit::getHealth() const
@@ -49,6 +50,26 @@ int Unit::getTd() const
 int Unit::getID() const
 {
 	return ID;
+}
+
+bool Unit::isAttacked() const
+{
+	return attacked;
+}
+
+void Unit::setAttacked(bool x)
+{
+	attacked = x;
+}
+
+void Unit::setTa(int t)
+{
+	Ta = t;
+}
+
+void Unit::setTd(int t)
+{
+	Td = t;
 }
 
 //Setting IDs:
