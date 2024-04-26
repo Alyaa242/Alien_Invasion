@@ -22,7 +22,6 @@ public:
 	virtual void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
-	LinkedQueue<Unit*> GetASList();
 	bool pickAS(Unit*& unit);
 	bool pickAM(Unit*& unit);
 	bool pickFrontAD(Unit*& front);

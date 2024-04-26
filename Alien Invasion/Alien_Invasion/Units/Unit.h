@@ -13,7 +13,7 @@ class Unit
 public:
 
 	//We need to add game ptr to constructor
-	Unit(int heal, int pow, int cap, int t);	//Initializing basic members in constructor
+	Unit(int heal, int pow, int cap, int t, Game* g);	//Initializing basic members in constructor
 	virtual void attack() = 0;
 
 	//Getters to members:

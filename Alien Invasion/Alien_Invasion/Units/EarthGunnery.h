@@ -4,7 +4,7 @@ class Unit;
 class EarthGunnery : public Unit
 {
 public:
-	EarthGunnery(int heal, int pow, int cap, int t);
+	EarthGunnery(int heal, int pow, int cap, int t, Game* g);
 	virtual void attack();
 
 };

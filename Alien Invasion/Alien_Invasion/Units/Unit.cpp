@@ -7,12 +7,13 @@
 int Unit::lastEarthID = 1;
 int Unit::lastAlienID = 2000;
 
-Unit::Unit( int heal, int pow, int cap, int t)
+Unit::Unit(int heal, int pow, int cap, int t, Game* g)
 { 
 	health = heal;
 	power = pow;
 	capacity = cap;
 	Tj = t;
+	game = g;
 }
 
 int Unit::getHealth() const

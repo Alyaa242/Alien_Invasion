@@ -1,12 +1,14 @@
 #include "AlienSoldier.h"
 
-AlienSoldier::AlienSoldier(  int heal, int pow, int cap, int t) : Unit( heal, pow, cap, t)
+AlienSoldier::AlienSoldier(int heal, int pow, int cap, int t, Game* g) : Unit( heal, pow, cap, t, g)
 {
 	setAlienID();
 }
 
 void AlienSoldier::attack()
 {
+	LinkedQueue<Unit*>* ESEnemies;
+
 	/*game->getESList();
 	LinkedQueue<Unit*>* ESEnemies;
 	LinkedQueue<Unit*> temp;

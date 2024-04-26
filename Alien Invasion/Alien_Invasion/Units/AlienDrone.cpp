@@ -1,6 +1,6 @@
 #include "AlienDrone.h"
 
-AlienDrone::AlienDrone( int heal, int pow, int cap, int t) : Unit( heal, pow, cap, t)
+AlienDrone::AlienDrone(int heal, int pow, int cap, int t, Game* g) : Unit( heal, pow, cap, t, g)
 {
 	setAlienID();
 }

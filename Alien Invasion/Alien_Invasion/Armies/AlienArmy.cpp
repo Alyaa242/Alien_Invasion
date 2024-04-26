@@ -64,11 +64,6 @@ void AlienArmy::print()
 	cout << endl << endl;
 }
 
-LinkedQueue<Unit*> AlienArmy::GetASList()
-{
-	return ASList;
-}
-
 bool AlienArmy::pickAS(Unit*& unit)
 {
 	if (ASList.dequeue(unit)) {

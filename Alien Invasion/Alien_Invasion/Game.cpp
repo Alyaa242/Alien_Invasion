@@ -25,7 +25,7 @@ Game::Game()
 
 int* Game::ReadInputParameters()
 {
-	int* arr = new int[20];
+	int* arr = new int[21];
 
 	ifstream InFile;
 	InFile.open("read.txt");
@@ -35,7 +35,7 @@ int* Game::ReadInputParameters()
 		InFile >> arr[i];
 	}
 	char c;
-	for (int i = 8; i < 20; i++)
+	for (int i = 8; i < 21; i++)
 	{
 		if (i % 2 == 0) InFile >> arr[i];
 		else InFile >> c >> arr[i];
@@ -185,6 +185,36 @@ void Game::print()
 int Game::getTimestep()
 {
 	return timestep;
+}
+
+LinkedQueue<Unit*>* Game::getESEnemies()
+{
+	return earthArmy->getESList();
+}
+
+ArrayStack<Unit*>* Game::getETEnemies()
+{
+	return earthArmy->getETList();
+}
+
+priQueue<Unit*>* Game::getEGEnemies()
+{
+	return earthArmy->getEGList();
+}
+
+LinkedQueue<Unit*>* Game::getASEnemies()
+{
+	return alienArmy->getASList();
+}
+
+Array<Unit*>* Game::getAMEnemies()
+{
+	return alienArmy->getAMList();
+}
+
+Deque<Unit*>* Game::getADEnemies()
+{
+	return alienArmy->getADList();
 }
 
 Game::~Game()

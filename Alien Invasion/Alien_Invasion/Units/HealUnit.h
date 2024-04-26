@@ -8,7 +8,7 @@ class HealUnit : public Unit
 
 public:
 	virtual void attack();
-	HealUnit(int heal, int pow, int cap, int t);
+	HealUnit(int heal, int pow, int cap, int t, Game* g);
  
 
 

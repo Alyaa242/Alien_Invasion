@@ -26,7 +26,6 @@ public:
 
 	void addUnit(Unit* unit);
 	virtual void attack();
-	LinkedQueue<Unit*> GetESList();
 	virtual void print();
 	bool pickES(Unit*& unit);
 	bool pickET(Unit*& unit);

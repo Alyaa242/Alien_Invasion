@@ -22,17 +22,17 @@ Unit* RandGen::CreateEarthUnit()
 	int B = rand() % 100 + 1;
 
 	if (B <= parameters[ESPer]) {
-			return new EarthSoldier( health, power, capacity, game->getTimestep());
+			return new EarthSoldier( health, power, capacity, game->getTimestep(), game);
 	}
 	else if (B <= parameters[ESPer] + parameters[ETPer]) {
-		return new EarthTank( health, power, capacity, game->getTimestep());
+		return new EarthTank( health, power, capacity, game->getTimestep(), game);
 	}
 	else if (B <= parameters[ESPer] + parameters[ETPer] + parameters [EGPer]) {
-		return new EarthGunnery( health, power, capacity, game->getTimestep());
+		return new EarthGunnery( health, power, capacity, game->getTimestep(), game);
 	}
 	else
 	{ 
-		return new HealUnit (health, power, capacity, game->getTimestep());
+		return new HealUnit (health, power, capacity, game->getTimestep(), game);
 	}
 }
 
@@ -44,13 +44,13 @@ Unit* RandGen::CreateAlienUnit()
 	int B = rand() % 100 + 1;
 
 	if (B <= parameters[ASPer]) {
-		return new AlienSoldier(health, power, capacity, game->getTimestep());
+		return new AlienSoldier(health, power, capacity, game->getTimestep(), game);
 	}
 	else if (B <= parameters[ASPer] + parameters[AMPer]) {
-		return new AlienMonster(health, power, capacity, game->getTimestep());
+		return new AlienMonster(health, power, capacity, game->getTimestep(), game);
 	}
 	else {
-		return new AlienDrone(health, power, capacity, game->getTimestep());
+		return new AlienDrone(health, power, capacity, game->getTimestep(), game);
 	}
 }
 

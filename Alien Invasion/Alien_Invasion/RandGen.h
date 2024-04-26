@@ -12,7 +12,7 @@ class RandGen
 	enum paramIndex
 	{
 		n = 0,
-		ESPer, ETPer, EGPer,
+		ESPer, ETPer, EGPer, HUPer,
 		ASPer, AMPer, ADPer, 
 		prob,
 		lowPowE, upPowE,
@@ -20,7 +20,7 @@ class RandGen
 		lowCapE, upCapE,
 		lowPowA, upPowA,
 		lowHealA, upHealA,
-		lowCapA, upCapA,HUPer
+		lowCapA, upCapA
 	};
 
 	Game* game;		//pointer to game

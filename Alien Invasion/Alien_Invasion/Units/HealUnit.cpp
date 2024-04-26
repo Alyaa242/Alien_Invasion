@@ -8,7 +8,7 @@ void HealUnit::attack()
 }
 
 
-HealUnit::HealUnit(int heal, int pow, int cap, int t) :  Unit(heal, pow, cap, t) 
+HealUnit::HealUnit(int heal, int pow, int cap, int t, Game* g) :  Unit(heal, pow, cap, t, g) 
 {
 	setEarthID();
 }

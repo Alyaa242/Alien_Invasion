@@ -49,11 +49,6 @@ void EarthArmy::attack()
 	addUnit(EG);
 }
 
-LinkedQueue<Unit*> EarthArmy::GetESList()
-{
-	return ESList;
-}
-
 void EarthArmy::print()
 {
 	cout << ESList.getCount() << " ES ";
@@ -64,6 +59,7 @@ void EarthArmy::print()
 	cout << endl;
 	cout << EGList.getCount() << " EG ";
 	EGList.print();
+	cout << endl;
 	cout << HUList.getCount() << " HU ";
 	HUList.print();
 	cout << endl << endl;

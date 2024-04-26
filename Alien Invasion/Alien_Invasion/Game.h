@@ -37,13 +37,14 @@ public:
 	void print();
 	int getTimestep();
 
-	//addToUML()
-	//getESList()
-	//getETList()
-	//getEGList()
-	//getASList()
-	//getAMList()
-	//getADList()
+	//Getters for enemies lists:
+
+	LinkedQueue<Unit*>* getESEnemies();
+	ArrayStack<Unit*>* getETEnemies();
+	priQueue<Unit*>* getEGEnemies();
+	LinkedQueue<Unit*>* getASEnemies();
+	Array<Unit*>* getAMEnemies();
+	Deque<Unit*>* getADEnemies();
 	
 	//Add printing UML, Ta, Td...
 	//Output file
