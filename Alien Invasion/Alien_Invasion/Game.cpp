@@ -162,7 +162,7 @@ void Game::start()
 					killedList.enqueue(backAD);
 			}
 		}
-
+		earthArmy->attack();
 		print();
 		timestep++;
 		cin.get();	//Wait for user to press enter

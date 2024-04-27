@@ -36,17 +36,17 @@ void EarthArmy::attack()
 	if (pickES(ES))
 		ES->attack();
 
-	Unit* ET = nullptr;
+	/*Unit* ET = nullptr;
 	if (pickET(ET))
 		ET->attack();
 
 	Unit* EG = nullptr;
 	if (pickEG(EG))
 		EG->attack();
-
+		*/
 	addUnit(ES);
-	addUnit(ET);
-	addUnit(EG);
+	//addUnit(ET);
+	//addUnit(EG);
 }
 
 void EarthArmy::print()
