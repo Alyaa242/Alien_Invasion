@@ -84,10 +84,9 @@ void Unit::setAlienID()
 }
 //
 
-int Unit::decHealth(int damage)   // yaaaaaaaaaaaaaaaa lahweeeeeeeeeeeeeeeee
+void Unit::decHealth(int damage)
 {
 	health -= damage;
-	return health;
 }
 
 std::ostream& operator<<(std::ostream& out, const Unit& u)

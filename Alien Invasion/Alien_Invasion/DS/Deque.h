@@ -12,7 +12,7 @@ public:
     Deque() = default;
     bool isEmpty();
     void addLast(T item);
-    bool removeLast(T& oldValue);
+    bool removeLast(T& item);
     bool enqueue(const T& newEntry);
     bool dequeue(T& frntEntry);
  
@@ -55,20 +55,26 @@ bool Deque<T>::removeLast(T& oldValue)
     {
         return false;
     }
-    Node <T>* ptr = LinkedQueue<T>::frontPtr;
+
+    Node<T>* ptr = LinkedQueue<T>::backPtr;
+    oldValue = ptr->getItem();
+    Node<T>* prevPtr = ptr->getPrev();
+    delete ptr;
+    prevPtr->setNext(nullptr);
+    LinkedQueue<T>::backPtr = prevPtr;
+
+    /*Node <T>* ptr = LinkedQueue<T>::frontPtr;
     while (ptr->getNext()->getNext())
         ptr = ptr->getNext();
 
-    oldValue = ptr->getItem();
+    oldValue = ptr->getNext()->getItem();
 
     Node <T>* oneBefore = ptr;
 
-
     oneBefore->setNext(nullptr);
 
-
     delete  LinkedQueue<T>::backPtr;
-    oneBefore =  LinkedQueue<T>::backPtr;
+    LinkedQueue<T>::backPtr = oneBefore;*/
 
     LinkedQueue<T>::counter--;
 

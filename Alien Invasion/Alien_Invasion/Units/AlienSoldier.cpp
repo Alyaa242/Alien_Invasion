@@ -19,7 +19,6 @@ void AlienSoldier::attack()
 			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
-
 			enemy->decHealth(damage);
 
 			//Check if it's not attacked before to set Ta:
@@ -42,7 +41,6 @@ void AlienSoldier::attack()
 			else
 				temp.enqueue(enemy);
 		}
-
 		else
 			break;
 	}

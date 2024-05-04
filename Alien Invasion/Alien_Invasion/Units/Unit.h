@@ -37,7 +37,7 @@ public:
 
 	void setEarthID();		//A function that sets units IDs automatically
 	void setAlienID();
-	int decHealth(int damage);		//Decrement health
+	void decHealth(int damage);		//Decrement health
 };
 
 std::ostream& operator << (std::ostream& out, const Unit& u);	//Overloading operator <<
