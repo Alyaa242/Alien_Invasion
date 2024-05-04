@@ -36,7 +36,7 @@ void AlienSoldier::attack()
 
 			//If it's injured, add to UML:
 			else if (enemy->getHealth() <= 20)
-				game->addToUML(enemy);
+				game->addToUML1(enemy);
 
 			//Otherwise store in a temp list:
 			else

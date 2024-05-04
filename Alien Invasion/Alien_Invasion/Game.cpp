@@ -78,24 +78,107 @@ void Game::addUnits()
 	delete arrAlien;
 }
 
-void Game::addToUML(Unit* unit)
+void Game::addToUML1(Unit* unit)
 {
- 	UML.enqueue(unit,unit->getCap());
+  	UML1.enqueue(unit,-unit->getHealth());
+}
+void Game::addToUML2(Unit* unit)
+{
+	UML2.enqueue(unit);
 }
 
+Unit* Game::pickfromUML1()
+{
+	Unit* unit;
+	int max_health;
+	
+	UML1.dequeue(unit, max_health);
+	return unit;
+}
+
+Unit* Game::pickfromUML2()
+{
+	Unit* unit;
+	
+	UML2.dequeue(unit);
+	return unit;
+}
 
 void Game::UpdateUML()
 {
-	//for (int i{};i<)
+	Unit* unit;int max_health;
+	for (int i{};i< UML1.getCount();i++)
+	
+	{
+		UML1.peek(unit, max_health);
+		if (getWait(unit) > 10)
+		{
+			UML1.dequeue(unit,max_health);
+			addToKilledList(unit);
+		}
+	}
+
+
+	for (int i{};i < UML2.getCount();i++)
+
+	{
+		UML2.peek(unit);
+		if (getWait(unit) > 10)
+		{
+			UML2.dequeue(unit);
+			addToKilledList(unit);
+		}
+	}
+}
+
+int Game::getWait(Unit* unit)
+{
+	return timestep-unit->getTj() ;
 }
 
 void Game::Heal()
 {
 	Unit* unit;
-	int max_cap;
-	UML.dequeue(unit,max_cap);
+	int max_health;
+	int h; 
+	LinkedQueue <Unit*> tempList;
+	Unit* picked;
+	earthArmy->pickHU(picked);
+	int healcap= picked->getCap();
+
+	while (healcap--)
+	{
+		if (!UML1.isEmpty())
+		{
+
+			UML1.dequeue(unit, max_health);
+			picked->attack();
+			if (unit->getHealth() <= 20)
+			
+				tempList.enqueue(unit);
+		}
+		else
+
+		{
+			
+			UML2.dequeue(unit);
+			picked->attack();
+			if (unit->getHealth() <= 20)
+
+				tempList.enqueue(unit);
 
 
+		}
+	}
+	while (tempList.isEmpty())
+	{
+		tempList.dequeue(unit);
+
+	}
+
+
+
+	addToKilledList(picked);
 
 }
 
@@ -163,13 +246,13 @@ void Game::start()
 			}
 		}
 		earthArmy->attack();
-		print();
+		chooseMode ();
 		timestep++;
 		cin.get();	//Wait for user to press enter
 	}
 }
 
-void Game::print()
+void Game::printInter()
 {
 	cout << "Current TimeStep " << timestep << endl;
 	cout << "=========================== Earth Army Alive Units ===========================\n";
@@ -182,9 +265,34 @@ void Game::print()
 	cout << endl << endl;
 }
 
+void Game::printSilent()
+{
+	cout << "Silent Mode\n SimulationStarts . . . \n Simulation ends, Output file is created \n";
+}
+
 int Game::getTimestep()
 {
 	return timestep;
+}
+
+void Game::chooseMode()
+{
+	cout << "=========================== Select Mode ===========================\n";
+	cout << " Press 1 for Silent Mode";
+	cout << " Press 2 for Interactive Mode\n";
+	int i;
+	cin >> i;
+	if (i==2) printInter();
+	else printSilent();
+}
+
+void Game::Display()
+{
+	ofstream outfile;
+	outfile.open("output.txt");
+	outfile << "Td   ID   Tj   Df   Dd   Db\n";
+	
+
 }
 
 LinkedQueue<Unit*>* Game::getESEnemies()

@@ -2,8 +2,10 @@
 
 void HealUnit::attack()
 {
-	/*int =h;
-	h += (getHealth() * getCap() / 100) / sqrt(h);*/
+	int h;
+	Unit* unit= game->pickfromUML1();
+	h = ((getPower()) * (getHealth()) / 100) / sqrt(unit->getHealth());
+	unit->incHealth(h);
 
 }
 
@@ -12,3 +14,10 @@ HealUnit::HealUnit(int heal, int pow, int cap, int t, Game* g) :  Unit(heal, pow
 {
 	setEarthID();
 }
+
+void HealUnit::UpdateHU()
+{
+	//if (getTj() +10 < game->getTimestep())
+	//	game->addToKilledList(this);
+}
+
