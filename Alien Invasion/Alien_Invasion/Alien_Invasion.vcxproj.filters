@@ -128,5 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="read.txt" />
+    <Text Include="output.txt" />
   </ItemGroup>
 </Project>
