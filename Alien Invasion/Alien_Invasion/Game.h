@@ -23,6 +23,8 @@ class Game
     AlienArmy* alienArmy;
 	RandGen* randGen;
 	int timestep;
+	int choosen;
+	int wait;
 	int n;		//number of units generated each timestep
 
 public:
@@ -44,6 +46,8 @@ public:
 	int getTimestep();
 	void chooseMode();
 	void Display();
+	void setWait(int w);
+
 	//Getters for enemies lists:
 
 	LinkedQueue<Unit*>* getESEnemies();
