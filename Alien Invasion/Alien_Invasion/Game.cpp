@@ -81,6 +81,8 @@ void Game::addUnits()
 void Game::addToUML1(Unit* unit)
 {
   	UML1.enqueue(unit,-unit->getHealth());
+	//setWait();
+
 }
 void Game::addToUML2(Unit* unit)
 {
@@ -133,7 +135,7 @@ void Game::UpdateUML()
 
 int Game::getWait(Unit* unit)
 {
-	return timestep-unit->getTj() ;
+	return wait ;
 }
 
 void Game::Heal()
@@ -141,7 +143,8 @@ void Game::Heal()
 	Unit* unit;
 	int max_health;
 	int h; 
-	LinkedQueue <Unit*> tempList;
+	LinkedQueue <Unit*> tempList1;
+	LinkedQueue <Unit*> tempList2;
 	Unit* picked;
 	earthArmy->pickHU(picked);
 	int healcap= picked->getCap();
@@ -155,7 +158,7 @@ void Game::Heal()
 			picked->attack();
 			if (unit->getHealth() <= 20)
 			
-				tempList.enqueue(unit);
+				tempList1.enqueue(unit);
 		}
 		else
 
@@ -165,18 +168,22 @@ void Game::Heal()
 			picked->attack();
 			if (unit->getHealth() <= 20)
 
-				tempList.enqueue(unit);
+				tempList2.enqueue(unit);
 
 
 		}
 	}
-	while (tempList.isEmpty())
+	while (!tempList1.isEmpty())
 	{
-		tempList.dequeue(unit);
-
+		tempList1.dequeue(unit);
+		UML1.enqueue(unit,max_health);
 	}
 
-
+	while (!tempList2.isEmpty())
+	{
+		tempList2.dequeue(unit);
+		UML2.enqueue(unit);
+	}
 
 	addToKilledList(picked);
 
@@ -246,7 +253,8 @@ void Game::start()
 			}
 		}
 		earthArmy->attack();
-		chooseMode ();
+		if (choosen == 2)
+			printInter();
 		timestep++;
 		cin.get();	//Wait for user to press enter
 	}
@@ -278,12 +286,12 @@ int Game::getTimestep()
 void Game::chooseMode()
 {
 	cout << "=========================== Select Mode ===========================\n";
-	cout << " Press 1 for Silent Mode";
+	cout << " Press 1 for Silent Mode\n";
 	cout << " Press 2 for Interactive Mode\n";
-	int i;
-	cin >> i;
-	if (i==2) printInter();
-	else printSilent();
+	
+	cin >> choosen;
+	if (choosen==1) 
+	 printSilent();
 }
 
 void Game::Display()
@@ -293,6 +301,11 @@ void Game::Display()
 	outfile << "Td   ID   Tj   Df   Dd   Db\n";
 	
 
+}
+
+void Game::setWait(int w)
+{
+	wait = w;
 }
 
 LinkedQueue<Unit*>* Game::getESEnemies()
