@@ -80,7 +80,10 @@ bool LinkedQueue<T>::enqueue( const T& newEntry)
 	if (isEmpty())	//special case if this is the first node to insert
 		frontPtr = newNodePtr; // The queue is empty
 	else
+	{
 		backPtr->setNext(newNodePtr); // The queue was not empty
+		newNodePtr->setPrev(backPtr);
+	}
 
 	backPtr = newNodePtr; // New node is the last node now
 	counter++;
@@ -145,11 +148,11 @@ inline void LinkedQueue<T>::print() const
 	cout << '[';
 	
 		while (ptr->getNext()) {
-		cout << *ptr->getItem() << ", ";
+		cout << ptr->getItem() << ", ";
 		ptr = ptr->getNext();
 
 	}
-		cout << *ptr->getItem();
+		cout << ptr->getItem();
 		cout << ']';
 }
 template<typename T>

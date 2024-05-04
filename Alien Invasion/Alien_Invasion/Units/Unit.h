@@ -30,14 +30,13 @@ public:
 	int getTd() const;
 	int getID() const;
 	bool isAttacked() const;
-	
 	void setAttacked(bool x);
 	void setTa(int t);
 	void setTd(int t);
-
 	void setEarthID();		//A function that sets units IDs automatically
 	void setAlienID();
 	void decHealth(int damage);		//Decrement health
+	void incHealth(int increment);		//increment health
 };
 
 std::ostream& operator << (std::ostream& out, const Unit& u);	//Overloading operator <<

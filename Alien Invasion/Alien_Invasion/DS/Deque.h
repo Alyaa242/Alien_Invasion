@@ -40,6 +40,7 @@ inline void Deque<T>::addLast(T item)
     else
     {
         (newNode)-> setNext(LinkedQueue<T>::frontPtr);
+        (LinkedQueue<T>::frontPtr)->setPrev(newNode);
         (LinkedQueue<T>::frontPtr)= newNode ;
 
     }
@@ -56,14 +57,31 @@ bool Deque<T>::removeLast(T& oldValue)
         return false;
     }
 
-    Node<T>* ptr = LinkedQueue<T>::backPtr;
-    oldValue = ptr->getItem();
-    Node<T>* prevPtr = ptr->getPrev();
-    delete ptr;
-    prevPtr->setNext(nullptr);
-    LinkedQueue<T>::backPtr = prevPtr;
 
-    /*Node <T>* ptr = LinkedQueue<T>::frontPtr;
+
+    Node <T>* ptr = LinkedQueue<T>::backPtr;
+    if (!ptr)
+        return false;
+
+    Node <T>* prev = ptr->getPrev();
+   if (!prev)
+   {
+     
+   /*    ptr = nullptr;
+       LinkedQueue<T>::counter--;*/
+       dequeue(oldValue);
+       return true;
+   }
+
+    prev->setNext(nullptr);
+    delete ptr;
+    ptr = nullptr;
+    LinkedQueue<T>::backPtr = prev;
+
+
+
+
+   /* Node <T>* ptr = LinkedQueue<T>::frontPtr;
     while (ptr->getNext()->getNext())
         ptr = ptr->getNext();
 
@@ -74,7 +92,7 @@ bool Deque<T>::removeLast(T& oldValue)
     oneBefore->setNext(nullptr);
 
     delete  LinkedQueue<T>::backPtr;
-    LinkedQueue<T>::backPtr = oneBefore;*/
+    oneBefore =  LinkedQueue<T>::backPtr;*/
 
     LinkedQueue<T>::counter--;
 

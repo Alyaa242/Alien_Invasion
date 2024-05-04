@@ -1,4 +1,9 @@
-﻿  AlienArmy.cpp
-  AlienDrone.cpp
+﻿  AlienMonster.cpp
+D:\Year one\Second Semester\Data Structures\Project\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienMonster.cpp(24,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Year one\Second Semester\Data Structures\Project\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienMonster.cpp(55,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  AlienSoldier.cpp
+D:\Year one\Second Semester\Data Structures\Project\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienSoldier.cpp(19,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Unit.cpp
   Generating Code...
+  LINK : D:\Year one\Second Semester\Data Structures\Project\AlienInvasion\Alien Invasion\x64\Debug\Alien_Invasion.exe not found or not built by the last incremental link; performing full link
   Alien_Invasion.vcxproj -> D:\Year one\Second Semester\Data Structures\Project\AlienInvasion\Alien Invasion\x64\Debug\Alien_Invasion.exe

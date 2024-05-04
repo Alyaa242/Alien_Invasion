@@ -89,6 +89,12 @@ void Unit::decHealth(int damage)
 	health -= damage;
 }
 
+void Unit::incHealth(int increment)
+{
+	health += increment;
+	return;
+}
+
 std::ostream& operator<<(std::ostream& out, const Unit& u)
 {
 	out << u.getID();
