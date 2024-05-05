@@ -76,6 +76,9 @@ void Game::addUnits()
 
 	delete arrEarth;
 	delete arrAlien;
+
+
+
 }
 
 void Game::addToUML1(Unit* unit)
@@ -195,7 +198,7 @@ void Game::start()
 
 		//Call attack for each army		
 		addUnits();		//Adding units generated from randGen
-		alienArmy->attack();
+		//alienArmy->attack();
 		/*int x = rand() % 100 + 1;
 
 		if (x < 10) {

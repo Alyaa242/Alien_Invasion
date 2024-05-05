@@ -9,7 +9,7 @@ AlienDrone::AlienDrone(int heal, int pow, int cap, int t, Game* g) : Unit( heal,
 
 void AlienDrone::attack()
 {
-	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
+	/*ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
 	priQueue<Unit*>* EGEnemies = game->getEGEnemies();
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
@@ -84,6 +84,6 @@ void AlienDrone::attack()
 		else
 			ETEnemies->push(enemy);
 	}
-
+	*/
 
 }

@@ -2,20 +2,8 @@
 
 int main() {
 	Game* game = new Game();
-	//game->start();
-	Deque <int > d;
-	d.enqueue(5);
-	d.enqueue(6);
-
-	d.print();
-	int y;
-	d.dequeue(y);
-	d.removeLast(y);
-	d.print();
-	d.enqueue(5);
-	d.enqueue(6);
-
-	d.print();
+	game->start();
+	
 	delete game;
 
 	return 0;
