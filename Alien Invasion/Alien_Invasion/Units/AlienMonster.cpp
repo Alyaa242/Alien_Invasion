@@ -50,34 +50,35 @@ void AlienMonster::attack()
 		}
 		
 		//Check there is an enemy in the list:
-		if (ESEnemies->dequeue(enemy) && i < getCap()) {
+		if (i < getCap()) {
+			if (ESEnemies->dequeue(enemy)) {
+				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				//Decrement enemy's health:
+				enemy->decHealth(damage);
 
-			//Decrement enemy's health:
-			enemy->decHealth(damage);
+				//Check if it's not attacked before to set Ta:
+				if (!enemy->isAttacked()) {
+					enemy->setAttacked(true);
+					enemy->setTa(game->getTimestep());
+				}
 
-			//Check if it's not attacked before to set Ta:
-			if (!enemy->isAttacked()) {
-				enemy->setAttacked(true);
-				enemy->setTa(game->getTimestep());
+				//If it's killed, add to killed list:
+				if (enemy->getHealth() <= 0) {
+					game->addToKilledList(enemy);
+					enemy->setTd(game->getTimestep());
+				}
+
+				//If it's injured, add to UML:
+				else if (enemy->getHealth() <= 20)
+					game->addToUML1(enemy);
+
+				//Otherwise store in a temp list:
+				else
+					temp.enqueue(enemy);
+
+				i++;
 			}
-
-			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				game->addToKilledList(enemy);
-				enemy->setTd(game->getTimestep());
-			}
-
-			//If it's injured, add to UML:
-			else if (enemy->getHealth() <= 20)
-				game->addToUML1(enemy);
-
-			//Otherwise store in a temp list:
-			else
-				temp.enqueue(enemy);
-		
-			i++;
 		}
 	}
 

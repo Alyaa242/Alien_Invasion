@@ -13,7 +13,6 @@ class Unit
 
 protected:
 	Game* game;
-	int blah;
 
 public:
 
