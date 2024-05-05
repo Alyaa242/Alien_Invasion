@@ -77,10 +77,10 @@ public:
         int x;
         while (ptr->getNext())
         {
-            cout << *ptr->getItem(x)<<", ";
+            cout << ptr->getItem(x)<<", ";
             ptr = ptr->getNext();
         }
-        cout << *ptr->getItem(x);
+        cout << ptr->getItem(x);
         cout << "]";
     }
 

@@ -71,11 +71,11 @@ public:
 	{
 		if (isEmpty()) return false;
 		cout << "[";
-		for (int i{};i<top - 1;i++)
+		for (int i{};i<top;i++)
 		{
-			cout << *items[i] << ", ";
+			cout << items[i] << ", ";
 		}
-		cout << *items[top - 1];
+		cout << items[top];
 		cout << "]";
 		return true;
 	}

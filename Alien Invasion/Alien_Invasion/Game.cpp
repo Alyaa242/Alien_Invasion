@@ -76,12 +76,18 @@ void Game::addUnits()
 
 	delete arrEarth;
 	delete arrAlien;
+
+
+
 }
 
 void Game::addToUML1(Unit* unit)
 {
   	UML1.enqueue(unit,-unit->getHealth());
+
 	unit->setWait(timestep);
+
+
 
 }
 void Game::addToUML2(Unit* unit)
@@ -134,6 +140,7 @@ void Game::UpdateUML()
 		}
 	}
 }
+
 
 
 
@@ -192,11 +199,10 @@ void Game::start()
 {
 	while (timestep < 50) {
 
-		//Call attack for each army
-
+		//Call attack for each army		
 		addUnits();		//Adding units generated from randGen
-
-		int x = rand() % 100 + 1;
+		//alienArmy->attack();
+		/*int x = rand() % 100 + 1;
 
 		if (x < 10) {
 			Unit* ES;
@@ -242,18 +248,25 @@ void Game::start()
 			}
 		}
 		else if (x < 60) {
-			Unit* frontAD;
-			Unit* backAD;
+			Unit* frontAD = nullptr;
+			Unit* backAD = nullptr;
 			for (int i = 0; i < 3; i++) {
 				if (alienArmy->pickFrontAD(frontAD))
 					killedList.enqueue(frontAD);
+
 				if (alienArmy->pickBackAD(backAD))
 					killedList.enqueue(backAD);
 			}
 		}
+
 		earthArmy->attack();
 		if (choosen == 2)
 			printInter();
+
+		earthArmy->attack();*/
+		printInter();
+
+
 		timestep++;
 		cin.get();	//Wait for user to press enter
 	}
@@ -301,6 +314,8 @@ void Game::Display()
 	
 
 }
+
+
 
 
 LinkedQueue<Unit*>* Game::getESEnemies()

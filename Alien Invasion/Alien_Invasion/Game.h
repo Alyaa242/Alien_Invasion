@@ -24,7 +24,7 @@ class Game
 	RandGen* randGen;
 	int timestep;
 	int choosen;
-	int wait;
+	
 	int n;		//number of units generated each timestep
 
 public:
@@ -46,7 +46,11 @@ public:
 	int getTimestep();
 	void chooseMode();
 	void Display();
+
 	
+
+
+
 
 	//Getters for enemies lists:
 

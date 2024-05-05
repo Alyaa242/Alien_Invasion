@@ -84,10 +84,9 @@ void Unit::setAlienID()
 }
 //
 
-int Unit::decHealth(int damage)   // yaaaaaaaaaaaaaaaa lahweeeeeeeeeeeeeeeee  ///WTF?????
+void Unit::decHealth(int damage)
 {
 	health -= damage;
-	return health;
 }
 
 void Unit::incHealth(int increment)
@@ -95,6 +94,7 @@ void Unit::incHealth(int increment)
 	health += increment;
 	return;
 }
+
 
 int Unit::getWait()
 {
@@ -106,8 +106,10 @@ void Unit::setWait(int w)
 	wait = w;
 }
 
-std::ostream& operator<<(std::ostream& out, const Unit& u)
+
+std::ostream& operator<<(std::ostream& out, const Unit* u)
+
 {
-	out << u.getID();
+	out << u->getID();
 	return out;
 }
