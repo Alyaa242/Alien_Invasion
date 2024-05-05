@@ -199,9 +199,9 @@ void Game::start()
 {
 	while (timestep < 50) {
 
-		//Call attack for each army		
+		//Call attack for each army	
 		addUnits();		//Adding units generated from randGen
-		//alienArmy->attack();
+		alienArmy->attack();
 		/*int x = rand() % 100 + 1;
 
 		if (x < 10) {
@@ -282,7 +282,15 @@ void Game::printInter()
 	cout << "=========================== Killed/Destructed Units ===========================\n";
 	cout<< killedList.getCount()<<" units ";
 	killedList.print();
+	cout << endl;
+
+
+	cout << "=========================== UML1 ===========================\n";
+	UML1.print();
+	cout << "=========================== UML2 ===========================\n";
+	UML2.print();
 	cout << endl << endl;
+
 }
 
 void Game::printSilent()
