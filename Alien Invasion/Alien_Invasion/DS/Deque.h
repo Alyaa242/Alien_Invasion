@@ -63,21 +63,24 @@ bool Deque<T>::removeLast(T& oldValue)
     if (!ptr)
         return false;
 
-    Node <T>* prev = ptr->getPrev();
-    if (!prev)
-    {
+   oldValue = ptr->getItem();
+   LinkedQueue<T>::backPtr = LinkedQueue<T>::backPtr->getPrev();
+   Node <T>* prev = ptr->getPrev();
+   //if (!prev)
+   //{
+   //  
+   ///*    ptr = nullptr;
+   //    LinkedQueue<T>::counter--;*/
+   //    dequeue(oldValue);
+   //    return true;
+   //}
 
-        /*    ptr = nullptr;
-            LinkedQueue<T>::counter--;*/
-        dequeue(oldValue);
-        return true;
-    }
-
-    oldValue = ptr->getItem();
-    prev->setNext(nullptr);
+   if (ptr == LinkedQueue<T>::frontPtr)
+       LinkedQueue<T>::frontPtr = nullptr;
+    //prev->setNext(nullptr);
     delete ptr;
-    ptr = nullptr;
-    LinkedQueue<T>::backPtr = prev;
+  //  ptr = nullptr;
+   
 
 
 

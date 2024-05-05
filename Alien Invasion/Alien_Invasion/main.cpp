@@ -10,7 +10,7 @@ int main() {
 	d.print();
 	int y;
 	d.dequeue(y);
-	d.dequeue(y);
+	d.removeLast(y);
 	d.print();
 	d.enqueue(5);
 	d.enqueue(6);
