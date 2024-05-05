@@ -112,8 +112,7 @@ bool LinkedQueue<T>:: dequeue(T& frntEntry)
 	frontPtr = frontPtr->getNext();
 	// Queue is not empty; remove front
 	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
-		backPtr = nullptr ;	
-		
+		backPtr = nullptr ;			
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
 	counter--;
@@ -144,7 +143,10 @@ inline void LinkedQueue<T>::print() const
 {
 	Node <T>* ptr = frontPtr;
 	if (!ptr)
+	{
+		cout << "NULL";
 		return;
+	}
 	cout << '[';
 	
 		while (ptr->getNext()) {
