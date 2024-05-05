@@ -35,7 +35,7 @@ public:
 	void addUnits();	//A function that links between RandGen and each army to add units
 	void addToUML1(Unit* unit);
 	void UpdateUML();
-	int getWait(Unit* unit);
+
 	void addToUML2(Unit* unit);
 	Unit* pickfromUML1();
 	Unit* pickfromUML2();
@@ -46,7 +46,7 @@ public:
 	int getTimestep();
 	void chooseMode();
 	void Display();
-	void setWait(int w);
+	
 
 	//Getters for enemies lists:
 

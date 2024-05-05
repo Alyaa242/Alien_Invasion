@@ -81,12 +81,14 @@ void Game::addUnits()
 void Game::addToUML1(Unit* unit)
 {
   	UML1.enqueue(unit,-unit->getHealth());
-	//setWait();
+	unit->setWait(timestep);
 
 }
 void Game::addToUML2(Unit* unit)
 {
 	UML2.enqueue(unit);
+
+	unit->setWait(timestep);
 }
 
 Unit* Game::pickfromUML1()
@@ -113,7 +115,7 @@ void Game::UpdateUML()
 	
 	{
 		UML1.peek(unit, max_health);
-		if (getWait(unit) > 10)
+		if (timestep- unit->getWait() > 10)
 		{
 			UML1.dequeue(unit,max_health);
 			addToKilledList(unit);
@@ -125,7 +127,7 @@ void Game::UpdateUML()
 
 	{
 		UML2.peek(unit);
-		if (getWait(unit) > 10)
+		if (timestep-unit->getWait() > 10)
 		{
 			UML2.dequeue(unit);
 			addToKilledList(unit);
@@ -133,10 +135,7 @@ void Game::UpdateUML()
 	}
 }
 
-int Game::getWait(Unit* unit)
-{
-	return wait ;
-}
+
 
 void Game::Heal()
 {
@@ -303,10 +302,6 @@ void Game::Display()
 
 }
 
-void Game::setWait(int w)
-{
-	wait = w;
-}
 
 LinkedQueue<Unit*>* Game::getESEnemies()
 {

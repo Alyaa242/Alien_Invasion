@@ -1,20 +1,6 @@
-﻿  AlienArmy.cpp
-  Army.cpp
-  EarthArmy.cpp
-  Game.cpp
-C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(145,6): warning C4101: 'h': unreferenced local variable
-  RandGen.cpp
-  AlienDrone.cpp
-  AlienMonster.cpp
-  AlienSoldier.cpp
-C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienSoldier.cpp(19,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  EarthGunnery.cpp
-  EarthSoldier.cpp
-C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\EarthSoldier.cpp(17,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  EarthTank.cpp
-  HealUnit.cpp
-C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\HealUnit.cpp(7,43): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Unit.cpp
+﻿  Game.cpp
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(144,6): warning C4101: 'h': unreferenced local variable
   main.cpp
+  RandGen.cpp
   Generating Code...
   Alien_Invasion.vcxproj -> C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\x64\Debug\Alien_Invasion.exe

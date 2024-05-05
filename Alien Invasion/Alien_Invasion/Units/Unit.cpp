@@ -96,6 +96,16 @@ void Unit::incHealth(int increment)
 	return;
 }
 
+int Unit::getWait()
+{
+	return wait;
+}
+
+void Unit::setWait(int w)
+{
+	wait = w;
+}
+
 std::ostream& operator<<(std::ostream& out, const Unit& u)
 {
 	out << u.getID();

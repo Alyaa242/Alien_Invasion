@@ -7,6 +7,7 @@ class Unit
 	int health, power, capacity;
 	int ID;
 	int Tj, Ta, Td;
+	int wait;
 	static int lastEarthID;
 	static int lastAlienID;
 	bool attacked;
@@ -37,6 +38,9 @@ public:
 	void setAlienID();
 	int decHealth(int damage);		//Decrement health
 	void incHealth(int increment);		//increment health
+	int getWait();
+	void setWait(int w);
+
 };
 
 std::ostream& operator << (std::ostream& out, const Unit& u);	//Overloading operator <<

@@ -4,6 +4,10 @@ void HealUnit::attack()
 {
 	int h;
 	Unit* unit= game->pickfromUML1();
+	if (!unit)
+		unit = game->pickfromUML2();
+	if (!unit)
+		return;
 	h = ((getPower()) * (getHealth()) / 100) / sqrt(unit->getHealth());
 	unit->incHealth(h);
 
