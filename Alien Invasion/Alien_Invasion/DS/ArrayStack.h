@@ -73,9 +73,9 @@ public:
 		cout << "[";
 		for (int i{};i<top;i++)
 		{
-			cout << *items[i] << ", ";
+			cout << items[i] << ", ";
 		}
-		cout << *items[top];
+		cout << items[top];
 		cout << "]";
 		return true;
 	}

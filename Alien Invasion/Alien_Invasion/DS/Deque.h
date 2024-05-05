@@ -5,26 +5,26 @@
 
 using namespace std;
 template <typename T>
-class Deque : public LinkedQueue <T> 
+class Deque : public LinkedQueue <T>
 
 {
-public: 
+public:
     Deque() = default;
     bool isEmpty();
     void addLast(T item);
-    bool removeLast(T& item);
+    bool removeLast(T& oldValue);
     bool enqueue(const T& newEntry);
     bool dequeue(T& frntEntry);
- 
+
 };
 
 
 template <typename T>
 bool Deque<T>::isEmpty()
 {
-    
-    return !LinkedQueue<T>::frontPtr ;
-    
+
+    return !LinkedQueue<T>::frontPtr;
+
 }
 
 template<typename T>
@@ -35,13 +35,13 @@ inline void Deque<T>::addLast(T item)
     {
         LinkedQueue<T>::frontPtr = newNode;
         LinkedQueue<T>::backPtr = LinkedQueue<T>::frontPtr;
-    } 
-      
+    }
+
     else
     {
-        (newNode)-> setNext(LinkedQueue<T>::frontPtr);
+        (newNode)->setNext(LinkedQueue<T>::frontPtr);
         (LinkedQueue<T>::frontPtr)->setPrev(newNode);
-        (LinkedQueue<T>::frontPtr)= newNode ;
+        (LinkedQueue<T>::frontPtr) = newNode;
 
     }
 
@@ -64,15 +64,16 @@ bool Deque<T>::removeLast(T& oldValue)
         return false;
 
     Node <T>* prev = ptr->getPrev();
-   if (!prev)
-   {
-     
-   /*    ptr = nullptr;
-       LinkedQueue<T>::counter--;*/
-       dequeue(oldValue);
-       return true;
-   }
+    if (!prev)
+    {
 
+        /*    ptr = nullptr;
+            LinkedQueue<T>::counter--;*/
+        dequeue(oldValue);
+        return true;
+    }
+
+    oldValue = ptr->getItem();
     prev->setNext(nullptr);
     delete ptr;
     ptr = nullptr;
@@ -81,18 +82,20 @@ bool Deque<T>::removeLast(T& oldValue)
 
 
 
-   /* Node <T>* ptr = LinkedQueue<T>::frontPtr;
-    while (ptr->getNext()->getNext())
-        ptr = ptr->getNext();
+    /* Node <T>* ptr = LinkedQueue<T>::frontPtr;
+     while (ptr->getNext()->getNext())
+         ptr = ptr->getNext();
 
-    oldValue = ptr->getNext()->getItem();
+     oldValue = ptr->getItem();
 
-    Node <T>* oneBefore = ptr;
+     Node <T>* oneBefore = ptr;
 
-    oneBefore->setNext(nullptr);
 
-    delete  LinkedQueue<T>::backPtr;
-    oneBefore =  LinkedQueue<T>::backPtr;*/
+     oneBefore->setNext(nullptr);
+
+
+     delete  LinkedQueue<T>::backPtr;
+     oneBefore =  LinkedQueue<T>::backPtr;*/
 
     LinkedQueue<T>::counter--;
 
@@ -109,8 +112,7 @@ inline bool Deque<T>::enqueue(const T& newEntry)
 template<typename T>
 inline bool Deque<T>::dequeue(T& frntEntry)
 {
-    if(LinkedQueue <T>::dequeue(frntEntry))
+    if (LinkedQueue <T>::dequeue(frntEntry))
         return true;
     return false;
 }
-

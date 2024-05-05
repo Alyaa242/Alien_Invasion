@@ -9,7 +9,7 @@ AlienDrone::AlienDrone(int heal, int pow, int cap, int t, Game* g) : Unit( heal,
 
 void AlienDrone::attack()
 {
-	/*ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
+	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
 	priQueue<Unit*>* EGEnemies = game->getEGEnemies();
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
@@ -40,7 +40,7 @@ void AlienDrone::attack()
 
 			//If it's injured, add to UML:
 			else if (enemy->getHealth() <= 20)
-				game->addToUML(enemy);
+				game->addToUML2(enemy);
 
 			//Otherwise store in a temp list:
 			else
@@ -83,5 +83,7 @@ void AlienDrone::attack()
 			EGEnemies->enqueue(enemy, dummy);
 		else
 			ETEnemies->push(enemy);
-	}*/
+	}
+
+
 }

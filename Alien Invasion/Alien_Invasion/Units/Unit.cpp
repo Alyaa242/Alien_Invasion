@@ -95,8 +95,8 @@ void Unit::incHealth(int increment)
 	return;
 }
 
-std::ostream& operator<<(std::ostream& out, const Unit& u)
+std::ostream& operator<<(std::ostream& out, const Unit* u)
 {
-	out << u.getID();
+	out << u->getID();
 	return out;
 }

@@ -52,9 +52,9 @@ inline void Array<T>::print() const
 		return;
 	cout << '[';
 	for (int i = 0; i < count - 1; i++) {
-		cout << *arr[i] << ", ";
+		cout << arr[i] << ", ";
 	}
-	cout << *arr[count - 1];
+	cout << arr[count - 1];
 	cout << ']';
 }
 

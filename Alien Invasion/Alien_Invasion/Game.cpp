@@ -246,7 +246,7 @@ void Game::start()
 			}
 		}
 		earthArmy->attack();*/
-		chooseMode ();
+		printInter();
 		timestep++;
 		cin.get();	//Wait for user to press enter
 	}
