@@ -9,7 +9,7 @@ AlienDrone::AlienDrone(int heal, int pow, int cap, int t, Game* g) : Unit( heal,
 
 void AlienDrone::attack()
 {
-	/*ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
+	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
 	priQueue<Unit*>* EGEnemies = game->getEGEnemies();
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
@@ -50,40 +50,41 @@ void AlienDrone::attack()
 		}
 
 		//Check there is an enemy in the list:
-		if (EGEnemies->dequeue(enemy, dummy) && i < getCap()) {
+		if (i < getCap()) {
+			if (EGEnemies->dequeue(enemy, dummy)) {
+				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				//Decrement enemy's health:
+				enemy->decHealth(damage);
 
-			//Decrement enemy's health:
-			enemy->decHealth(damage);
+				//Check if it's not attacked before to set Ta:
+				if (!enemy->isAttacked()) {
+					enemy->setAttacked(true);
+					enemy->setTa(game->getTimestep());
+				}
 
-			//Check if it's not attacked before to set Ta:
-			if (!enemy->isAttacked()) {
-				enemy->setAttacked(true);
-				enemy->setTa(game->getTimestep());
+				//If it's killed, add to killed list:
+				if (enemy->getHealth() <= 0) {
+					game->addToKilledList(enemy);
+					enemy->setTd(game->getTimestep());
+				}
+
+				//Otherwise store in a temp list:
+				else
+					temp.enqueue(enemy);
+
+				i++;
 			}
-
-			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				game->addToKilledList(enemy);
-				enemy->setTd(game->getTimestep());
-			}
-
-			//Otherwise store in a temp list:
-			else
-				temp.enqueue(enemy);
-
-			i++;
 		}
 	}
 
 	//Add enemies back to their original lists:
 	while (temp.dequeue(enemy)) {
 		if (dynamic_cast<EarthGunnery*>(enemy))
-			EGEnemies->enqueue(enemy, dummy);
+			EGEnemies->enqueue(enemy, enemy->getHealth() + enemy->getPower());
 		else
 			ETEnemies->push(enemy);
 	}
-	*/
+	
 
 }

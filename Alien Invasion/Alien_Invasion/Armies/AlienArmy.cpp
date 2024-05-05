@@ -28,27 +28,25 @@ void AlienArmy::addUnit(Unit* unit)
 
 void AlienArmy::attack()
 {
-	/*Unit* AS = nullptr;
+	Unit* AS = nullptr;
 	if(pickAS(AS))
 		AS->attack();
 	
 	Unit* AM = nullptr;
 	if(pickAM(AM))
-		AM->attack();*/
+		AM->attack();
 	
 	Unit* AD1 = nullptr;
 	Unit* AD2 = nullptr;
 	if (pickFrontAD(AD1) && pickBackAD(AD2)) {
 		AD1->attack();
 		AD2->attack();
-		addUnit(AD1);
-		addUnit(AD2);
 	}
-	else if (AD1)
-		addUnit(AD1);
 	
-	//addUnit(AS);
-	//addUnit(AM);
+	addUnit(AS);
+	addUnit(AM);
+	addUnit(AD1);
+	addUnit(AD2);
 	
 }
 
