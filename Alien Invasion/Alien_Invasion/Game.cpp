@@ -199,6 +199,7 @@ void Game::start()
 		//Call attack for each army	
 		addUnits();		//Adding units generated from randGen
 		alienArmy->attack();
+		earthArmy->attack();
 		/*int x = rand() % 100 + 1;
 
 		if (x < 10) {

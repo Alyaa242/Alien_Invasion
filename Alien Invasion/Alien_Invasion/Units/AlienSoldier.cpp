@@ -25,12 +25,15 @@ void AlienSoldier::attack()
 			if (!enemy->isAttacked()) {
 				enemy->setAttacked(true);
 				enemy->setTa(game->getTimestep());
+				enemy->setDf(enemy->getTa() - enemy->getTj());
 			}
 
 			//If it's killed, add to killed list:
 			if (enemy->getHealth() <= 0) {
 				game->addToKilledList(enemy);
 				enemy->setTd(game->getTimestep());
+				enemy->setDd(enemy->getTd() - enemy->getTa());
+				enemy->setDb(enemy->getTd() - enemy->getTj());
 			}
 
 			//If it's injured, add to UML:
