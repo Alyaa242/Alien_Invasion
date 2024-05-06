@@ -32,20 +32,15 @@ void EarthTank::attack()
 
 				attackAM->decHealth(damageAM);
 
-				if (!attackAM->isAttacked())
-				{
-					attackAM->setAttacked(true);
-					attackAM->setTa(game->getTimestep());  //set the first time unit got shot
-					attackAM->setDf(attackAM->getTa() - attackAM->getTj());
-				}
+				//Set Ta:
+				attackAM->setTa(game->getTimestep());
 
-				if (attackAM->getHealth() <= 0) // ask the game to move it to the killed list
-				{
+				//If it's killed, add to killed list:
+				if (attackAM->getHealth() <= 0) {
 					game->addToKilledList(attackAM);
 					attackAM->setTd(game->getTimestep());
-					attackAM->setDd(attackAM->getTd() - attackAM->getTa());
-					attackAM->setDb(attackAM->getTd() - attackAM->getTj());
 				}
+
 				else
 				{
 					tempListAM.enqueue(attackAM); // store at temp list
@@ -65,20 +60,15 @@ void EarthTank::attack()
 
 					attackAS->decHealth(damageAS);
 
-					if (!attackAS->isAttacked())
-					{
-						attackAS->setAttacked(true);
-						attackAS->setTa(game->getTimestep());  //set the first time unit got shot
-						attackAS->setDf(attackAS->getTa() - attackAS->getTj());
-					}
+					//Set Ta:
+					attackAS->setTa(game->getTimestep());
 
-					if (attackAS->getHealth() <= 0) // ask the game to move it to the killed list
-					{
+					//If it's killed, add to killed list:
+					if (attackAS->getHealth() <= 0) {
 						game->addToKilledList(attackAS);
 						attackAS->setTd(game->getTimestep());
-						attackAS->setDd(attackAS->getTd() - attackAS->getTa());
-						attackAS->setDb(attackAS->getTd() - attackAS->getTj());
 					}
+
 					else
 					{
 						tempListAS.enqueue(attackAS); // store at temp list
