@@ -11,6 +11,8 @@ void HealUnit::attack()
 	h = ((getPower()) * (getHealth()) / 100) / sqrt(unit->getHealth());
 	unit->incHealth(h);
 
+
+	
 }
 
 

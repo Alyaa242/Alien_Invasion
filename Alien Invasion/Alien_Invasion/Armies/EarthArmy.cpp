@@ -65,6 +65,11 @@ void EarthArmy::print()
 	cout << endl << endl;
 }
 
+int EarthArmy::gettotCount()
+{
+	return ESList.getCount() + ETList.getCount() + EGList.getCount()+ HUList.getCount();
+}
+
 bool EarthArmy::pickES(Unit*& unit)
 {
 	if (ESList.dequeue(unit))
@@ -88,6 +93,13 @@ bool EarthArmy::pickEG(Unit*& unit)
 }
 
 bool EarthArmy::pickHU(Unit*& unit)
+{
+	if (HUList.peek(unit))
+		return true;
+	return false;
+}
+
+bool EarthArmy::RemoveHU(Unit*& unit)
 {
 	if (HUList.pop(unit))
 		return true;

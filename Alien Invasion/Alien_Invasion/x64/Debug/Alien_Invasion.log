@@ -1,6 +1,14 @@
 ﻿  Game.cpp
-C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(144,6): warning C4101: 'h': unreferenced local variable
-  main.cpp
-  RandGen.cpp
-  Generating Code...
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(183,6): warning C4101: 'h': unreferenced local variable
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(383,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(384,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(385,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(386,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(387,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(387,87): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(394,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(395,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(396,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(397,13): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(397,89): warning C4129: ' ': unrecognized character escape sequence
   Alien_Invasion.vcxproj -> C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\x64\Debug\Alien_Invasion.exe

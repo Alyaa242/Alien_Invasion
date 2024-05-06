@@ -27,10 +27,13 @@ public:
 	void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
+
+	int gettotCount();
 	bool pickES(Unit*& unit);
 	bool pickET(Unit*& unit);
 	bool pickEG(Unit*& unit);
 	bool pickHU(Unit*& unit);
+	bool RemoveHU(Unit*& unit);
 	LinkedQueue<Unit*>* getESList();
 	ArrayStack<Unit*>* getETList();
 	priQueue<Unit*>* getEGList();
