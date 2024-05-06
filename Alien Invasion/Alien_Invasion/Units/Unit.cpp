@@ -79,12 +79,18 @@ void Unit::setAttacked(bool x)
 
 void Unit::setTa(int t)
 {
-	Ta = t;
+	if (!attacked) {
+		Ta = t;
+		attacked = true;
+	}
+	Df = Ta - Tj;
 }
 
 void Unit::setTd(int t)
 {
 	Td = t;
+	Dd = Td - Ta;
+	Db = Td - Tj;
 }
 
 void Unit::setDd(int t)
