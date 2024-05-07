@@ -1,4 +1,9 @@
-﻿  Game.cpp
+﻿  AlienArmy.cpp
+  Army.cpp
+  EarthArmy.cpp
+  HealUnit.cpp
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\HealUnit.cpp(11,43): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Game.cpp
 C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(183,6): warning C4101: 'h': unreferenced local variable
 C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(383,13): warning C4129: ' ': unrecognized character escape sequence
 C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(384,13): warning C4129: ' ': unrecognized character escape sequence
@@ -11,4 +16,21 @@ C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Inva
 C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(396,13): warning C4129: ' ': unrecognized character escape sequence
 C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(397,13): warning C4129: ' ': unrecognized character escape sequence
 C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Game.cpp(397,89): warning C4129: ' ': unrecognized character escape sequence
+  main.cpp
+  RandGen.cpp
+  AlienDrone.cpp
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienDrone.cpp(24,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienDrone.cpp(55,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  AlienMonster.cpp
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienMonster.cpp(24,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienMonster.cpp(55,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  AlienSoldier.cpp
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\AlienSoldier.cpp(19,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  EarthGunnery.cpp
+  EarthSoldier.cpp
+C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\Alien_Invasion\Units\EarthSoldier.cpp(17,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  EarthTank.cpp
+  Unit.cpp
+  Generating Code...
+  LINK : C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\x64\Debug\Alien_Invasion.exe not found or not built by the last incremental link; performing full link
   Alien_Invasion.vcxproj -> C:\Users\esraa\OneDrive\Documents\GitHub\AlienInvasion\Alien Invasion\x64\Debug\Alien_Invasion.exe

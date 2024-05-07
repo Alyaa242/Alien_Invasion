@@ -15,7 +15,8 @@ public:
     bool removeLast(T& oldValue);
     bool enqueue(const T& newEntry);
     bool dequeue(T& frntEntry);
-
+    bool peek(T& frntEntry)  const;
+    bool peekBack(T& backEntry) const;
 };
 
 
@@ -123,4 +124,23 @@ inline bool Deque<T>::dequeue(T& frntEntry)
     if (LinkedQueue <T>::dequeue(frntEntry))
         return true;
     return false;
+}
+
+template<typename T>
+inline bool Deque<T>::peek(T& frntEntry) const
+{
+
+    if (LinkedQueue <T>::peek(frntEntry))
+        return true;
+    return false;
+}
+
+template<typename T>
+inline bool Deque<T>::peekBack(T& backEntry) const
+{
+    if (isEmpty())
+        return false;
+
+    backEntry = LinkedQueue <T>::backPtr->getItem();
+    return true;
 }
