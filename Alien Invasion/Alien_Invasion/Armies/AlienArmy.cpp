@@ -63,6 +63,17 @@ void AlienArmy::print()
 	cout << endl << endl;
 }
 
+bool AlienArmy::isKilled()
+{
+	if (ASList.isEmpty() && AMList.getCount() == 0 && ADList.isEmpty())
+
+		return true;
+
+	else
+
+		return false;
+}
+
 bool AlienArmy::pickAS(Unit*& unit)
 {
 	if (ASList.dequeue(unit)) {

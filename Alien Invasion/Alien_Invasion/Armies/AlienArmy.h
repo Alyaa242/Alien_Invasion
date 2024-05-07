@@ -22,6 +22,7 @@ public:
 	virtual void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
+	virtual bool isKilled();
 	bool pickAS(Unit*& unit);
 	bool pickAM(Unit*& unit);
 	bool pickFrontAD(Unit*& front);

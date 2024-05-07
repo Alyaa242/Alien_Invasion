@@ -27,6 +27,7 @@ public:
 	void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
+	virtual bool isKilled();
 	bool pickES(Unit*& unit);
 	bool pickET(Unit*& unit);
 	bool pickEG(Unit*& unit);

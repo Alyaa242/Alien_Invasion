@@ -65,6 +65,17 @@ void EarthArmy::print()
 	cout << endl << endl;
 }
 
+bool EarthArmy::isKilled()
+{
+	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty()) // army killed
+
+		return true;
+
+	else
+
+		return false;
+}
+
 bool EarthArmy::pickES(Unit*& unit)
 {
 	if (ESList.dequeue(unit))

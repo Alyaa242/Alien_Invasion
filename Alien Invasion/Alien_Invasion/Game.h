@@ -26,6 +26,7 @@ class Game
 	int choosen;
 	int wait;
 	int n;		//number of units generated each timestep
+	bool stop;
 
 public:
 
