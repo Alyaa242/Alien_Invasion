@@ -52,6 +52,21 @@ int Unit::getID() const
 	return ID;
 }
 
+int Unit::getDd() const
+{
+	return Dd;
+}
+
+int Unit::getDb() const
+{
+	return Db;
+}
+
+int Unit::getDf() const
+{
+	return Df;
+}
+
 bool Unit::isAttacked() const
 {
 	return attacked;
@@ -70,6 +85,21 @@ void Unit::setTa(int t)
 void Unit::setTd(int t)
 {
 	Td = t;
+}
+
+void Unit::setDd(int t)
+{
+	Dd = t;
+}
+
+void Unit::setDb(int t)
+{
+	Db = t;
+}
+
+void Unit::setDf(int t)
+{
+	Df = t;
 }
 
 //Setting IDs:

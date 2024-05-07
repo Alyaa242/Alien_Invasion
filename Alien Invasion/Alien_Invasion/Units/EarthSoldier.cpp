@@ -20,11 +20,14 @@ void EarthSoldier::attack()
 			{
 				attack->setAttacked(true);
 				attack->setTa(game->getTimestep());  //set the first time unit got shot
+				attack->setDf(attack->getTa() - attack->getTj());
 			}
 			if (attack->getHealth() <= 0) // ask the game to move it to the killed list
 			{
 				game->addToKilledList(attack);
 				attack->setTd(game->getTimestep());
+				attack->setDd(attack->getTd() - attack->getTa());
+				attack->setDb(attack->getTd() - attack->getTj());
 			}
 			else
 			{
