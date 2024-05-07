@@ -73,6 +73,10 @@ bool AlienArmy::isKilled()
 
 		return false;
 }
+int AlienArmy::gettotCount()
+{
+	return ASList.getCount() + AMList.getCount() + ADList.getCount();
+}
 
 bool AlienArmy::pickAS(Unit*& unit)
 {
@@ -106,6 +110,7 @@ bool AlienArmy::pickBackAD(Unit*& back)
 		return true;
 	return false;
 }
+
 LinkedQueue<Unit*>* AlienArmy::getASList()
 {
 	return &ASList;

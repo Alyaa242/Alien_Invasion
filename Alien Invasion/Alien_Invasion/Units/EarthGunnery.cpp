@@ -27,18 +27,13 @@ void EarthGunnery::attack()
 			{
 				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(attackAM->getHealth());
 				attackAM->decHealth(damageAM);
-				if (!attackAM->isAttacked())
-				{
-					attackAM->setAttacked(true);
-					attackAM->setTa(game->getTimestep());  //set the first time unit got shot
-					attackAM->setDf(attackAM->getTa() - attackAM->getTj());
-				}
-				if (attackAM->getHealth() <= 0) // ask the game to move it to the killed list
-				{
+				//Set Ta:
+				attackAM->setTa(game->getTimestep());
+
+				//If it's killed, add to killed list:
+				if (attackAM->getHealth() <= 0) {
 					game->addToKilledList(attackAM);
 					attackAM->setTd(game->getTimestep());
-					attackAM->setDd(attackAM->getTd() - attackAM->getTa());
-					attackAM->setDb(attackAM->getTd() - attackAM->getTj());
 				}
 				else
 				{
@@ -57,18 +52,14 @@ void EarthGunnery::attack()
 				{
 					int damageAD = (float(getPower() * getHealth()) / 100) / sqrt(attackADFront->getHealth());
 					attackADFront->decHealth(damageAD);
-					if (!attackADFront->isAttacked())
-					{
-						attackADFront->setAttacked(true);
-						attackADFront->setTa(game->getTimestep());  //set the first time unit got shot
-						attackADFront->setDf(attackADFront->getTa() - attackADFront->getTj());
-					}
-					if (attackADFront->getHealth() <= 0) // ask the game to move it to the killed list
-					{
+				
+					//Set Ta:
+					attackADFront->setTa(game->getTimestep());
+
+					//If it's killed, add to killed list:
+					if (attackADFront->getHealth() <= 0) {
 						game->addToKilledList(attackADFront);
 						attackADFront->setTd(game->getTimestep());
-						attackADFront->setDd(attackADFront->getTd() - attackADFront->getTa());
-						attackADFront->setDb(attackADFront->getTd() - attackADFront->getTj());
 					}
 					else
 					{
@@ -87,38 +78,28 @@ void EarthGunnery::attack()
 					int damageADBack = (float(getPower() * getHealth()) / 100) / sqrt(attackADBack->getHealth());
 					attackADBack->decHealth(damageADBack);
 
-					if (!attackADFront->isAttacked())
-					{
-						attackADFront->setAttacked(true);
-						attackADFront->setTa(game->getTimestep());  //set the first time unit got shot
-						attackADFront->setDf(attackADFront->getTa() - attackADFront->getTj());
-					}
+					//Set Ta:
+					attackADFront->setTa(game->getTimestep());
 
-					if (!attackADBack->isAttacked())
-					{
-						attackADBack->setAttacked(true);
-						attackADBack->setTa(game->getTimestep());  //set the first time unit got shot
-						attackADBack->setDf(attackADBack->getTa() - attackADBack->getTj());
-					}
-
-					if (attackADFront->getHealth() <= 0) // ask the game to move it to the killed list
-					{
+					//If it's killed, add to killed list:
+					if (attackADFront->getHealth() <= 0) {
 						game->addToKilledList(attackADFront);
 						attackADFront->setTd(game->getTimestep());
-						attackADFront->setDd(attackADFront->getTd() - attackADFront->getTa());
-						attackADFront->setDb(attackADFront->getTd() - attackADFront->getTj());
 					}
+
 					else
 					{
 						tempListAD.enqueue(attackADFront); // store at temp list
 					}
-					if (attackADBack->getHealth() <= 0) // ask the game to move it to the killed list
-					{
+					//Set Ta:
+					attackADBack->setTa(game->getTimestep());
+
+					//If it's killed, add to killed list:
+					if (attackADBack->getHealth() <= 0) {
 						game->addToKilledList(attackADBack);
 						attackADBack->setTd(game->getTimestep());
-						attackADBack->setDd(attackADBack->getTd() - attackADBack->getTa());
-						attackADBack->setDb(attackADBack->getTd() - attackADBack->getTj());
 					}
+
 					else
 					{
 						tempListAD.enqueue(attackADBack); // store at temp list

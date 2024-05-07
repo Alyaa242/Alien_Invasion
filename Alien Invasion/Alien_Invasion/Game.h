@@ -24,7 +24,9 @@ class Game
 	RandGen* randGen;
 	int timestep;
 	int choosen;
-	int wait;
+	int healcap=0;
+	Unit* picked;
+
 	int n;		//number of units generated each timestep
 	bool stop;
 
@@ -36,7 +38,7 @@ public:
 	void addUnits();	//A function that links between RandGen and each army to add units
 	void addToUML1(Unit* unit);
 	void UpdateUML();
-	int getWait(Unit* unit);
+	void PickHU();
 	void addToUML2(Unit* unit);
 	Unit* pickfromUML1();
 	Unit* pickfromUML2();
@@ -47,7 +49,11 @@ public:
 	int getTimestep();
 	void chooseMode();
 	void Display();
-	void setWait(int w);
+
+	
+
+
+
 
 	//Getters for enemies lists:
 

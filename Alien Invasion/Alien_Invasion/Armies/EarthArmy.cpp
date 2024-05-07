@@ -65,6 +65,7 @@ void EarthArmy::print()
 	cout << endl << endl;
 }
 
+
 bool EarthArmy::isKilled()
 {
 	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty()) // army killed
@@ -74,6 +75,11 @@ bool EarthArmy::isKilled()
 	else
 
 		return false;
+}
+int EarthArmy::gettotCount()
+{
+	return ESList.getCount() + ETList.getCount() + EGList.getCount()+ HUList.getCount();
+
 }
 
 bool EarthArmy::pickES(Unit*& unit)
@@ -99,6 +105,13 @@ bool EarthArmy::pickEG(Unit*& unit)
 }
 
 bool EarthArmy::pickHU(Unit*& unit)
+{
+	if (HUList.peek(unit))
+		return true;
+	return false;
+}
+
+bool EarthArmy::RemoveHU(Unit*& unit)
 {
 	if (HUList.pop(unit))
 		return true;

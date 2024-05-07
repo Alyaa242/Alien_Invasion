@@ -2,10 +2,16 @@
 #include "DS/PriQueue.h"
 
 int main() {
-	Game* game = new Game();
-	game->start();
-	
-	delete game;
 
+	Game* g=new Game;
+	Deque <int> *d= new Deque <int>;
+	g->start();
+
+
+
+
+
+
+	g->Display();
 	return 0;
 }
