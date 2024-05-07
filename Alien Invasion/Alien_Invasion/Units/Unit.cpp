@@ -146,6 +146,6 @@ void Unit::setWait(int w)
 std::ostream& operator<<(std::ostream& out, const Unit* u)
 
 {
-	out << u->getID() << " " << u->getCap();
+	out << u->getID();
 	return out;
 }
