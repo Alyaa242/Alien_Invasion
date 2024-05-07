@@ -131,8 +131,21 @@ void Unit::incHealth(int increment)
 	return;
 }
 
-std::ostream& operator<<(std::ostream& out, const Unit* u)
+
+int Unit::getWait()
 {
-	out << u->getID();
+	return wait;
+}
+
+void Unit::setWait(int w)
+{
+	wait = w;
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Unit* u)
+
+{
+	out << u->getID() << " " << u->getCap();
 	return out;
 }

@@ -31,7 +31,13 @@ Unit* RandGen::CreateEarthUnit()
 		return new EarthGunnery( health, power, capacity, game->getTimestep(), game);
 	}
 	else
-	{ 
+	{
+		cout << "[[[[[[[[[[[[[[[[[[[";
+
+
+
+
+
 		return new HealUnit (health, power, capacity, game->getTimestep(), game);
 	}
 }
