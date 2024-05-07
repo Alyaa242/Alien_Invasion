@@ -15,8 +15,10 @@ public:
 	Array();
 	void insert(T item);
 	bool remove(int i, T& item);
+	bool atIndx(int i, T& item) const;
 	void print() const;
 	int getCount() const;
+	bool isEmpty() const;
 
 };
 
@@ -46,6 +48,16 @@ inline bool Array<T>::remove(int i, T& item)
 }
 
 template<typename T>
+inline bool Array<T>::atIndx(int i, T& item) const
+{
+	if (i < count) {
+		item = arr[i];
+		return true;
+	}
+	return false;
+}
+
+template<typename T>
 inline void Array<T>::print() const
 {
 	if (count == 0)
@@ -62,4 +74,10 @@ template<typename T>
 inline int Array<T>::getCount() const
 {
 	return count;
+}
+
+template<typename T>
+inline bool Array<T>::isEmpty() const
+{
+	return !count;
 }

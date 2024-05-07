@@ -6,7 +6,6 @@ class Unit
 {
 	int health, power, capacity;
 	int ID;
-
 	
 	int wait;
 

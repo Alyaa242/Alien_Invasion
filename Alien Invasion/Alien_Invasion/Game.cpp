@@ -340,6 +340,7 @@ void Game::printInter()
 	UML1.print();cout << endl;
 	cout << "=========================== UML2 ===========================\n";
 	UML2.print();cout << endl;
+
 	cout << endl << endl;
 
 }
