@@ -29,24 +29,25 @@ void AlienArmy::addUnit(Unit* unit)
 void AlienArmy::attack()
 {
 	Unit* AS = nullptr;
-	if(pickAS(AS))
+	if(ASList.peek(AS))		//Call attack() of the front AS
 		AS->attack();
 	
 	Unit* AM = nullptr;
-	if(pickAM(AM))
-		AM->attack();
-	
+	int count = AMList.getCount();
+	//Call attack() of random AM
+	if (count) {
+		int index = rand() % count;
+		if (AMList.atIndx(index, AM))
+			AM->attack();
+	}
+
 	Unit* AD1 = nullptr;
 	Unit* AD2 = nullptr;
-	if (pickFrontAD(AD1) && pickBackAD(AD2)) {
+	//Call attack() of the front and back ADs
+	if (ADList.peek(AD1) && ADList.peekBack(AD2)) {
 		AD1->attack();
 		AD2->attack();
 	}
-	
-	addUnit(AS);
-	addUnit(AM);
-	addUnit(AD1);
-	addUnit(AD2);
 	
 }
 
