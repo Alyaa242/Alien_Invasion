@@ -253,68 +253,6 @@ void Game::start()
 
 		earthArmy->attack();
 
-		/*int x = rand() % 100 + 1;
-
-		if (x < 10) {
-			Unit* ES;
-			if(earthArmy->pickES(ES))
-				earthArmy->addUnit(ES);
-		}
-		else if (x < 20) {
-			Unit* ET;
-			if(earthArmy->pickET(ET))
-				killedList.enqueue(ET);
-		}
-		else if (x < 30) {
-			Unit* EG;
-			if (earthArmy->pickEG(EG)) {
-				EG->decHealth(EG->getHealth() / 2);
-				if (EG->getHealth() <= 0)
-					addToKilledList(EG);
-				else
-					earthArmy->addUnit(EG);
-			}
-		}
-		else if (x < 40) {
-			Unit* arr[5] = {};
-			for (int i = 0; i < 5; i++) {
-				Unit* AS;
-				if (alienArmy->pickAS(AS)) {
-					AS->decHealth(AS->getHealth() / 2);
-					if (AS->getHealth() <= 0)
-						addToKilledList(AS);
-					arr[i] = AS;
-				}
-			}
-			for (int i = 0; i < 5; i++) {
-				if (arr[i])
-					alienArmy->addUnit(arr[i]);
-			}
-		}
-		else if (x < 50) {
-			Unit* AM;
-			for (int i = 0; i < 5; i++) {
-				if (alienArmy->pickAM(AM))
-					alienArmy->addUnit(AM);
-			}
-		}
-		else if (x < 60) {
-			Unit* frontAD = nullptr;
-			Unit* backAD = nullptr;
-			for (int i = 0; i < 3; i++) {
-				if (alienArmy->pickFrontAD(frontAD))
-					killedList.enqueue(frontAD);
-
-				if (alienArmy->pickBackAD(backAD))
-					killedList.enqueue(backAD);
-			}
-		}
-
-		earthArmy->attack();
-		if (choosen == 2)
-			printInter();
-
-		earthArmy->attack();*/
 		printInter();
 
 

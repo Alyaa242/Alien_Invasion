@@ -7,7 +7,7 @@ class Array {
 
 private:
 
-	T arr[100];
+	T arr[1000];
 	int count;
 	
 public:
