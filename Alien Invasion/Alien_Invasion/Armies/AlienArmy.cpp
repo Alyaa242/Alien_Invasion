@@ -22,7 +22,7 @@ void AlienArmy::addUnit(Unit* unit)
 		AMList.insert(unit);
 	}
 	else {
-		ADList.enqueue(unit);
+		ADList.insert(unit);
 	}
 }
 
