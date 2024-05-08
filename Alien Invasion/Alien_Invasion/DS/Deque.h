@@ -8,10 +8,13 @@ template <typename T>
 class Deque : public LinkedQueue <T>
 
 {
+    bool last;
+
 public:
-    Deque() = default;
-    bool isEmpty();
-    void addLast(T item);
+    Deque();
+    bool isEmpty() const;
+    bool addLast(const T& item);
+    bool insert(const T& entry);    //Function that insert and handle wether to enqueue or addLast
     bool removeLast(T& oldValue);
     bool enqueue(const T& newEntry);
     bool dequeue(T& frntEntry);
@@ -20,8 +23,14 @@ public:
 };
 
 
+template<typename T>
+inline Deque<T>::Deque()
+{
+    last = false;
+}
+
 template <typename T>
-bool Deque<T>::isEmpty()
+bool Deque<T>::isEmpty() const
 {
 
     return !LinkedQueue<T>::frontPtr;
@@ -29,7 +38,7 @@ bool Deque<T>::isEmpty()
 }
 
 template<typename T>
-inline void Deque<T>::addLast(T item)
+inline bool Deque<T>::addLast(const T& item)
 {
     Node <T>* newNode = new Node <T>(item);
     if (isEmpty())
@@ -48,6 +57,23 @@ inline void Deque<T>::addLast(T item)
 
     LinkedQueue<T>::counter++;
     LinkedQueue<T>::backPtr->setNext(nullptr);
+
+    return true;
+}
+
+template<typename T>
+inline bool Deque<T>::insert(const T& entry)
+{
+    if (!last) {
+        enqueue(entry);
+        last = true;
+    }
+    else {
+        addLast(entry);
+        last = false;
+    }
+
+    return true;
 }
 
 template <typename T>
