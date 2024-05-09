@@ -252,6 +252,7 @@ void Game::start()
 		Heal();
 
 		earthArmy->attack();
+ 
 		printInter();
 		if (timestep >= 40)
 		{
