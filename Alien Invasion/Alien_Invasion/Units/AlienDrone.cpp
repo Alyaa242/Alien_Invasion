@@ -5,6 +5,7 @@
 AlienDrone::AlienDrone(int heal, int pow, int cap, int t, Game* g) : Unit( heal, pow, cap, t, g)
 {
 	setAlienID();
+	isSecond = false;
 }
 
 void AlienDrone::attack()
@@ -15,11 +16,23 @@ void AlienDrone::attack()
 	LinkedQueue<Unit*> temp;
 	int dummy;	//Dummy int to take pri value
 
+	//Setting this unit as a fighting unit for the current timestep
+	if (isSecond)
+		game->setFightingUnit(this, 2);
+	else
+		game->setFightingUnit(this);
+
 	int i = 0;
 	while (i < getCap() && !(ETEnemies->isEmpty() || EGEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {
+
+			//Adding enemy to attackedByAD list
+			if (isSecond)
+				game->addAttacked(this, enemy, 2);
+			else
+				game->addAttacked(this, enemy);
 
 			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
@@ -49,6 +62,13 @@ void AlienDrone::attack()
 		//Check there is an enemy in the list:
 		if (i < getCap()) {
 			if (EGEnemies->dequeue(enemy, dummy)) {
+
+				//Adding enemy to attackedByAD list
+				if (isSecond)
+					game->addAttacked(this, enemy, 2);
+				else
+					game->addAttacked(this, enemy);
+
 				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Decrement enemy's health:
@@ -81,4 +101,9 @@ void AlienDrone::attack()
 	}
 	
 
+}
+
+void AlienDrone::setIsSecond()
+{
+	isSecond = true;
 }

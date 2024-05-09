@@ -18,6 +18,10 @@ void EarthTank::attack()
 	LinkedQueue<Unit*> tempListAM;
 	int counter = 0;
 	float percentage = ((float((ASEnemies->getCount()) - (ESlist->getCount()))) / (ASEnemies->getCount())) * 100;
+
+	//Setting this unit as a fighting unit for the current timestep
+	game->setFightingUnit(this);
+
 	while (counter < getCap() && (AMEnemies->getCount() != 0 || (percentage > 0 && percentage < 30)))
 	{
 		// attack monster

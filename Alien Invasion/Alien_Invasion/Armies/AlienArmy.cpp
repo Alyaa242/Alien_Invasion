@@ -46,6 +46,7 @@ void AlienArmy::attack()
 	//Call attack() of the front and back ADs
 	if (ADList.peek(AD1) && ADList.peekBack(AD2)) {
 		AD1->attack();
+		dynamic_cast<AlienDrone*>(AD2)->setIsSecond();
 		AD2->attack();
 	}
 	

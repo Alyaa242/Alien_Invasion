@@ -245,6 +245,8 @@ void Game::start()
 {
 	while (timestep < 50) {
 
+		resetFightingUnits();	//Reset current fighting units to null
+
 		//Call attack for each army	
 		addUnits();		//Adding units generated from randGen
 		alienArmy->attack();
@@ -338,6 +340,67 @@ void Game::Display()
 	outfile << " Total Destructed_AT \ Total AT";
 	outfile << " Total Destructed_AG \ Total AG";
 	outfile << "Total Destructed Units \ Total Units ";outfile << killedList.getCount() << " \ " << earthArmy->gettotCount() + alienArmy->gettotCount();
+}
+
+void Game::setFightingUnit(Unit* unit, int x)
+{
+	if (dynamic_cast<EarthSoldier*>(unit)) {
+		fightingES = unit;
+	}
+	else if (dynamic_cast<EarthTank*>(unit)) {
+		fightingET = unit;
+	}
+	else if (dynamic_cast<EarthGunnery*>(unit)) {
+		fightingEG = unit;
+	}
+	else if (dynamic_cast<AlienSoldier*>(unit)) {
+		fightingAS = unit;
+	}
+	else if (dynamic_cast<AlienMonster*>(unit)) {
+		fightingAM = unit;
+	}
+	else if (dynamic_cast<AlienDrone*>(unit) && x == 1) {
+		fightingAD1 = unit;
+	}
+	else {
+		fightingAD2 = unit;
+	}
+}
+
+void Game::addAttacked(Unit* attacking, Unit* attacked, int x)
+{
+	if (dynamic_cast<EarthSoldier*>(attacking)) {
+		attackedByES.enqueue(attacked);
+	}
+	else if (dynamic_cast<EarthTank*>(attacking)) {
+		attackedByET.enqueue(attacked);
+	}
+	else if (dynamic_cast<EarthGunnery*>(attacking)) {
+		attackedByEG.enqueue(attacked);
+	}
+	else if (dynamic_cast<AlienSoldier*>(attacking)) {
+		attackedByAS.enqueue(attacked);
+	}
+	else if (dynamic_cast<AlienMonster*>(attacking)) {
+		attackedByAM.enqueue(attacked);
+	}
+	else if (dynamic_cast<AlienDrone*>(attacking) && x == 1) {
+		attackedByAD1.enqueue(attacked);
+	}
+	else {
+		attackedByAD2.enqueue(attacked);
+	}
+}
+
+void Game::resetFightingUnits()
+{
+	fightingES = nullptr;
+	fightingET = nullptr;
+	fightingEG = nullptr;
+	fightingAS = nullptr;
+	fightingAM = nullptr;
+	fightingAD1 = nullptr;
+	fightingAD2 = nullptr;
 }
 
 
