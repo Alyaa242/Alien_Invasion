@@ -65,7 +65,7 @@ void AlienArmy::print()
 
 bool AlienArmy::isKilled()
 {
-	if (ASList.isEmpty() && AMList.getCount() == 0 && ADList.isEmpty())
+	if (ASList.isEmpty() && AMList.isEmpty() && ADList.isEmpty())
 
 		return true;
 

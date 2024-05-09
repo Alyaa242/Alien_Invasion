@@ -22,7 +22,7 @@ void EarthTank::attack()
 	else
 		Npass = false;
 
-	while (counter < getCap() && (AMEnemies->getCount() != 0 || Npass))
+	while (counter < getCap() && (!AMEnemies->isEmpty() || Npass))
 	{
 		// attack monster
 		int count = AMEnemies->getCount();
