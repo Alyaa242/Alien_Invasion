@@ -33,7 +33,11 @@ template <typename T>
 bool Deque<T>::isEmpty() const
 {
 
-    return !LinkedQueue<T>::frontPtr;
+  //  return !LinkedQueue<T>::frontPtr;
+    if (LinkedQueue<T>::counter)
+        return false;
+    else
+        return true;
 
 }
 

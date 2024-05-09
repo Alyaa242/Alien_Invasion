@@ -17,6 +17,12 @@ using namespace std;
 
 Game::Game()
 {
+	AvgDbAlien = 0;
+	AvgDbEarth = 0;
+	AvgDdAlien = 0;
+	AvgDdEarth = 0;
+	AvgDfEarth = 0;
+	AvgDfAlien = 0;
 	timestep = 0;
 	stop = true;
 	earthArmy = new EarthArmy ;
@@ -351,6 +357,38 @@ void Game::Display()
 	outfile << " Total Destructed_AT \ Total AT";
 	outfile << " Total Destructed_AG \ Total AG";
 	outfile << "Total Destructed Units \ Total Units ";outfile << killedList.getCount() << " \ " << earthArmy->gettotCount() + alienArmy->gettotCount();
+}
+
+
+
+void Game::setDfEarth(int t)
+{
+	AvgDfEarth += t;
+}
+
+void Game::setDdEarth(int t)
+{
+	AvgDdEarth += t;
+}
+
+void Game::setDbEarth(int t)
+{
+	AvgDbEarth += t;
+}
+
+void Game::setDfAlien(int t)
+{
+	AvgDfAlien += t;
+}
+
+void Game::setDdAlien(int t)
+{
+	AvgDdAlien += t;
+}
+
+void Game::setDbAlien(int t)
+{
+	AvgDbAlien += t;
 }
 
 

@@ -7,21 +7,23 @@ EarthTank::EarthTank(int heal, int pow, int cap, int t, Game* g) : Unit(heal, po
 
 void EarthTank::attack()
 {
-	// attack AS if the count of ES less than AS with 30% until ES reaches 80% of AS then back to attack AM randomly
 	LinkedQueue<Unit*>* ASEnemies = game->getASEnemies();
 	LinkedQueue<Unit*>* ESlist = game->getESEnemies();
 	Array<Unit*>* AMEnemies = game->getAMEnemies();
+	LinkedQueue<Unit*> tempList;
+
 	Unit* enemy;
 	float percentage = (ASEnemies->getCount() != 0) ? ((float((ASEnemies->getCount()) - (ESlist->getCount()))) / (ASEnemies->getCount())) * 100 : INT_MIN;
+
 	bool Npass; // check if the percentage of ES reaches 80 of AS to stop attack AS
-	LinkedQueue<Unit*> tempList;
-	int counter = 0;
+
 
 	if ((percentage > 0 && percentage < 30))
 		Npass = true;
 	else
 		Npass = false;
 
+	int counter = 0;
 	while (counter < getCap() && (!AMEnemies->isEmpty() || Npass))
 	{
 		// attack monster
@@ -82,21 +84,16 @@ void EarthTank::attack()
 				Npass = false;
 			}
 
-			if (counter == 0)
-				break;
 		}
 	}
 	while (tempList.dequeue(enemy))  //move all items from the temp list back to thier original list
 	{
 		if (dynamic_cast<AlienSoldier*>(enemy))
-
 			ASEnemies->enqueue(enemy);
-
 		else
-
 			AMEnemies->insert(enemy);
 
 	}
-
+	
 }
 

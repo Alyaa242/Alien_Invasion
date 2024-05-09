@@ -22,6 +22,9 @@ class Game
 	EarthArmy* earthArmy;
     AlienArmy* alienArmy;
 	RandGen* randGen;
+	// Average Df , Dd , Db for eath and alien
+	int AvgDfEarth, AvgDbEarth, AvgDdEarth;
+	int AvgDfAlien, AvgDbAlien, AvgDdAlien;
 	int timestep;
 	int choosen;
 	int healcap=0;
@@ -51,8 +54,13 @@ public:
 	void Display();
 
 	
-
-
+	
+	void setDfEarth(int t);
+	void setDdEarth(int t);
+	void setDbEarth(int t);
+	void setDfAlien(int t);
+	void setDdAlien(int t);
+	void setDbAlien(int t);
 
 
 	//Getters for enemies lists:
