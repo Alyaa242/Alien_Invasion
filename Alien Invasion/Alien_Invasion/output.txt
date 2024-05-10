@@ -35,52 +35,19 @@ Td   ID   Tj   Df   Dd   Db
 71 2033 68
 75 2039 69
 76 2040 74
-76 2031 68
-76 2038 69
-80 2047 78
-81 2046 78
 83 2041 74
-84 2049 78
-86 2052 84
-87 2057 86
-88 2043 74
-88 2004 1
-88 2055 86
-90 2037 69
-93 2035 69
-93 2051 84
-94 2056 86
-95 2058 86
-102 2061 100
-103 2063 100
-107 2060 100
-108 2069 106
-108 2072 107
-110 2073 107
-111 2070 107
-112 2074 107
-115 2076 113
-117 2054 84
-117 2044 74
-118 2001 1
-119 2078 113
-119 2062 100
-122 2064 100
-122 2009 11
-123 2002 1
-124 2006 11
-125 2079 113
-127 2082 127
-127 2077 113
-130 2081 127
-131 2088 130
-132 2087 130
-132 2083 127
-132 2080 127
-132 2085 130
-135 2084 127
-141 2089 130
+85 2049 80
+87 2045 80
+88 2046 80
+110 2066 109
+112 2068 109
+114 2062 108
+115 2053 85
+115 2065 109
+116 2067 109
+118 2009 11
+120 2069 109
 Battle Result . . .
 For Earth Army
-Total number of ES : Total number of ET : Total number of EG : Total number of HU :  Total Destructed_ES  Total ES Total Destructed_ET  Total ET Total Destructed_EG  Total EG Total Destructed_HU  Total HUTotal Destructed Units  Total Units 0  71For Alien Army
-Total number of AS : Total number of AT : Total number of AG :  Total Destructed_AS  Total AS Total Destructed_AT  Total AT Total Destructed_AG  Total AGTotal Destructed Units  Total Units 0  71
+Total number of ES : Total number of ET : Total number of EG : Total number of HU :  Total Destructed_ES  Total ES Total Destructed_ET  Total ET Total Destructed_EG  Total EG Total Destructed_HU  Total HUTotal Destructed Units  Total Units 0  41For Alien Army
+Total number of AS : Total number of AT : Total number of AG :  Total Destructed_AS  Total AS Total Destructed_AT  Total AT Total Destructed_AG  Total AGTotal Destructed Units  Total Units 0  41

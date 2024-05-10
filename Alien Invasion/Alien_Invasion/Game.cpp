@@ -229,7 +229,7 @@ void Game::Heal()
 
 	{
 		earthArmy->RemoveHU(picked);
-		addToKilledList(picked);cout << "lllllllllllllllllllllllll\n";
+		addToKilledList(picked); //cout << "lllllllllllllllllllllllll\n";
 	
 
 		while (!tempList1.isEmpty())
@@ -253,6 +253,7 @@ void Game::start()
 	while (stop)
 	{
 		addUnits();		//Adding units generated from randGen
+
 		alienArmy->attack();
 
 		Heal();
@@ -260,6 +261,7 @@ void Game::start()
 		earthArmy->attack();
  
 		printInter();
+
 		if (timestep >= 40)
 		{
 			if (alienArmy->isKilled())
@@ -278,6 +280,7 @@ void Game::start()
 		cin.get();	//Wait for user to press enter
 
 	}
+	cin.get();
 }
 
 void Game::printInter()

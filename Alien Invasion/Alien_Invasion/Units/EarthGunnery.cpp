@@ -47,6 +47,7 @@ void EarthGunnery::attack()
 		{
 			bool fromlast = false;
 			bool fromfront = false;
+
 			if (ADflag % 2 == 0)
 			{
 				fromfront = ADEnemies->dequeue(enemy);

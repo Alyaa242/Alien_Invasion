@@ -33,12 +33,8 @@ template <typename T>
 bool Deque<T>::isEmpty() const
 {
 
-  //  return !LinkedQueue<T>::frontPtr;
-    if (LinkedQueue<T>::counter)
-        return false;
-    else
-        return true;
-
+    return !LinkedQueue<T>::frontPtr;
+ 
 }
 
 template<typename T>
@@ -95,51 +91,35 @@ bool Deque<T>::removeLast(T& oldValue)
         return false;
 
 
+    oldValue = ptr->getItem();
+    LinkedQueue<T>::backPtr = LinkedQueue<T>::backPtr->getPrev();
+    Node <T>* prev = ptr->getPrev();
+    LinkedQueue<T>::backPtr->setNext(nullptr);
 
-  
+    if (ptr == LinkedQueue<T>::frontPtr)
+    {
+        delete  LinkedQueue<T>::frontPtr;
+        LinkedQueue<T>::frontPtr = nullptr;
 
-   oldValue = ptr->getItem();
-   LinkedQueue<T>::backPtr = LinkedQueue<T>::backPtr->getPrev();
-   Node <T>* prev = ptr->getPrev();
-   //if (!prev)
-   //{
-   //  
-   ///*    ptr = nullptr;
-   //    LinkedQueue<T>::counter--;*/
-   //    dequeue(oldValue);
-   //    return true;
-   //}
+    }
+    else
+    {
+        delete ptr;
+        ptr = nullptr;
 
-
-   if (ptr == LinkedQueue<T>::frontPtr)
-       LinkedQueue<T>::frontPtr = nullptr;
-    //prev->setNext(nullptr);
-    delete ptr;
-  //  ptr = nullptr;
-   
+    }
 
 
 
 
-    /* Node <T>* ptr = LinkedQueue<T>::frontPtr;
-     while (ptr->getNext()->getNext())
-         ptr = ptr->getNext();
-
-     oldValue = ptr->getItem();
-
-     Node <T>* oneBefore = ptr;
 
 
-     oneBefore->setNext(nullptr);
-
-
-     delete  LinkedQueue<T>::backPtr;
-     oneBefore =  LinkedQueue<T>::backPtr;*/
 
     LinkedQueue<T>::counter--;
 
     return true;
 }
+
 
 template<typename T>
 inline bool Deque<T>::enqueue(const T& newEntry)
