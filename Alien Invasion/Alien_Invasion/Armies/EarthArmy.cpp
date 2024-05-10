@@ -40,6 +40,7 @@ void EarthArmy::attack()
 	if (ETList.peek(ET))	//Call attack() of the last ET (peek of the stack)
 		ET->attack();
 
+		
 	Unit* EG = nullptr;
 	int maxpower_health;
 	if (EGList.peek(EG, maxpower_health))	//Call attack() of EG with the max power & health

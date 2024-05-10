@@ -254,37 +254,37 @@ void Game::start()
 { 
 	while (stop)
 	{
-		addUnits();		//Adding units generated from randGen
+		resetFightingUnits();	//Reset current fighting units to null
 
+		addUnits();		//Adding units generated from randGen	
+
+		//Call attack for each army	
+		earthArmy->attack();
 		alienArmy->attack();
 
 		Heal();
 
-		earthArmy->attack();
-		if (InteractiveM)
-		{
-			printInter();
-		}
+		printInter();
 
 		if (timestep >= 40)
 		{
 			if (alienArmy->isKilled())
 			{
 				cout << "=========================== The winner is the Earth Army ===========================\n";
-				stop = false;
+			//	stop = false;
 			}
 			else if (earthArmy->isKilled())
 			{
 				cout << "=========================== The winner is the Alien Army ===========================\n";
-				stop = false;
+			//	stop = false;
 			}
 		}
+
 
 		timestep++;
 		cin.get();	//Wait for user to press enter
 
 	}
-	cin.get();
 }
 
 void Game::printInter()
@@ -364,6 +364,67 @@ void Game::Display()
 	outfile << " Total Destructed_AT \ Total AT";
 	outfile << " Total Destructed_AG \ Total AG";
 	outfile << "Total Destructed Units \ Total Units ";outfile << killedList.getCount() << " \ " << earthArmy->gettotCount() + alienArmy->gettotCount();
+}
+
+void Game::setFightingUnit(Unit* unit, int x)
+{
+	if (dynamic_cast<EarthSoldier*>(unit)) {
+		fightingES = unit;
+	}
+	else if (dynamic_cast<EarthTank*>(unit)) {
+		fightingET = unit;
+	}
+	else if (dynamic_cast<EarthGunnery*>(unit)) {
+		fightingEG = unit;
+	}
+	else if (dynamic_cast<AlienSoldier*>(unit)) {
+		fightingAS = unit;
+	}
+	else if (dynamic_cast<AlienMonster*>(unit)) {
+		fightingAM = unit;
+	}
+	else if (dynamic_cast<AlienDrone*>(unit) && x == 1) {
+		fightingAD1 = unit;
+	}
+	else {
+		fightingAD2 = unit;
+	}
+}
+
+void Game::addAttacked(Unit* attacking, Unit* attacked, int x)
+{
+	if (dynamic_cast<EarthSoldier*>(attacking)) {
+		attackedByES.enqueue(attacked);
+	}
+	else if (dynamic_cast<EarthTank*>(attacking)) {
+		attackedByET.enqueue(attacked);
+	}
+	else if (dynamic_cast<EarthGunnery*>(attacking)) {
+		attackedByEG.enqueue(attacked);
+	}
+	else if (dynamic_cast<AlienSoldier*>(attacking)) {
+		attackedByAS.enqueue(attacked);
+	}
+	else if (dynamic_cast<AlienMonster*>(attacking)) {
+		attackedByAM.enqueue(attacked);
+	}
+	else if (dynamic_cast<AlienDrone*>(attacking) && x == 1) {
+		attackedByAD1.enqueue(attacked);
+	}
+	else {
+		attackedByAD2.enqueue(attacked);
+	}
+}
+
+void Game::resetFightingUnits()
+{
+	fightingES = nullptr;
+	fightingET = nullptr;
+	fightingEG = nullptr;
+	fightingAS = nullptr;
+	fightingAM = nullptr;
+	fightingAD1 = nullptr;
+	fightingAD2 = nullptr;
 }
 
 

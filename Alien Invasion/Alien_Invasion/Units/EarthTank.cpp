@@ -94,6 +94,5 @@ void EarthTank::attack()
 			AMEnemies->insert(enemy);
 
 	}
-	
-}
 
+}

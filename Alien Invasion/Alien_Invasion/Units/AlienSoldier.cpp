@@ -11,10 +11,16 @@ void AlienSoldier::attack()
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
 
+	//Setting this unit as a fighting unit for the current timestep
+	game->setFightingUnit(this);
+
 	for (int i = 0; i < getCap(); i++) {
 
 		//Check there is an enemy in the list:
 		if (ESEnemies->dequeue(enemy)) {
+
+			//Adding enemy to attackedByAS list
+			game->addAttacked(this, enemy);
 
 			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 

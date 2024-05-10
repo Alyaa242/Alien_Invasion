@@ -30,6 +30,24 @@ class Game
 	int healcap=0;
 	Unit* picked;
 
+	//Units fighting this timestep:
+	Unit* fightingES;
+	Unit* fightingET;
+	Unit* fightingEG;
+	Unit* fightingAS;
+	Unit* fightingAM;
+	Unit* fightingAD1;
+	Unit* fightingAD2;
+
+	//Units attacked this timestep:
+	LinkedQueue<Unit*>	attackedByES;
+	LinkedQueue<Unit*>	attackedByET;
+	LinkedQueue<Unit*>	attackedByEG;
+	LinkedQueue<Unit*>	attackedByAS;
+	LinkedQueue<Unit*>	attackedByAM;
+	LinkedQueue<Unit*>	attackedByAD1;
+	LinkedQueue<Unit*>	attackedByAD2;
+
 	int n;		//number of units generated each timestep
 	bool stop;
 	bool SilentM, InteractiveM; 
@@ -53,8 +71,6 @@ public:
 	int getTimestep();
 	void chooseMode();
 	void Display();
-
-	
 	
 	void setDfEarth(int t);
 	void setDdEarth(int t);
@@ -63,9 +79,11 @@ public:
 	void setDdAlien(int t);
 	void setDbAlien(int t);
 
+	void setFightingUnit(Unit* unit, int x = 1);	//A function that sets current units fighting
+	void addAttacked(Unit* attacking, Unit* attacked, int x = 1);	//A function that adds each attacked unit to the appropriate list
+	void resetFightingUnits();	//A function for reseting fighting units each timestep
 
 	//Getters for enemies lists:
-
 	LinkedQueue<Unit*>* getESEnemies();
 	ArrayStack<Unit*>* getETEnemies();
 	priQueue<Unit*>* getEGEnemies();

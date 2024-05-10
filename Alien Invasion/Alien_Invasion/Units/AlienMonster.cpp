@@ -14,12 +14,18 @@ void AlienMonster::attack()
 	LinkedQueue<Unit*>* ESEnemies = game->getESEnemies();
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
+
+	//Setting this unit as a fighting unit for the current timestep
+	game->setFightingUnit(this);
 	
 	int i = 0;
 	while(i < getCap() && !(ETEnemies->isEmpty() || ESEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {
+
+			//Adding enemy to attackedByAM list
+			game->addAttacked(this, enemy);
 
 			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
@@ -49,6 +55,10 @@ void AlienMonster::attack()
 		//Check there is an enemy in the list:
 		if (i < getCap()) {
 			if (ESEnemies->dequeue(enemy)) {
+
+				//Adding enemy to attackedByAM list
+				game->addAttacked(this, enemy);
+
 				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Decrement enemy's health:
