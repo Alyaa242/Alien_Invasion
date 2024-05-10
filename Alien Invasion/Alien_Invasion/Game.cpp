@@ -25,6 +25,8 @@ Game::Game()
 	AvgDfAlien = 0;
 	timestep = 0;
 	stop = true;
+	SilentM = false;
+	InteractiveM = false;
 	earthArmy = new EarthArmy ;
 	alienArmy = new AlienArmy;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
@@ -259,8 +261,10 @@ void Game::start()
 		Heal();
 
 		earthArmy->attack();
- 
-		printInter();
+		if (InteractiveM)
+		{
+			printInter();
+		}
 
 		if (timestep >= 40)
 		{

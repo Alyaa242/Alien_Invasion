@@ -32,6 +32,7 @@ class Game
 
 	int n;		//number of units generated each timestep
 	bool stop;
+	bool SilentM, InteractiveM; 
 
 public:
 
