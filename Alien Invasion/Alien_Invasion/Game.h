@@ -76,7 +76,6 @@ public:
 
 
 	//Getters for enemies lists:
-
 	LinkedQueue<Unit*>* getESEnemies();
 	ArrayStack<Unit*>* getETEnemies();
 	priQueue<Unit*>* getEGEnemies();

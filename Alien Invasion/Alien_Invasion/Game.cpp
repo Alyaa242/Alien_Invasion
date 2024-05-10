@@ -249,9 +249,12 @@ void Game::start()
 
 		//Call attack for each army	
 		addUnits();		//Adding units generated from randGen
-		alienArmy->attack();
+	//	alienArmy->attack();
 
-		Heal();
+	//	Heal();
+		if (timestep == 46)
+
+			int x = 0;
 
 		earthArmy->attack();
 

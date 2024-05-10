@@ -32,14 +32,15 @@ void EarthArmy::addUnit(Unit* unit)
 
 void EarthArmy::attack()
 {
-	Unit* ES = nullptr;
+	/*Unit* ES = nullptr;
 	if (ESList.peek(ES))	//Call attack() of the front ES
 		ES->attack();
 
+
 	Unit* ET = nullptr;
 	if (ETList.peek(ET))	//Call attack() of the last ET (peek of the stack)
-		ET->attack();
-
+		ET->attack();*/
+		
 	Unit* EG = nullptr;
 	int maxpower_health;
 	if (EGList.peek(EG, maxpower_health))	//Call attack() of EG with the max power & health
