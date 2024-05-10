@@ -264,25 +264,37 @@ void Game::start()
 
 		Heal();
 
-		printInter();
+		if (InteractiveM) {
+			printInter();
+			cin.get();	//Wait for user to press enter
+		}
+
 
 		if (timestep >= 40)
 		{
-			if (alienArmy->isKilled())
-			{
-				cout << "=========================== The winner is the Earth Army ===========================\n";
-			//	stop = false;
+			if (InteractiveM) {
+				if (alienArmy->isKilled())
+				{
+					cout << "=========================== The winner is the Earth Army ===========================\n";
+					//	stop = false;
+				}
+				else if (earthArmy->isKilled())
+				{
+					cout << "=========================== The winner is the Alien Army ===========================\n";
+					//	stop = false;
+				}
 			}
-			else if (earthArmy->isKilled())
-			{
-				cout << "=========================== The winner is the Alien Army ===========================\n";
-			//	stop = false;
+			else {
+				if (alienArmy->isKilled() || earthArmy->isKilled()) {
+					cout << "Simulation ended...\n";
+					cout << "Output File created.\n";
+					stop = false;
+				}
 			}
 		}
 
 
 		timestep++;
-		cin.get();	//Wait for user to press enter
 
 	}
 }
@@ -309,11 +321,6 @@ void Game::printInter()
 
 }
 
-void Game::printSilent()
-{
-	cout << "Silent Mode\n SimulationStarts . . . \n Simulation ends, Output file is created \n";
-}
-
 int Game::getTimestep()
 {
 	return timestep;
@@ -322,12 +329,18 @@ int Game::getTimestep()
 void Game::chooseMode()
 {
 	cout << "=========================== Select Mode ===========================\n";
-	cout << " Press 1 for Silent Mode\n";
-	cout << " Press 2 for Interactive Mode\n";
-	
+	cout << "Press S for Silent Mode\n";
+	cout << "Press I for Interactive Mode\n";
+
 	cin >> choosen;
-	if (choosen==1) 
-	 printSilent();
+	if (choosen == 'S')
+	{
+		cout << "Silent Mode\nSimulationStarts . . . \n ";
+		SilentM = true;
+	}
+	else
+		InteractiveM = true;
+
 }
 
 void Game::Display()

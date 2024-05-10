@@ -26,7 +26,7 @@ class Game
 	int AvgDfEarth, AvgDbEarth, AvgDdEarth;
 	int AvgDfAlien, AvgDbAlien, AvgDdAlien;
 	int timestep;
-	int choosen;
+	char choosen;
 	int healcap=0;
 	Unit* picked;
 
@@ -67,7 +67,6 @@ public:
 	void Heal();
 	void start();	//The main function that implements the game logic
 	void printInter();
-	void printSilent();
 	int getTimestep();
 	void chooseMode();
 	void Display();
