@@ -19,7 +19,7 @@ void AlienMonster::attack()
 	game->setFightingUnit(this);
 	
 	int i = 0;
-	while(i < getCap() && !(ETEnemies->isEmpty() || ESEnemies->isEmpty())) {
+	while(i < getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {

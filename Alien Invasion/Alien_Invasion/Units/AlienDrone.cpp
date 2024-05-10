@@ -23,7 +23,7 @@ void AlienDrone::attack()
 		game->setFightingUnit(this);
 
 	int i = 0;
-	while (i < getCap() && !(ETEnemies->isEmpty() || EGEnemies->isEmpty())) {
+	while (i < getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {
