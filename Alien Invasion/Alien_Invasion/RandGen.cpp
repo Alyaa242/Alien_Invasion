@@ -32,12 +32,6 @@ Unit* RandGen::CreateEarthUnit()
 	}
 	else
 	{
-		cout << "[[[[[[[[[[[[[[[[[[[";
-
-
-
-
-
 		return new HealUnit (health, power, capacity, game->getTimestep(), game);
 	}
 }
@@ -53,7 +47,7 @@ Unit* RandGen::CreateAlienUnit()
 		return new AlienSoldier(health, power, capacity, game->getTimestep(), game);
 	}
 	else if (B <= parameters[ASPer] + parameters[AMPer]) {
-		return new AlienMonster(health, power, capacity, game->getTimestep(), game);
+		return new AlienMonster(health, power, capacity, game->getTimestep(), game, parameters[prob_infect]);
 	}
 	else {
 		return new AlienDrone(health, power, capacity, game->getTimestep(), game);

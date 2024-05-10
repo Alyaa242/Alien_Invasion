@@ -41,3 +41,8 @@ void EarthSoldier::attack()
 		ASenemies->enqueue(attack);
 	}
 }
+
+void EarthSoldier::setInfected(bool x)
+{
+	infected = x;
+}

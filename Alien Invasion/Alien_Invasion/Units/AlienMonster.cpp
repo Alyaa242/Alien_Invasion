@@ -2,9 +2,10 @@
 #include "EarthSoldier.h"
 #include "EarthTank.h"
 
-AlienMonster::AlienMonster(int heal, int pow, int cap, int t, Game* g) : Unit( heal, pow, cap, t, g)
+AlienMonster::AlienMonster(int heal, int pow, int cap, int t, Game* g, int p) : Unit( heal, pow, cap, t, g)
 {
 	setAlienID();
+	prob = p;
 }
 
 void AlienMonster::attack()
@@ -14,7 +15,7 @@ void AlienMonster::attack()
 	LinkedQueue<Unit*>* ESEnemies = game->getESEnemies();
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
-
+	
 	//Setting this unit as a fighting unit for the current timestep
 	game->setFightingUnit(this);
 	
@@ -58,6 +59,11 @@ void AlienMonster::attack()
 
 				//Adding enemy to attackedByAM list
 				game->addAttacked(this, enemy);
+
+				//Infect ES by probability prob
+				int x = rand() % 100 + 1;
+				if (x <= prob)
+					dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
 
 				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 

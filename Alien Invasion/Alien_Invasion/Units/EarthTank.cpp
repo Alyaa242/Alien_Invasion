@@ -13,7 +13,7 @@ void EarthTank::attack()
 	LinkedQueue<Unit*> tempList;
 
 	Unit* enemy;
-	float percentage = (ASEnemies->getCount() != 0) ? ((float((ASEnemies->getCount()) - (ESlist->getCount()))) / (ASEnemies->getCount())) * 100 : INT_MIN;
+	float percentage = (ASEnemies->getCount() != 0)? ((float((ESlist->getCount()))) / (ASEnemies->getCount())) * 100 : INT_MIN;
 
 	bool Npass; // check if the percentage of ES reaches 80 of AS to stop attack AS
 
@@ -24,7 +24,7 @@ void EarthTank::attack()
 		Npass = false;
 
 	int counter = 0;
-	while (counter < getCap() && (!AMEnemies->isEmpty() || Npass))
+	while (counter < getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
 	{
 		// attack monster
 		int count = AMEnemies->getCount();
@@ -56,30 +56,31 @@ void EarthTank::attack()
 		// attack alien soldier
 		if (counter < getCap())
 		{
-
-			if (ASEnemies->dequeue(enemy) && Npass)
-			{
-				int damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
-
-				enemy->decHealth(damageAS);
-
-				enemy->setTa(game->getTimestep());  //set the first time unit got shot
-
-
-				if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
+			if (Npass) {
+				if (ASEnemies->dequeue(enemy))
 				{
-					game->addToKilledList(enemy);
-					enemy->setTd(game->getTimestep());
-				}
-				else
-				{
-					tempList.enqueue(enemy); // store at temp list
-				}
+					int damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
-				counter++;
+					enemy->decHealth(damageAS);
+
+					enemy->setTa(game->getTimestep());  //set the first time unit got shot
+
+
+					if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
+					{
+						game->addToKilledList(enemy);
+						enemy->setTd(game->getTimestep());
+					}
+					else
+					{
+						tempList.enqueue(enemy); // store at temp list
+					}
+
+					counter++;
+				}
 			}
 
-			if (!ESlist->isEmpty() && (((float((ESlist->getCount()) - (ASEnemies->getCount()))) / (ESlist->getCount())) * 100 >= 80))
+			if (((float((ESlist->getCount())) / (ASEnemies->getCount())) * 100 >= 80))
 			{
 				Npass = false;
 			}
@@ -94,5 +95,4 @@ void EarthTank::attack()
 			AMEnemies->insert(enemy);
 
 	}
-
 }

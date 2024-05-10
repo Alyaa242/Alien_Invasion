@@ -34,7 +34,7 @@ Game::Game()
 
 int* Game::ReadInputParameters()
 {
-	int* arr = new int[21];
+	int* arr = new int[22];
 
 	ifstream InFile;
 	InFile.open("read.txt");
@@ -49,6 +49,7 @@ int* Game::ReadInputParameters()
 		if (i % 2) InFile >> arr[i];
 		else InFile >> c >> arr[i];
 	}
+	InFile >> arr[21];
 	InFile.close();
 
 	n = arr[0];
