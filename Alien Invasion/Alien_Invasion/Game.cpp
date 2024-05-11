@@ -439,6 +439,22 @@ void Game::resetFightingUnits()
 	fightingAM = nullptr;
 	fightingAD1 = nullptr;
 	fightingAD2 = nullptr;
+
+	Unit* temp;
+	while (!attackedByET.isEmpty())
+		attackedByET.dequeue(temp);
+	while (!attackedByES.isEmpty())
+		attackedByES.dequeue(temp);
+	while (!attackedByEG.isEmpty())
+		attackedByEG.dequeue(temp);
+	while (!attackedByAS.isEmpty())
+		attackedByAS.dequeue(temp);
+	while (!attackedByAM.isEmpty())
+		attackedByAM.dequeue(temp);
+	while (!attackedByAD1.isEmpty())
+		attackedByAD1.dequeue(temp);
+	while (!attackedByAD2.isEmpty())
+		attackedByAD2.dequeue(temp);
 }
 
 
@@ -512,4 +528,20 @@ Game::~Game()
 	delete alienArmy;
 	delete earthArmy;
 	delete randGen;
+
+	Unit* temp;
+	int dummy;
+
+	while (killedList.dequeue(temp)) {
+		delete temp;
+	}
+
+	while (UML1.dequeue(temp, dummy)) {
+		delete temp;
+	}
+
+	while (UML2.dequeue(temp)) {
+		delete temp;
+	}
+
 }

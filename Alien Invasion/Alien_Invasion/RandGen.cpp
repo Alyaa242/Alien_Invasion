@@ -105,5 +105,5 @@ Unit** RandGen::GenerateAlienUnits()
 
 RandGen::~RandGen()
 {
-	delete parameters;
+	delete[] parameters;
 }

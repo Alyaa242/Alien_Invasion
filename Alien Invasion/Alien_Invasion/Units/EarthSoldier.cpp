@@ -54,7 +54,10 @@ void EarthSoldier::setInfected(bool x)
 
 bool EarthSoldier::isInfeced()
 {
-	if (infected)
-		return true;
-	return false;
+	return infected;
+}
+
+bool EarthSoldier::isImmune()
+{
+	return immune;
 }

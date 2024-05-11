@@ -15,6 +15,5 @@ public:
 	virtual void print() = 0;
 	virtual bool isKilled() = 0;
 	virtual int gettotCount()=0 ;
-	~Army();
 };
 

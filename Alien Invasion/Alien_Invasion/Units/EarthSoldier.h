@@ -10,5 +10,6 @@ public:
 	virtual void attack();
 	void setInfected(bool x);
 	bool isInfeced();
+	bool isImmune();
 };
 
