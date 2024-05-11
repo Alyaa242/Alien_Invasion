@@ -161,6 +161,16 @@ void Unit::setWait(int w)
 	wait = w;
 }
 
+int Unit::getLastEarthID()
+{
+	return lastEarthID;
+}
+
+int Unit::getLastAlienID()
+{
+	return lastAlienID;
+}
+
 
 std::ostream& operator<<(std::ostream& out, Unit* u)
 {

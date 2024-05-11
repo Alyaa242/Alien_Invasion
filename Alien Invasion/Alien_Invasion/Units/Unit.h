@@ -51,6 +51,9 @@ public:
 	int getWait();
 	void setWait(int w);
 
+	static int getLastEarthID();
+	static int getLastAlienID();
+
 };
 
 std::ostream& operator << (std::ostream& out, Unit* u);	//Overloading operator <<

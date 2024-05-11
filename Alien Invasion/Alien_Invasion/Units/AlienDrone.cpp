@@ -17,10 +17,13 @@ void AlienDrone::attack()
 	int dummy;	//Dummy int to take pri value
 
 	//Setting this unit as a fighting unit for the current timestep
-	if (isSecond)
-		game->setFightingUnit(this, 2);
-	else
-		game->setFightingUnit(this);
+	if (getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
+		if (isSecond)
+			game->setFightingUnit(this, 2);
+		else
+			game->setFightingUnit(this);
+	}
+	
 
 	int i = 0;
 	while (i < getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {

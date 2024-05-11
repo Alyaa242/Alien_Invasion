@@ -13,6 +13,11 @@ void EarthGunnery::attack()
 	LinkedQueue<Unit*> tempList;
 	int counter = 0;
 	int ADflag = 0;
+
+	//Setting this unit as a fighting unit for the current timestep
+	if(getCap() && (!AMEnemies->isEmpty() || !ADEnemies->isEmpty()))
+		game->setFightingUnit(this);
+
 	while (counter < getCap() && (!AMEnemies->isEmpty() || !ADEnemies->isEmpty()))
 	{
 		// attack monster
@@ -24,6 +29,10 @@ void EarthGunnery::attack()
 			if (AMEnemies->remove(index, enemy))
 			{
 				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+				//Adding enemy to attackedByEG list
+				game->addAttacked(this, enemy);
+
 				enemy->decHealth(damageAM);
 				//Set Ta:
 				enemy->setTa(game->getTimestep());
@@ -60,6 +69,10 @@ void EarthGunnery::attack()
 			if (fromlast || fromfront)
 			{
 				int damageAD = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+				//Adding enemy to attackedByEG list
+				game->addAttacked(this, enemy);
+
 				enemy->decHealth(damageAD);
 
 				//Set Ta:

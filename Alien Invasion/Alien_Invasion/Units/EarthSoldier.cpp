@@ -12,6 +12,7 @@ void EarthSoldier::attack()
 	Unit* attack;  
 
 	//Setting this unit as a fighting unit for the current timestep
+	if(getCap() && !ASenemies->isEmpty())
 	game->setFightingUnit(this);
 
 	for (int i = 0; i < getCap(); i++)
@@ -19,6 +20,10 @@ void EarthSoldier::attack()
 		if (ASenemies->dequeue(attack)) // get a unit from that list and attack it
 		{
 			int damage = (float(getPower() * getHealth()) / 100) / sqrt(attack->getHealth());
+
+			//Adding enemy to attackedByES list
+			game->addAttacked(this, attack);
+
 			attack->decHealth(damage);
 			//Set Ta:
 			attack->setTa(game->getTimestep());

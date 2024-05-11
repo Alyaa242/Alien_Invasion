@@ -12,7 +12,8 @@ void AlienSoldier::attack()
 	LinkedQueue<Unit*> temp;
 
 	//Setting this unit as a fighting unit for the current timestep
-	game->setFightingUnit(this);
+	if(getCap() && !ESEnemies->isEmpty())
+		game->setFightingUnit(this);
 
 	for (int i = 0; i < getCap(); i++) {
 

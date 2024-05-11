@@ -24,6 +24,11 @@ void EarthTank::attack()
 		Npass = false;
 
 	int counter = 0;
+
+	//Setting this unit as a fighting unit for the current timestep
+	if (getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
+		game->setFightingUnit(this);
+	
 	while (counter < getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
 	{
 		// attack monster
@@ -35,6 +40,9 @@ void EarthTank::attack()
 			if (AMEnemies->remove(index, enemy))
 			{
 				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+				//Adding enemy to attackedByET list
+				game->addAttacked(this, enemy);
 
 				enemy->decHealth(damageAM);
 
@@ -60,6 +68,9 @@ void EarthTank::attack()
 				if (ASEnemies->dequeue(enemy))
 				{
 					int damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+					//Adding enemy to attackedByET list
+					game->addAttacked(this, enemy);
 
 					enemy->decHealth(damageAS);
 

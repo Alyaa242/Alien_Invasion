@@ -17,7 +17,8 @@ void AlienMonster::attack()
 	LinkedQueue<Unit*> temp;
 	
 	//Setting this unit as a fighting unit for the current timestep
-	game->setFightingUnit(this);
+	if (getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty()))
+		game->setFightingUnit(this);
 	
 	int i = 0;
 	while(i < getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty())) {
