@@ -288,6 +288,7 @@ void Game::start()
 			else {
 				if (alienArmy->isKilled() || earthArmy->isKilled()) {
 					cout << "Simulation ended . . .\n";
+					Display();
 					cout << "Output File created.\n";
 					stop = false;
 				}

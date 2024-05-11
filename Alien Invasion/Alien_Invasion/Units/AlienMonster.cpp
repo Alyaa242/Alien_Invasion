@@ -64,7 +64,10 @@ void AlienMonster::attack()
 				//Infect ES by probability prob
 				int x = rand() % 100 + 1;
 				if (x <= prob)
+				{
 					dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
+					cout << "ES ==> infected\n";
+				}
 
 				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
