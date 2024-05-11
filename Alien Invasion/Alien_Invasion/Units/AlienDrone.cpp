@@ -44,6 +44,7 @@ void AlienDrone::attack()
 
 			//If it's killed, add to killed list:
 			if (enemy->getHealth() <= 0) {
+				cout << "ETKilled\n";
 				game->addToKilledList(enemy);
 				enemy->setTd(game->getTimestep());
 			}
@@ -79,6 +80,7 @@ void AlienDrone::attack()
 
 				//If it's killed, add to killed list:
 				if (enemy->getHealth() <= 0) {
+					cout << "EGKilled\n";
 					game->addToKilledList(enemy);
 					enemy->setTd(game->getTimestep());
 				}
