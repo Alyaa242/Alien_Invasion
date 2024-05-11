@@ -162,9 +162,12 @@ void Unit::setWait(int w)
 }
 
 
-std::ostream& operator<<(std::ostream& out, const Unit* u)
-
+std::ostream& operator<<(std::ostream& out, Unit* u)
 {
 	out << u->getID();
+	if (dynamic_cast<EarthSoldier*>(u)) {
+		if(dynamic_cast<EarthSoldier*>(u)->isInfeced())
+			out << "*";
+	}
 	return out;
 }

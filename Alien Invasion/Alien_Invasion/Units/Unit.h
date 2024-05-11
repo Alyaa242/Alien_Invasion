@@ -53,5 +53,5 @@ public:
 
 };
 
-std::ostream& operator << (std::ostream& out, const Unit* u);	//Overloading operator <<
+std::ostream& operator << (std::ostream& out, Unit* u);	//Overloading operator <<
 
