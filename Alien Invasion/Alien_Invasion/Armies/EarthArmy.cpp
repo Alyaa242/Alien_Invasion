@@ -16,16 +16,20 @@ void EarthArmy::addUnit(Unit* unit)
 		return;
 
 	if (dynamic_cast<EarthSoldier*>(unit)) {
+		cout << "ES\n";
 		ESList.enqueue(unit);
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
+		cout << "ET\n";
 		ETList.push(unit);
 	}
 	else if (dynamic_cast<EarthGunnery*>(unit)) {
+		cout << "EG\n";
 		EGList.enqueue(unit, unit->getHealth() + unit->getPower());
 	}
 	else
 	{
+		cout << "HU\n";
 		HUList.push(unit);
 	}
 }
@@ -67,7 +71,7 @@ void EarthArmy::print()
 
 bool EarthArmy::isKilled()
 {
-	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty()) // army killed
+	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty() && HUList.isEmpty()) // army killed
 
 		return true;
 

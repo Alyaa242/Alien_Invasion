@@ -50,6 +50,7 @@ void EarthTank::attack()
 
 				if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
 				{
+					cout << "AMKilled\n";
 					game->addToKilledList(enemy);
 					enemy->setTd(game->getTimestep());
 				}
@@ -79,6 +80,7 @@ void EarthTank::attack()
 
 					if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
 					{
+						cout << "ASKilled\n";
 						game->addToKilledList(enemy);
 						enemy->setTd(game->getTimestep());
 					}
@@ -91,7 +93,7 @@ void EarthTank::attack()
 				}
 			}
 
-			if (((float((ESlist->getCount())) / (ASEnemies->getCount())) * 100 >= 80))
+			if (!ASEnemies->isEmpty() && ((float((ESlist->getCount())) / (ASEnemies->getCount())) * 100 >= 80))
 			{
 				Npass = false;
 			}

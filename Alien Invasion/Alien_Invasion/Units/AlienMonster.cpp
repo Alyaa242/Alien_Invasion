@@ -39,6 +39,7 @@ void AlienMonster::attack()
 
 			//If it's killed, add to killed list:
 			if (enemy->getHealth() <= 0) {
+				cout << "ETKilled\n";
 				game->addToKilledList(enemy);
 				enemy->setTd(game->getTimestep());
 			}
@@ -63,8 +64,12 @@ void AlienMonster::attack()
 
 				//Infect ES by probability prob
 				int x = rand() % 100 + 1;
-				if (x <= prob && !(dynamic_cast<EarthSoldier*>(enemy)->isImmune()))
+
+				if (x <= prob && !(dynamic_cast<EarthSoldier*>(enemy)->isImmune())) {
+
 					dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
+					cout << "ES ==> infected\n";
+				}
 
 				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
@@ -76,6 +81,7 @@ void AlienMonster::attack()
 
 				//If it's killed, add to killed list:
 				if (enemy->getHealth() <= 0) {
+					cout << "ESKilled\n";
 					game->addToKilledList(enemy);
 					enemy->setTd(game->getTimestep());
 				}

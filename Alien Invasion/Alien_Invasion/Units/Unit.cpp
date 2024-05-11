@@ -171,7 +171,6 @@ int Unit::getLastAlienID()
 	return lastAlienID;
 }
 
-
 std::ostream& operator<<(std::ostream& out, Unit* u)
 {
 	out << u->getID();

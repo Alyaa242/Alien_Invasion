@@ -40,6 +40,7 @@ void EarthGunnery::attack()
 				//If it's killed, add to killed list:
 				if (enemy->getHealth() <= 0)
 				{
+					cout << "AMKilled\n";
 					game->addToKilledList(enemy);
 					enemy->setTd(game->getTimestep());
 				}
@@ -80,6 +81,7 @@ void EarthGunnery::attack()
 
 				//If it's killed, add to killed list:
 				if (enemy->getHealth() <= 0) {
+					cout << "ADKilled\n";
 					game->addToKilledList(enemy);
 					enemy->setTd(game->getTimestep());
 				}
