@@ -33,7 +33,7 @@ Game::Game()
 
 int* Game::ReadInputParameters()
 {
-	int* arr = new int[22];
+	int* arr = new int[28];
 
 	ifstream InFile;
 	InFile.open("read.txt");
@@ -43,7 +43,7 @@ int* Game::ReadInputParameters()
 		InFile >> arr[i];
 	}
 	char c;
-	for (int i = 9; i < 21; i++)
+	for (int i = 9; i < 27; i++)
 	{
 		if (i % 2) InFile >> arr[i];
 		else InFile >> c >> arr[i];
@@ -205,26 +205,26 @@ void Game::Heal()
 		if (!UML1.isEmpty())
 		{
            picked->attack();
-		  if (UML1.dequeue(unit, max_health))
-			
-			if (unit->getHealth() <= 20)
+		   if (UML1.dequeue(unit, max_health))
 
-				tempList1.enqueue(unit);
-			else
-				earthArmy->addUnit(unit);
+			   if (unit->getHealth() <= 20)
+
+				   tempList1.enqueue(unit);
+			   else
+				   earthArmy->addUnit(unit);			
 		}
 		else
 
 		{
 			picked->attack();
 			if (UML2.dequeue(unit))
+
+				if (unit->getHealth() <= 20)
+
+					tempList2.enqueue(unit);
+				else
+					earthArmy->addUnit(unit);
 			
-			if (unit->getHealth() <= 20)
-
-				tempList2.enqueue(unit);
-			else
-				earthArmy->addUnit(unit);
-
 		}
 	}
 		else

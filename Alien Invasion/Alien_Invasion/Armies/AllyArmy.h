@@ -12,4 +12,8 @@ class AllyArmy : public Army
 
 public:
 
+	virtual void addUnit(Unit* unit);
+	virtual void attack();
+	virtual void print();
+
 };

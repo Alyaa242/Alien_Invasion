@@ -21,6 +21,9 @@ class RandGen
 		lowPowA, upPowA,
 		lowHealA, upHealA,
 		lowCapA, upCapA,
+		lowPowS, upPowS,
+		lowHealS, upHealS,
+		lowCapS, upCapS,
 		prob_infect
 	};
 
@@ -33,6 +36,7 @@ public:
 	//We need to pass game ptr to each unit's constructor
 	Unit* CreateEarthUnit();	//Create one unit
 	Unit* CreateAlienUnit();
+	Unit* CreateSaverUnit();
 	Unit** GenerateEarthUnits();	//Generate array of units pointers (units generated each timestep)
 	Unit** GenerateAlienUnits();
 	~RandGen();

@@ -9,6 +9,7 @@
 //Initializing IDs:
 int Unit::lastEarthID = 1;
 int Unit::lastAlienID = 2000;
+int Unit::lastAllyID = 4000;
 
 Unit::Unit(int heal, int pow, int cap, int t, Game* g)
 { 
@@ -136,6 +137,10 @@ void Unit::setEarthID()
 void Unit::setAlienID()
 {
 	ID = lastAlienID++;
+}
+void Unit::setAllyID()
+{
+	ID = lastAllyID++;
 }
 //
 

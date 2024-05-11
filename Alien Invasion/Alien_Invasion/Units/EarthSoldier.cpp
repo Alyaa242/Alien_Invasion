@@ -15,7 +15,23 @@ void EarthSoldier::attack()
 	//Setting this unit as a fighting unit for the current timestep
 	if(getCap() && !ASenemies->isEmpty())
 	game->setFightingUnit(this);
- 
+
+	//Infect another ES if infected
+	if (infected) {
+		int x = rand() % 100 + 1;
+		//Check for probability
+		if (x <= 2) {
+			//Get random ES
+			int index = rand() % ESenemies->getCount();
+			Unit* temp;
+			for (int i = 0; i < ESenemies->getCount(); i++) {
+				ESenemies->dequeue(temp);
+				if(i == index && !(dynamic_cast<EarthSoldier*>(temp)->immune))
+					dynamic_cast<EarthSoldier*>(temp)->setInfected(true);
+				ESenemies->enqueue(temp);
+			}
+		}
+	}
 
 	for (int i = 0; i < getCap(); i++)
 	{
@@ -32,8 +48,6 @@ void EarthSoldier::attack()
 				}
 				else
 				{
-					//Adding enemy to attackedByAS list
-					game->addAttacked(this, enemy);
 
 					int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
@@ -65,6 +79,7 @@ void EarthSoldier::attack()
 
 				}
 			}
+			
 		}
 		 // if not infected ==> attack AS
 		else if (ASenemies->dequeue(enemy)) // get a unit from that list and attack it

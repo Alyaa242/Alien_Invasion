@@ -6,6 +6,7 @@
 #include "Units/EarthSoldier.h"
 #include "Units/EarthTank.h"
 #include "Units\HealUnit.h"
+#include "Units/SaverUnit.h"
 #include <cstdlib>
 
 RandGen::RandGen(int* param, Game* g)
@@ -59,6 +60,19 @@ Unit* RandGen::CreateAlienUnit()
 		else {
 			return new AlienDrone(health, power, capacity, game->getTimestep(), game);
 		}
+	}
+	else
+		return nullptr;
+}
+
+Unit* RandGen::CreateSaverUnit()
+{
+	if (Unit::getLastAlienID() < 5000) {
+		int power = rand() % (parameters[upPowS] - parameters[lowPowS] + 1) + parameters[lowPowS];
+		int health = rand() % (parameters[upHealS] - parameters[lowHealS] + 1) + parameters[lowHealS];
+		int capacity = rand() % (parameters[upCapS] - parameters[lowCapS] + 1) + parameters[lowCapS];
+		
+		return new SaverUnit(health, power, capacity, game->getTimestep(), game);
 	}
 	else
 		return nullptr;
