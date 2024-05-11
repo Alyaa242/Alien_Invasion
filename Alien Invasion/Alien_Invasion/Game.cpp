@@ -24,8 +24,7 @@ Game::Game()
 	AvgDfEarth = 0;
 	AvgDfAlien = 0;
 	timestep = 0;
-	stop = true;
-	SilentM = false;
+	stop = true; 
 	InteractiveM = false;
 	earthArmy = new EarthArmy ;
 	alienArmy = new AlienArmy;
@@ -232,7 +231,7 @@ void Game::Heal()
 
 	{
 		earthArmy->RemoveHU(picked);
-		addToKilledList(picked); //cout << "lllllllllllllllllllllllll\n";
+		addToKilledList(picked);  
 	
 
 		while (!tempList1.isEmpty())
@@ -259,16 +258,17 @@ void Game::start()
 
 		addUnits();		//Adding units generated from randGen	
 
+		if (InteractiveM) {
+			printInter();
+			cin.get();	//Wait for user to press enter
+		}
+
 		//Call attack for each army	
 		earthArmy->attack();
 		alienArmy->attack();
 
 		Heal();
 
-		if (InteractiveM) {
-			printInter();
-			cin.get();	//Wait for user to press enter
-		}
 
 
 		if (timestep >= 40)
@@ -277,17 +277,17 @@ void Game::start()
 				if (alienArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Earth Army ===========================\n";
-					//	stop = false;
+						stop = false;
 				}
 				else if (earthArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Alien Army ===========================\n";
-					//	stop = false;
+						stop = false;
 				}
 			}
 			else {
 				if (alienArmy->isKilled() || earthArmy->isKilled()) {
-					cout << "Simulation ended...\n";
+					cout << "Simulation ended . . .\n";
 					cout << "Output File created.\n";
 					stop = false;
 				}
@@ -336,8 +336,8 @@ void Game::chooseMode()
 	cin >> choosen;
 	if (choosen == 'S')
 	{
-		cout << "Silent Mode\nSimulationStarts . . . \n ";
-		SilentM = true;
+		cout << "Silent Mode\nSimulationStarts . . .\n";
+ 
 	}
 	else
 		InteractiveM = true;

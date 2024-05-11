@@ -32,6 +32,7 @@ void AlienSoldier::attack()
 
 			//If it's killed, add to killed list:
 			if (enemy->getHealth() <= 0) {
+				cout << "ESKilled\n";
 				game->addToKilledList(enemy);
 				enemy->setTd(game->getTimestep());
 			}

@@ -25,6 +25,7 @@ void EarthSoldier::attack()
 
 			//If it's killed, add to killed list:
 			if (attack->getHealth() <= 0) {
+				cout << "ASKilled\n";
 				game->addToKilledList(attack);
 				attack->setTd(game->getTimestep());
 			}
