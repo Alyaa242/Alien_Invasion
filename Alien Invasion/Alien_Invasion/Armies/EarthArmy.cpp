@@ -71,7 +71,7 @@ void EarthArmy::print()
 
 bool EarthArmy::isKilled()
 {
-	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty()) // army killed
+	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty() && HUList.isEmpty()) // army killed
 
 		return true;
 
