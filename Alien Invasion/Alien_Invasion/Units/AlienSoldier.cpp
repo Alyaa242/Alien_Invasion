@@ -35,7 +35,8 @@ void AlienSoldier::attack()
 			if (enemy->getHealth() <= 0) {
 				cout << "ESKilled\n";
 				game->addToKilledList(enemy);
-				enemy->setTd(game->getTimestep());
+			 
+				cout << "ES destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 			}
 
 			//If it's injured, add to UML:

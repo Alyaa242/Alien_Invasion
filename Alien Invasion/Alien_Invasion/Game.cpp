@@ -63,6 +63,7 @@ int* Game::ReadInputParameters()
 void Game::addToKilledList(Unit* unit)
 {
 	killedList.enqueue(unit);
+	unit->setTd(timestep);
 }
 
 void Game::addUnits()
@@ -146,7 +147,6 @@ void Game::UpdateUML()
 	Unit* unit;int max_health;
 	//cout << "UUUMMMMMMMMMMMMLLLLLLLLL";
 	for (int i{};i< UML1.getCount();i++)
-	
 	{
 		UML1.peek(unit, max_health);
 		if (timestep- unit->getWait() > 9)
@@ -158,7 +158,6 @@ void Game::UpdateUML()
 
 
 	for (int i{};i < UML2.getCount();i++)
-
 	{
 		UML2.peek(unit);
 		if (timestep-unit->getWait() > 9)

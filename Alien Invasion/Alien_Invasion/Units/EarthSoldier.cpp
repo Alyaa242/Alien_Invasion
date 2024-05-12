@@ -68,7 +68,7 @@ void EarthSoldier::attack()
 					if (enemy->getHealth() <= 0) {
 						cout << "ESKilled infected\n";
 						game->addToKilledList(enemy);
-						enemy->setTd(game->getTimestep());
+					 
 					}
 					//If it's injured, add to UML:
 					else if (enemy->getHealth() <= 20)
@@ -105,7 +105,8 @@ void EarthSoldier::attack()
 			if (enemy->getHealth() <= 0) {
 				cout << "ASKilled\n";
 				game->addToKilledList(enemy);
-				enemy->setTd(game->getTimestep());
+			 
+				cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 			}
 			else
 			{

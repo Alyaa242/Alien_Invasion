@@ -2,32 +2,25 @@
 
 void HealUnit::attack()
 {
-	
+
 	Unit* unit;
 	int max_health;
 	int h;
-
-
-
-
-
-
-
-
-
+ 
 	LinkedQueue <Unit*> tempList1;
 	LinkedQueue <Unit*> tempList2;
 	Unit* picked;
 	game->UpdateUML();
-	picked= game->PickHU();
+	picked = game->PickHU();
 	if (!picked)
 		return;
 	int healcap = picked->getCap();
 
 
-	
-	int i=0;
-	for (;i < healcap;i++)
+
+
+	int i = 0;
+	for (; i < healcap; i++)
 	{
 		Unit* healed1 = game->pickfromUML1();
 		if (healed1)
@@ -48,14 +41,14 @@ void HealUnit::attack()
 					game->addES(healed1);
 		}
 	}
-	for (int j=i;j < healcap;j++)
+	for (int j = i; j < healcap; j++)
 	{
 		Unit* healed2 = game->pickfromUML2();
-		 if (healed2)
+		if (healed2)
 
 		{
 			{
-				h = (float ((getPower()) * (getHealth()) / 100)) / sqrt(healed2->getHealth());
+				h = (float((getPower()) * (getHealth()) / 100)) / sqrt(healed2->getHealth());
 				healed2->incHealth(h);
 			}
 
@@ -70,7 +63,7 @@ void HealUnit::attack()
 
 		}
 	}
-	
+
 
 	{
 		//cout << "lllllllllllllllllllllllll\n";
@@ -92,9 +85,13 @@ void HealUnit::attack()
 
 
 
-	
+
 	if (game->RemoveHU())
-	game-> addToKilledList(picked);
+	{
+		game->addToKilledList(picked);
+
+	}
+
 }
 
 
