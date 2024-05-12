@@ -108,7 +108,7 @@ void AlienDrone::attack()
 
 }
 
-void AlienDrone::setIsSecond()
+void AlienDrone::setIsSecond(bool x)
 {
-	isSecond = true;
+	isSecond = x;
 }

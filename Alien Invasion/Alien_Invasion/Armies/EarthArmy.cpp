@@ -16,7 +16,6 @@ void EarthArmy::addUnit(Unit* unit)
 		return;
 
 	if (dynamic_cast<EarthSoldier*>(unit)) {
-		cout << "ES\n";
 		ESList.enqueue(unit);
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
@@ -49,6 +48,10 @@ void EarthArmy::attack()
 	int maxpower_health;
 	if (EGList.peek(EG, maxpower_health))	//Call attack() of EG with the max power & health
 		EG->attack();
+
+	Unit* HU = nullptr;
+	if (HUList.peek(HU))
+		HU->attack();
 		
 }
 
