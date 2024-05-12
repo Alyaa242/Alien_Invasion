@@ -343,6 +343,35 @@ void Game::printInter()
 		}
 	}
 	cout << endl;
+
+	if (fightingAD1)
+	{
+		cout << "AD1 " << fightingAD1->getID() << " shots ";
+		while (!attackedByAD1.isEmpty())
+		{
+			Unit* unit;
+			attackedByAD1.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	cout << endl;
+	if (fightingAD2)
+	{
+		cout << "AD2 " << fightingAD2->getID() << " shots ";
+		while (!attackedByAD2.isEmpty())
+		{
+			Unit* unit;
+			attackedByAD2.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	cout << endl;
+
+
 	if (fightingEG)
 	{
 		cout << "EG " << fightingEG->getID() << " shots ";
