@@ -52,7 +52,8 @@ void EarthTank::attack()
 				{
 					cout << "AMKilled\n";
 					game->addToKilledList(enemy);
-					enemy->setTd(game->getTimestep());
+					 
+					cout << "AM destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 				}
 
 				else
@@ -82,9 +83,12 @@ void EarthTank::attack()
 					{
 						cout << "ASKilled\n";
 						game->addToKilledList(enemy);
-						enemy->setTd(game->getTimestep());
+			
+						cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 					}
 					else
+
+
 					{
 						tempList.enqueue(enemy); // store at temp list
 					}

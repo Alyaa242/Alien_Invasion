@@ -49,7 +49,8 @@ void AlienDrone::attack()
 			if (enemy->getHealth() <= 0) {
 				cout << "ETKilled\n";
 				game->addToKilledList(enemy);
-				enemy->setTd(game->getTimestep());
+			 
+				cout << "ET destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 			}
 
 			//If it's injured, add to UML:
@@ -85,7 +86,8 @@ void AlienDrone::attack()
 				if (enemy->getHealth() <= 0) {
 					cout << "EGKilled\n";
 					game->addToKilledList(enemy);
-					enemy->setTd(game->getTimestep());
+				 
+					cout << "EG destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 				}
 
 				//Otherwise store in a temp list:
