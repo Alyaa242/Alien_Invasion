@@ -3,6 +3,8 @@
 EarthSoldier::EarthSoldier(int heal, int pow, int cap, int t, Game* g) : Unit( heal, pow, cap, t, g)
 {
 	setEarthID();
+	infected = false;
+	immune = false;
 }
 
 void EarthSoldier::attack()
