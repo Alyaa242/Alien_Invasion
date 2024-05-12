@@ -1,4 +1,7 @@
+#include <iostream>
 #include "AllyArmy.h"
+#include "..\DS\LinkedQueue.h"
+using namespace std;
 
 void AllyArmy::addUnit(Unit* unit)
 {
@@ -15,7 +18,26 @@ void AllyArmy::attack()
 
 void AllyArmy::print()
 {
-	cout << SUList.getCount() << " HU ";
+	cout << SUList.getCount() << " SU ";
 	SUList.print();
 	cout << endl << endl;
+}
+
+bool AllyArmy::isKilled()
+{
+	return false;
+}
+
+int AllyArmy::gettotCount()
+{
+	return 0;
+}
+
+AllyArmy::~AllyArmy()
+{
+	Unit* temp;
+
+	while (SUList.dequeue(temp)) {
+		delete temp;
+	}
 }

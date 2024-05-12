@@ -24,7 +24,8 @@ class RandGen
 		lowPowS, upPowS,
 		lowHealS, upHealS,
 		lowCapS, upCapS,
-		prob_infect
+		prob_infect,
+		infThresh
 	};
 
 	Game* game;		//pointer to game
@@ -39,6 +40,7 @@ public:
 	Unit* CreateSaverUnit();
 	Unit** GenerateEarthUnits();	//Generate array of units pointers (units generated each timestep)
 	Unit** GenerateAlienUnits();
+	Unit** GenerateSaverUnits(int per);
 	~RandGen();
 };
 

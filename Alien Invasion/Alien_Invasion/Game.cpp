@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "Armies/EarthArmy.h"
 #include "Armies/AlienArmy.h"
+#include "Armies/AllyArmy.h"
 #include "Units\EarthGunnery.h"
 #include "Units\EarthSoldier.h"
 #include "Units\EarthTank.h"
@@ -26,14 +27,17 @@ Game::Game()
 	timestep = 0;
 	stop = true; 
 	InteractiveM = false;
-	earthArmy = new EarthArmy ;
+	noMoreSU = false;
+	earthArmy = new EarthArmy
+		;
 	alienArmy = new AlienArmy;
+	allyArmy = new AllyArmy;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
 }
 
 int* Game::ReadInputParameters()
 {
-	int* arr = new int[28];
+	int* arr = new int[29];
 
 	ifstream InFile;
 	InFile.open("read.txt");
@@ -48,7 +52,7 @@ int* Game::ReadInputParameters()
 		if (i % 2) InFile >> arr[i];
 		else InFile >> c >> arr[i];
 	}
-	InFile >> arr[21];
+	InFile >> arr[27] >> arr[28];
 	InFile.close();
 
 	n = arr[0];
@@ -65,6 +69,10 @@ void Game::addUnits()
 {
 	Unit** arrEarth = randGen->GenerateEarthUnits();	//To get array of created earth units at this timestep
 	Unit** arrAlien = randGen->GenerateAlienUnits();		//To get array of created alien units at this timestep
+	Unit** arrSaver = nullptr;
+
+	if(!noMoreSU)
+		arrSaver = randGen->GenerateSaverUnits(EarthSoldier::getInfectedCount() / float(earthArmy->gettotCount()) * 100);
 	
 
 	//Adding each unit to its army:
@@ -83,8 +91,16 @@ void Game::addUnits()
 		          alienArmy->addUnit(arrAlien[i]);
 		}
 
-	delete arrEarth;
-	delete arrAlien;
+	if (arrSaver)	//Check that GenerateAlienUnits() was performed successfully
+		for (int i = 0; i < n; i++)
+		{
+			if (arrSaver)//Check there are alien units generated at this timestep
+				allyArmy->addUnit(arrSaver[i]);
+		}
+
+	delete[] arrEarth;
+	delete[] arrAlien;
+	delete[] arrSaver;
 
 
 
@@ -307,6 +323,10 @@ void Game::printInter()
 	earthArmy->print();
 	cout << "=========================== Alien Army Alive Units ===========================\n";
     alienArmy->print();
+	if (allyArmy) {
+		cout << "=========================== Ally Army Alive Units ===========================\n";
+		allyArmy->print();
+	}
 	cout << "=========================== Killed/Destructed Units ===========================\n";
 	cout<< killedList.getCount()<<" units ";
 	killedList.print();

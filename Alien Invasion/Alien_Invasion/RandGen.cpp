@@ -117,6 +117,26 @@ Unit** RandGen::GenerateAlienUnits()
 	return nullptr;
 }
 
+Unit** RandGen::GenerateSaverUnits(int per)
+{
+	if (parameters && per > parameters[infThresh]) {
+		Unit** arr = new Unit * [parameters[n]];
+
+		for (int i = 0; i < parameters[n]; i++)
+			arr[i] = nullptr;
+
+		int A = rand() % 100 + 1;
+		if (A <= parameters[prob]) {
+			for (int i = 0; i < parameters[n]; i++) {
+				arr[i] = CreateSaverUnit();
+			}
+		}
+		return arr;
+	}
+
+	return nullptr;
+}
+
 RandGen::~RandGen()
 {
 	delete[] parameters;
