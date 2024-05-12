@@ -7,6 +7,6 @@ int main() {
 	g->chooseMode();
 	g->start();
 
-	g->Display();
+	//g->Display();
 	return 0;
 }

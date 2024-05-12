@@ -266,7 +266,7 @@ void Game::start()
 		earthArmy->attack();
 		alienArmy->attack();
 
-	//	Heal();
+	 
 
 		if (InteractiveM) {
 			printInter();
@@ -280,17 +280,18 @@ void Game::start()
 				if (alienArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Earth Army ===========================\n";
-					//	stop = false;
+						stop = false;
 				}
 				else if (earthArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Alien Army ===========================\n";
-					//	stop = false;
+						stop = false;
 				}
 			}
 			else {
 				if (alienArmy->isKilled() || earthArmy->isKilled()) {
 					cout << "Simulation ended...\n";
+					Display();
 					cout << "Output File created.\n";
 					stop = false;
 				}
@@ -409,7 +410,7 @@ void Game::chooseMode()
 	cin >> choosen;
 	if (choosen == 'S')
 	{
-		cout << "Silent Mode\nSimulationStarts . . . \n ";
+		cout << "Silent Mode\nSimulationStarts . . .\n";
 		SilentM = true;
 	}
 	else
