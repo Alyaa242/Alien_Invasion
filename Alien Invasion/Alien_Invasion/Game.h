@@ -30,6 +30,15 @@ class Game
 	int healcap=0;
 	Unit* picked;
 
+
+	int tot_des_AD = 0;
+	int tot_des_AM = 0;
+	int tot_des_AS = 0;
+	int tot_des_ES = 0;
+	int tot_des_ET = 0;
+	int tot_des_EG = 0;
+	int tot_des_HU = 0;
+
 	//Units fighting this timestep:
 	Unit* fightingES;
 	Unit* fightingET;
@@ -60,11 +69,12 @@ public:
 	void addUnits();	//A function that links between RandGen and each army to add units
 	void addToUML1(Unit* unit);
 	void UpdateUML();
-	void PickHU();
+	Unit* PickHU();
+	Unit* RemoveHU();
 	void addToUML2(Unit* unit);
 	Unit* pickfromUML1();
 	Unit* pickfromUML2();
-	void Heal();
+	//void Heal();
 	void start();	//The main function that implements the game logic
 	void printInter();
 	int getTimestep();
@@ -77,6 +87,8 @@ public:
 	void setDfAlien(int t);
 	void setDdAlien(int t);
 	void setDbAlien(int t);
+	void addES(Unit* unit);
+	void addET(Unit* unit);
 
 	void setFightingUnit(Unit* unit, int x = 1);	//A function that sets current units fighting
 	void addAttacked(Unit* attacking, Unit* attacked, int x = 1);	//A function that adds each attacked unit to the appropriate list

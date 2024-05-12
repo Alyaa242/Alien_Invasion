@@ -112,7 +112,7 @@ Unit* Game::pickfromUML1()
 	Unit* unit;
 	int max_health;
 	
-	if (UML1.peek(unit, max_health))
+	if (UML1.dequeue(unit, max_health))
 		return unit;
 	else return nullptr;
 }
@@ -121,7 +121,7 @@ Unit* Game::pickfromUML2()
 {
 	Unit* unit;
 	
-	if (UML2.peek(unit))
+	if (UML2.dequeue(unit))
 		return unit;
 	else return nullptr;
 }
@@ -157,99 +157,102 @@ void Game::UpdateUML()
 
 
 
-void Game::PickHU()
+Unit* Game::PickHU()
 {
 	
-	
-	if (healcap)
-	{
-		if (!UML1.isEmpty() || !UML2.isEmpty() )
-		healcap--;
-	}
-	
-		else
-	
-	{
-		if (!earthArmy->pickHU(picked))
-		{
+	Unit* picked;
+	if (earthArmy->pickHU(picked))
+		return picked;
+	else return nullptr;
+}
 
-			return;
-		}
-
-		else
-			healcap = picked->getCap();
-	}
-		
+Unit* Game::RemoveHU()
+{
+	Unit* picked;
+	if (earthArmy->RemoveHU(picked))
+		return picked;
+	else return nullptr;
 }
 
 
 
 
-
-void Game::Heal()
-{
-	Unit* unit;
-	int max_health;
-	int h; 
-	LinkedQueue <Unit*> tempList1;
-	LinkedQueue <Unit*> tempList2;
-	//Unit* picked;
-	UpdateUML();
-	PickHU();
-	
-	if (!picked)
-		return;
-
-
-	if (healcap)
-	{
-		if (!UML1.isEmpty())
-		{
-           picked->attack();
-		  if (UML1.dequeue(unit, max_health))
-			
-			if (unit->getHealth() <= 20)
-
-				tempList1.enqueue(unit);
-			else
-				earthArmy->addUnit(unit);
-		}
-		else
-
-		{
-			picked->attack();
-			if (UML2.dequeue(unit))
-			
-			if (unit->getHealth() <= 20)
-
-				tempList2.enqueue(unit);
-			else
-				earthArmy->addUnit(unit);
-
-		}
-	}
-		else
-
-	{
-		earthArmy->RemoveHU(picked);
-		addToKilledList(picked); //cout << "lllllllllllllllllllllllll\n";
-	
-
-		while (!tempList1.isEmpty())
-		{
-			if (tempList1.dequeue(unit))
-				UML1.enqueue(unit, -unit->getHealth());
-		}
-
-		while (!tempList2.isEmpty())
-		{
-			if (tempList2.dequeue(unit))
-				UML2.enqueue(unit);
-
-		}
-	}
-
-}
+//
+//void Game::Heal()
+//{
+//	Unit* unit;
+//	int max_health;
+//	int h; 
+//	LinkedQueue <Unit*> tempList1;
+//	LinkedQueue <Unit*> tempList2;
+//	Unit* picked;
+//	UpdateUML();
+//	
+//
+//
+//	if (healcap)
+//	{
+//		if (!UML1.isEmpty())
+//		{
+//           picked->attack();
+//		  if (UML1.dequeue(unit, max_health))
+//			
+//			if (unit->getHealth() <= 20)
+//
+//			{
+//				tempList1.enqueue(unit);cout << "MMMMMMMMMMMMMMMMMMM";
+//			}
+//			else
+//			{
+//				earthArmy->addUnit(unit);cout << "loooooolllllllllllllllll";
+//			}
+//		}
+//		else
+//
+//		{
+//			picked->attack();
+//			if (UML2.dequeue(unit))
+//			
+//			if (unit->getHealth() <= 20)
+//
+//			{
+//				tempList2.enqueue(unit);cout << "MMMMMMMMMMMMMMMMMMM";
+//			}
+//			else
+//			{
+//				earthArmy->addUnit(unit);cout << "loooooolllllllllllllllll";
+//			}
+//
+//		}
+//	}
+//		else
+//
+//	{
+//	 //cout << "lllllllllllllllllllllllll\n";
+//		if	(earthArmy->RemoveHU(picked))
+//	//if (!UML1.isEmpty() ||!UML2.isEmpty())
+//
+//		addToKilledList(picked);
+//
+//		while (!tempList1.isEmpty())
+//		{
+//			if (tempList1.dequeue(unit))
+//				UML1.enqueue(unit, -unit->getHealth());
+//		}
+//
+//		while (!tempList2.isEmpty())
+//		{
+//			if (tempList2.dequeue(unit))
+//				UML2.enqueue(unit);
+//
+//		}
+//	}
+//	
+//
+//	
+//
+//
+//}
 
 void Game::start()
 { 
@@ -263,7 +266,7 @@ void Game::start()
 		earthArmy->attack();
 		alienArmy->attack();
 
-		Heal();
+	//	Heal();
 
 		if (InteractiveM) {
 			printInter();
@@ -313,6 +316,76 @@ void Game::printInter()
 	cout << endl;
 
 
+	cout << "=========================== Units fighting at current step ===========================\n";
+	if (fightingAS) 
+	{
+		cout << "AS " << fightingAS->getID() << " shots ";
+		while (!attackedByAS.isEmpty())
+		{
+			Unit* unit;
+			attackedByAS.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	cout << endl;
+	if (fightingAM)
+	{
+		cout << "AM " << fightingAM->getID() << " shots ";
+		while (!attackedByAM.isEmpty())
+		{
+			Unit* unit;
+			attackedByAM.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	cout << endl;
+	if (fightingEG)
+	{
+		cout << "EG " << fightingEG->getID() << " shots ";
+		while (!attackedByEG.isEmpty())
+		{
+			Unit* unit;
+			attackedByEG.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	cout << endl;
+	if (fightingET)
+	{
+		cout << "ET " << fightingET->getID() << " shots ";
+		while (!attackedByET.isEmpty())
+		{
+			Unit* unit;
+			attackedByET.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	cout << endl;
+	if (fightingES)
+	{
+		cout << "ES " << fightingES->getID() << " shots ";
+		while (!attackedByES.isEmpty())
+		{
+			Unit* unit;
+			attackedByES.dequeue(unit);
+			cout << unit->getID() << " ";
+
+
+		}
+	}
+	
+	
+
+	cout << endl;
+
 	cout << "=========================== UML1 ===========================\n";
 	UML1.print();cout << endl;
 	cout << "=========================== UML2 ===========================\n";
@@ -344,41 +417,56 @@ void Game::chooseMode()
 
 }
 
+
 void Game::Display()
 {
 	ofstream outfile;
 	outfile.open("output.txt");
-	outfile << "Td   ID   Tj   Df   Dd   Db\n";
-	int countKL= killedList.getCount();
+	outfile << "Td    ID    Tj    Df    Dd    Db\n";
+	int countKL = killedList.getCount();
 	while (countKL--)
 	{
 		Unit* unit;
 		killedList.dequeue(unit);
-	    outfile << unit->getTd() <<" "<<unit->getID()<<" "<<unit->getTj()<<"\n";
+		outfile << unit->getTd() << "    " << unit->getID() << "    " << unit->getTj() << "     " << unit->getDf() << "     " << unit->getDd() << "     " << unit->getDb() << "\n";
 	}
 
-	outfile << "Battle Result . . .\n";
+	outfile << "Battle Result . . .\n";//
+	if (alienArmy->isKilled())
+		outfile << "EARTH ARMY WIN ! ! !";
+	else
+		outfile << "ALIEN ARMY WIN ! ! !";
 	outfile << "For Earth Army\n";
-	outfile << "Total number of ES : ";
-	outfile << "Total number of ET : ";
-	outfile << "Total number of EG : ";
+	outfile << "Total number of ES : " << earthArmy->getESList()->getCount() << endl;
+	outfile << "Total number of ET : " << earthArmy->getETList()->getCount() << endl;
+	outfile << "Total number of EG : " << earthArmy->getEGList()->getCount() << endl;
 	outfile << "Total number of HU : ";
-	outfile << " Total Destructed_ES \ Total ES";
-	outfile << " Total Destructed_ET \ Total ET";
-	outfile << " Total Destructed_EG \ Total EG";
+	outfile << " Total Destructed_ES \ Total ES" << tot_des_ES << " \ " << earthArmy->getESList()->getCount() << endl;
+	outfile << " Total Destructed_ET \ Total ET" << tot_des_ET << " \ " << earthArmy->getETList()->getCount() << endl;
+	outfile << " Total Destructed_EG \ Total EG" << tot_des_ES << " \ " << earthArmy->getEGList()->getCount() << endl;
 	outfile << " Total Destructed_HU \ Total HU";
-	outfile << "Total Destructed Units \ Total Units ";outfile <<killedList.getCount() <<" \ "<<  earthArmy->gettotCount() + alienArmy->gettotCount();
-	
+	outfile << "Total Destructed Units \ Total Units ";
+	int tot_des_earth = tot_des_ET + tot_des_ES + tot_des_EG + tot_des_HU;
+	outfile << tot_des_earth << " \ " << earthArmy->gettotCount() << endl;
+	outfile << "Df/Db = " <<AvgDfEarth <<" / "<< AvgDbEarth << "     " << "Dd/Db = "<<AvgDdEarth<<" / "<<AvgDbEarth ;
+
+	outfile << endl << endl << endl;
 
 	outfile << "For Alien Army\n";
-	outfile << "Total number of AS : ";
-	outfile << "Total number of AT : ";
-	outfile << "Total number of AG : ";
-	outfile << " Total Destructed_AS \ Total AS";
-	outfile << " Total Destructed_AT \ Total AT";
-	outfile << " Total Destructed_AG \ Total AG";
-	outfile << "Total Destructed Units \ Total Units ";outfile << killedList.getCount() << " \ " << earthArmy->gettotCount() + alienArmy->gettotCount();
+	outfile << "Total number of AD : " << alienArmy->getADList()->getCount() << endl;
+	outfile << "Total number of AM : " << alienArmy->getAMList()->getCount() << endl;
+	outfile << "Total number of AS : " << alienArmy->getASList()->getCount() << endl;
+	outfile << " Total Destructed_AS \ Total AD" << tot_des_AD << " \ " << alienArmy->getADList()->getCount();
+	outfile << " Total Destructed_AM \ Total AM" << tot_des_AM << " \ " << alienArmy->getAMList()->getCount();
+	outfile << " Total Destructed_AG \ Total AS" << tot_des_AS << " \ " << alienArmy->getASList()->getCount();
+	outfile << "Total Destructed Units \ Total Units ";
+	int tot_des_alien = tot_des_AD + tot_des_AM + tot_des_AS;
+	outfile << tot_des_alien << " \ " << alienArmy->gettotCount() << endl;
+	outfile << "Df/Db = " << AvgDfAlien << " / " << AvgDbAlien << "     " << "Dd/Db = " << AvgDdAlien << " / " << AvgDbAlien;
+
+	outfile.close();
 }
+
 
 void Game::setFightingUnit(Unit* unit, int x)
 {
@@ -471,6 +559,16 @@ void Game::setDdAlien(int t)
 void Game::setDbAlien(int t)
 {
 	AvgDbAlien += t;
+}
+
+void Game::addES(Unit* unit)
+{
+	earthArmy->addUnit(unit);//cout << "addddddddddd";
+}
+
+void Game::addET(Unit* unit)
+{
+	earthArmy->addUnit(unit);
 }
 
 

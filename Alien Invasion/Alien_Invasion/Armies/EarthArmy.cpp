@@ -16,7 +16,7 @@ void EarthArmy::addUnit(Unit* unit)
 		return;
 
 	if (dynamic_cast<EarthSoldier*>(unit)) {
-		ESList.enqueue(unit);
+		ESList.enqueue(unit);//cout << unit;
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
 		ETList.push(unit);
@@ -45,6 +45,10 @@ void EarthArmy::attack()
 	int maxpower_health;
 	if (EGList.peek(EG, maxpower_health))	//Call attack() of EG with the max power & health
 		EG->attack();
+
+	Unit* HU = nullptr;
+	if (HUList.peek(HU))
+		HU->attack();
 		
 }
 
