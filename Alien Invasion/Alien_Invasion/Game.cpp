@@ -129,6 +129,7 @@ Unit* Game::pickfromUML2()
 void Game::UpdateUML()
 {
 	Unit* unit;int max_health;
+	//cout << "UUUMMMMMMMMMMMMLLLLLLLLL";
 	for (int i{};i< UML1.getCount();i++)
 	
 	{
@@ -265,7 +266,7 @@ void Game::start()
 		//Call attack for each army	
 		earthArmy->attack();
 		alienArmy->attack();
-
+		UpdateUML();
 	 
 
 		if (InteractiveM) {
