@@ -18,7 +18,7 @@ class ArrayStack : public StackADT<T>
 
 	//count is needed 
 
-	enum { MAX_SIZE = 100 };
+	enum { MAX_SIZE = 1000 };
 private:
 	T items[MAX_SIZE];		// Array of stack items
 	int top;                   // Index to top of stack

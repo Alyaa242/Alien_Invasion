@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Armies\AlienArmy.h" />
+    <ClInclude Include="Armies\AllyArmy.h" />
     <ClInclude Include="Armies\Army.h" />
     <ClInclude Include="Armies\EarthArmy.h" />
     <ClInclude Include="DS\Array.h" />
@@ -148,10 +149,12 @@
     <ClInclude Include="Units\EarthGunnery.h" />
     <ClInclude Include="Units\EarthSoldier.h" />
     <ClInclude Include="Units\EarthTank.h" />
+    <ClInclude Include="Units\SaverUnit.h" />
     <ClInclude Include="Units\Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Armies\AlienArmy.cpp" />
+    <ClCompile Include="Armies\AllyArmy.cpp" />
     <ClCompile Include="Armies\Army.cpp" />
     <ClCompile Include="Armies\EarthArmy.cpp" />
     <ClCompile Include="Units\HealUnit.cpp" />
@@ -164,6 +167,7 @@
     <ClCompile Include="Units\EarthGunnery.cpp" />
     <ClCompile Include="Units\EarthSoldier.cpp" />
     <ClCompile Include="Units\EarthTank.cpp" />
+    <ClCompile Include="Units\SaverUnit.cpp" />
     <ClCompile Include="Units\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>

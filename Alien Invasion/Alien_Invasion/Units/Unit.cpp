@@ -9,6 +9,7 @@
 //Initializing IDs:
 int Unit::lastEarthID = 1;
 int Unit::lastAlienID = 2000;
+int Unit::lastAllyID = 4000;
 
 Unit::Unit(int heal, int pow, int cap, int t, Game* g)
 { 
@@ -137,6 +138,10 @@ void Unit::setAlienID()
 {
 	ID = lastAlienID++;
 }
+void Unit::setAllyID()
+{
+	ID = lastAllyID++;
+}
 //
 
 void Unit::decHealth(int damage)
@@ -161,10 +166,22 @@ void Unit::setWait(int w)
 	wait = w;
 }
 
-
-std::ostream& operator<<(std::ostream& out, const Unit* u)
-
+int Unit::getLastEarthID()
 {
-	out << u->getID();// << " " << u->getCap();
+	return lastEarthID;
+}
+
+int Unit::getLastAlienID()
+{
+	return lastAlienID;
+}
+
+std::ostream& operator<<(std::ostream& out, Unit* u)
+{
+	out << u->getID();
+	if (dynamic_cast<EarthSoldier*>(u)) {
+		if(dynamic_cast<EarthSoldier*>(u)->isInfeced())
+			out << "*";
+	}
 	return out;
 }

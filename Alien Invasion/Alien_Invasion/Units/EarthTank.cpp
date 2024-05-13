@@ -24,6 +24,11 @@ void EarthTank::attack()
 		Npass = false;
 
 	int counter = 0;
+
+	//Setting this unit as a fighting unit for the current timestep
+	if (getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
+		game->setFightingUnit(this);
+	
 	while (counter < getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
 	{
 		// attack monster
@@ -36,14 +41,19 @@ void EarthTank::attack()
 			{
 				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
+				//Adding enemy to attackedByET list
+				game->addAttacked(this, enemy);
+
 				enemy->decHealth(damageAM);
 
 				enemy->setTa(game->getTimestep());  //set the first time unit got shot
 
 				if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
 				{
+					cout << "AMKilled\n";
 					game->addToKilledList(enemy);
-					enemy->setTd(game->getTimestep());
+					 
+					cout << "AM destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 				}
 
 				else
@@ -61,6 +71,9 @@ void EarthTank::attack()
 				{
 					int damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
+					//Adding enemy to attackedByET list
+					game->addAttacked(this, enemy);
+
 					enemy->decHealth(damageAS);
 
 					enemy->setTa(game->getTimestep());  //set the first time unit got shot
@@ -68,10 +81,14 @@ void EarthTank::attack()
 
 					if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
 					{
+						cout << "ASKilled\n";
 						game->addToKilledList(enemy);
-						enemy->setTd(game->getTimestep());
+			
+						cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 					}
 					else
+
+
 					{
 						tempList.enqueue(enemy); // store at temp list
 					}

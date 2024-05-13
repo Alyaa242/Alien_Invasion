@@ -24,7 +24,7 @@ public:
 
 	//Getters for each list (return pointer)
 
-	void addUnit(Unit* unit);
+	virtual void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
 	virtual bool isKilled();

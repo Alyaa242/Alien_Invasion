@@ -11,6 +11,7 @@
 class Unit;
 class EarthArmy;
 class AlienArmy;
+class AllyArmy;
 class RandGen;
 //UML priQueue
 
@@ -21,6 +22,7 @@ class Game
 	LinkedQueue <Unit*> UML2; //tanks
 	EarthArmy* earthArmy;
     AlienArmy* alienArmy;
+	AllyArmy* allyArmy;
 	RandGen* randGen;
 	// Average Df , Dd , Db for eath and alien
 	int AvgDfEarth, AvgDbEarth, AvgDdEarth;
@@ -59,7 +61,8 @@ class Game
 
 	int n;		//number of units generated each timestep
 	bool stop;
-	bool SilentM, InteractiveM; 
+	bool InteractiveM; 
+	bool noMoreSU;
 
 public:
 

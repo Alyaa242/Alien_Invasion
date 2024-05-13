@@ -1,26 +1,27 @@
 #include "HealUnit.h"
 #include "EarthSoldier.h"
+int HealUnit::HealedCounter = 0;
 void HealUnit::attack()
 {
-	
+
 	Unit* unit;
 	int max_health;
 	int h;
-
 
 	LinkedQueue <Unit*> tempList1;
 	LinkedQueue <Unit*> tempList2;
 	Unit* picked;
 	game->UpdateUML();
-	picked= game->PickHU();
+	picked = game->PickHU();
 	if (!picked)
 		return;
 	int healcap = picked->getCap();
 
 
-	
-	int i=0;
-	for (;i < healcap;i++)
+
+
+	int i = 0;
+	for (; i < healcap; i++)
 	{
 		Unit* healed1 = game->pickfromUML1();
 		if (healed1)
@@ -31,7 +32,7 @@ void HealUnit::attack()
 			if (dynamic_cast <EarthSoldier*> (healed1)->getInfected())
 			{
 				
-				healed1->incHealth(h/2);
+				healed1->incHealth(h / 2); HealedCounter++;
 			
 
 			}
@@ -39,7 +40,7 @@ void HealUnit::attack()
 			
 			{
 				
-				healed1->incHealth(h);
+				healed1->incHealth(h); HealedCounter++;
 
 			}
 
@@ -56,14 +57,14 @@ void HealUnit::attack()
 				}
 		}
 	}
-	for (int j=i;j < healcap;j++)
+	for (int j = i; j < healcap; j++)
 	{
 		Unit* healed2 = game->pickfromUML2();
-		 if (healed2)
+		if (healed2)
 
 		{
 			{
-				h = (float ((getPower()) * (getHealth()) / 100)) / sqrt(healed2->getHealth());
+				h = (float((getPower()) * (getHealth()) / 100)) / sqrt(healed2->getHealth());
 				healed2->incHealth(h);
 			}
 
@@ -78,7 +79,7 @@ void HealUnit::attack()
 
 		}
 	}
-	
+
 
 	{
 		//cout << "lllllllllllllllllllllllll\n";
@@ -100,9 +101,13 @@ void HealUnit::attack()
 
 
 
-	
+
 	if (game->RemoveHU())
-	game-> addToKilledList(picked);
+	{
+		game->addToKilledList(picked);
+
+	}
+
 }
 
 
@@ -115,5 +120,10 @@ void HealUnit::UpdateHU()
 {
 	//if (getTj() +10 < game->getTimestep())
 	//	game->addToKilledList(this);
+}
+
+int HealUnit::getHealedCounter()
+{
+	return HealedCounter;
 }
 

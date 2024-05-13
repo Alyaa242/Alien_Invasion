@@ -13,6 +13,7 @@ class Unit
 
 	static int lastEarthID;
 	static int lastAlienID;
+	static int lastAllyID;
 	bool attacked;
 
 protected:
@@ -46,12 +47,16 @@ public:
 
 	void setEarthID();		//A function that sets units IDs automatically
 	void setAlienID();
+	void setAllyID();
 	void decHealth(int damage);		//Decrement health
 	void incHealth(int increment);		//increment health
 	int getWait();
 	void setWait(int w);
 
+	static int getLastEarthID();
+	static int getLastAlienID();
+
 };
 
-std::ostream& operator << (std::ostream& out, const Unit* u);	//Overloading operator <<
+std::ostream& operator << (std::ostream& out, Unit* u);	//Overloading operator <<
 

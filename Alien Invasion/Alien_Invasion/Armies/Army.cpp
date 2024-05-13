@@ -6,7 +6,3 @@ Army::Army()
     count = 0;
 }
 
-Army::~Army()
-{
-}
-

@@ -17,10 +17,13 @@ void AlienDrone::attack()
 	int dummy;	//Dummy int to take pri value
 
 	//Setting this unit as a fighting unit for the current timestep
-	if (isSecond)
-		game->setFightingUnit(this, 2);
-	else
-		game->setFightingUnit(this);
+	if (getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
+		if (isSecond)
+			game->setFightingUnit(this, 2);
+		else
+			game->setFightingUnit(this);
+	}
+	
 
 	int i = 0;
 	while (i < getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
@@ -44,8 +47,10 @@ void AlienDrone::attack()
 
 			//If it's killed, add to killed list:
 			if (enemy->getHealth() <= 0) {
+				cout << "ETKilled\n";
 				game->addToKilledList(enemy);
-				enemy->setTd(game->getTimestep());
+			 
+				cout << "ET destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 			}
 
 			//If it's injured, add to UML:
@@ -79,8 +84,10 @@ void AlienDrone::attack()
 
 				//If it's killed, add to killed list:
 				if (enemy->getHealth() <= 0) {
+					cout << "EGKilled\n";
 					game->addToKilledList(enemy);
-					enemy->setTd(game->getTimestep());
+				 
+					cout << "EG destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 				}
 
 				//Otherwise store in a temp list:

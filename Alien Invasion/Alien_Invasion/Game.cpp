@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "Armies/EarthArmy.h"
 #include "Armies/AlienArmy.h"
+#include "Armies/AllyArmy.h"
 #include "Units\EarthGunnery.h"
 #include "Units\EarthSoldier.h"
 #include "Units\EarthTank.h"
@@ -24,17 +25,19 @@ Game::Game()
 	AvgDfEarth = 0;
 	AvgDfAlien = 0;
 	timestep = 0;
-	stop = true;
-	SilentM = false;
+	stop = true; 
 	InteractiveM = false;
-	earthArmy = new EarthArmy ;
+	noMoreSU = false;
+	earthArmy = new EarthArmy
+		;
 	alienArmy = new AlienArmy;
+	allyArmy = new AllyArmy;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
 }
 
 int* Game::ReadInputParameters()
 {
-	int* arr = new int[22];
+	int* arr = new int[29];
 
 	ifstream InFile;
 	InFile.open("read.txt");
@@ -44,12 +47,12 @@ int* Game::ReadInputParameters()
 		InFile >> arr[i];
 	}
 	char c;
-	for (int i = 9; i < 21; i++)
+	for (int i = 9; i < 27; i++)
 	{
 		if (i % 2) InFile >> arr[i];
 		else InFile >> c >> arr[i];
 	}
-	InFile >> arr[21];
+	InFile >> arr[27] >> arr[28];
 	InFile.close();
 
 	n = arr[0];
@@ -60,12 +63,17 @@ int* Game::ReadInputParameters()
 void Game::addToKilledList(Unit* unit)
 {
 	killedList.enqueue(unit);
+	unit->setTd(timestep);
 }
 
 void Game::addUnits()
 {
 	Unit** arrEarth = randGen->GenerateEarthUnits();	//To get array of created earth units at this timestep
 	Unit** arrAlien = randGen->GenerateAlienUnits();		//To get array of created alien units at this timestep
+	Unit** arrSaver = nullptr;
+
+	if(!noMoreSU)
+		arrSaver = randGen->GenerateSaverUnits(EarthSoldier::getInfectedCount() / float(earthArmy->gettotCount()) * 100);
 	
 
 	//Adding each unit to its army:
@@ -84,8 +92,16 @@ void Game::addUnits()
 		          alienArmy->addUnit(arrAlien[i]);
 		}
 
-	delete arrEarth;
-	delete arrAlien;
+	if (arrSaver)	//Check that GenerateAlienUnits() was performed successfully
+		for (int i = 0; i < n; i++)
+		{
+			if (arrSaver)//Check there are alien units generated at this timestep
+				allyArmy->addUnit(arrSaver[i]);
+		}
+
+	delete[] arrEarth;
+	delete[] arrAlien;
+	delete[] arrSaver;
 
 
 
@@ -131,7 +147,6 @@ void Game::UpdateUML()
 	Unit* unit;int max_health;
 	//cout << "UUUMMMMMMMMMMMMLLLLLLLLL";
 	for (int i{};i< UML1.getCount();i++)
-	
 	{
 		UML1.peek(unit, max_health);
 		if (timestep- unit->getWait() > 9)
@@ -143,7 +158,6 @@ void Game::UpdateUML()
 
 
 	for (int i{};i < UML2.getCount();i++)
-
 	{
 		UML2.peek(unit);
 		if (timestep-unit->getWait() > 9)
@@ -174,9 +188,6 @@ Unit* Game::RemoveHU()
 		return picked;
 	else return nullptr;
 }
-
-
-
 
 //
 //void Game::Heal()
@@ -259,22 +270,21 @@ void Game::start()
 { 
 	while (stop)
 	{
-		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
-
-		//Call attack for each army	
-		earthArmy->attack();
-		alienArmy->attack();
-		UpdateUML();
-	 
 
 		if (InteractiveM) {
 			printInter();
 			cin.get();	//Wait for user to press enter
 		}
 
+		resetFightingUnits();	//Reset current fighting units to null
 
+		//Call attack for each army	
+		earthArmy->attack();
+		alienArmy->attack();
+		UpdateUML();
+	 
 		if (timestep >= 40)
 		{
 			if (InteractiveM) {
@@ -312,6 +322,10 @@ void Game::printInter()
 	earthArmy->print();
 	cout << "=========================== Alien Army Alive Units ===========================\n";
     alienArmy->print();
+	if (allyArmy) {
+		cout << "=========================== Ally Army Alive Units ===========================\n";
+		allyArmy->print();
+	}
 	cout << "=========================== Killed/Destructed Units ===========================\n";
 	cout<< killedList.getCount()<<" units ";
 	killedList.print();
@@ -443,7 +457,6 @@ void Game::chooseMode()
 	if (choosen == 'S')
 	{
 		cout << "Silent Mode\nSimulationStarts . . .\n";
-		SilentM = true;
 	}
 	else
 		InteractiveM = true;
@@ -560,6 +573,22 @@ void Game::resetFightingUnits()
 	fightingAM = nullptr;
 	fightingAD1 = nullptr;
 	fightingAD2 = nullptr;
+
+	Unit* temp;
+	while (!attackedByET.isEmpty())
+		attackedByET.dequeue(temp);
+	while (!attackedByES.isEmpty())
+		attackedByES.dequeue(temp);
+	while (!attackedByEG.isEmpty())
+		attackedByEG.dequeue(temp);
+	while (!attackedByAS.isEmpty())
+		attackedByAS.dequeue(temp);
+	while (!attackedByAM.isEmpty())
+		attackedByAM.dequeue(temp);
+	while (!attackedByAD1.isEmpty())
+		attackedByAD1.dequeue(temp);
+	while (!attackedByAD2.isEmpty())
+		attackedByAD2.dequeue(temp);
 }
 
 
@@ -643,4 +672,20 @@ Game::~Game()
 	delete alienArmy;
 	delete earthArmy;
 	delete randGen;
+
+	Unit* temp;
+	int dummy;
+
+	while (killedList.dequeue(temp)) {
+		delete temp;
+	}
+
+	while (UML1.dequeue(temp, dummy)) {
+		delete temp;
+	}
+
+	while (UML2.dequeue(temp)) {
+		delete temp;
+	}
+
 }

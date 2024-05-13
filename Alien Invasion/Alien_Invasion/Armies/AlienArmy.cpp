@@ -16,12 +16,15 @@ void AlienArmy::addUnit(Unit* unit)
 		return;
 
 	if (dynamic_cast<AlienSoldier*>(unit)) {
+		cout << "AS\n";
 		ASList.enqueue(unit);
 	}
 	else if (dynamic_cast<AlienMonster*>(unit)) {
+		cout << "AM\n";
 		AMList.insert(unit);
 	}
 	else {
+		cout << "AD\n";
 		ADList.insert(unit);
 	}
 }
