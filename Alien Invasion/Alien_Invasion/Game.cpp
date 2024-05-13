@@ -28,8 +28,8 @@ Game::Game()
 	stop = true; 
 	InteractiveM = false;
 	noMoreSU = false;
-	earthArmy = new EarthArmy
-		;
+	IsSUgen = false;
+	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	allyArmy = new AllyArmy;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
@@ -71,6 +71,8 @@ void Game::addUnits()
 	Unit** arrEarth = randGen->GenerateEarthUnits();	//To get array of created earth units at this timestep
 	Unit** arrAlien = randGen->GenerateAlienUnits();		//To get array of created alien units at this timestep
 	Unit** arrSaver = nullptr;
+
+	SUwithdrawal();
 
 	if(!noMoreSU)
 		arrSaver = randGen->GenerateSaverUnits(EarthSoldier::getInfectedCount() / float(earthArmy->gettotCount()) * 100);
@@ -291,12 +293,14 @@ void Game::start()
 				if (alienArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Earth Army ===========================\n";
-						stop = false;
+					Display();
+					stop = false;
 				}
 				else if (earthArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Alien Army ===========================\n";
-						stop = false;
+					Display();
+					stop = false;
 				}
 			}
 			else {
@@ -461,6 +465,23 @@ void Game::chooseMode()
 
 }
 
+bool Game::SUwithdrawal()
+{
+	if (EarthSoldier::getInfectedCount() == 0 && IsSUgen)
+	{
+		noMoreSU = true;
+		LinkedQueue<Unit*>* Sulist = allyArmy->getSUList();
+		Unit* unit;
+		while (Sulist->dequeue(unit))
+		{
+			addToKilledList(unit);
+		}
+		return true;
+	}
+	return false;
+}
+
+ 
 
 void Game::Display()
 {

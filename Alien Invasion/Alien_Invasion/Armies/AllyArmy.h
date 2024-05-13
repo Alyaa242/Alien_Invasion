@@ -17,5 +17,6 @@ public:
 	virtual void print();
 	virtual bool isKilled();
 	virtual int gettotCount();
+	LinkedQueue<Unit*>* getSUList();
 	~AllyArmy();
 };
