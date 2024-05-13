@@ -421,6 +421,8 @@ void Game::printInter()
 	UML1.print();cout << endl;
 	cout << "=========================== UML2 ===========================\n";
 	UML2.print();cout << endl;
+	cout << "=============Current percentage of infected soldiers=============\n";
+    //cout<<
 
 	cout << endl << endl;
 
