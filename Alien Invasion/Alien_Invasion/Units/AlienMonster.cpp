@@ -13,16 +13,16 @@ void AlienMonster::attack()
 
 	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();	
 	LinkedQueue<Unit*>* ESEnemies = game->getESEnemies();
-	LinkedQueue<Unit*>* SUEnemies;
+	LinkedQueue<Unit*>* SUEnemies = game->getSUEnemies();
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
 	
 	//Setting this unit as a fighting unit for the current timestep
-	if (getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty()))
+	if (getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty() || !SUEnemies->isEmpty()))
 		game->setFightingUnit(this);
 	
 	int i = 0;
-	while(i < getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty())) {
+	while(i < getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty() || !SUEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {
@@ -57,8 +57,8 @@ void AlienMonster::attack()
 			i++;
 		}
 		
-		//Check there is an enemy in the list:
 		if (i < getCap()) {
+			//Check there is an enemy in the list:
 			if (ESEnemies->dequeue(enemy)) {
 
 				//Adding enemy to attackedByAM list
@@ -99,13 +99,47 @@ void AlienMonster::attack()
 				i++;
 			}
 		}
+
+		if (i < getCap()) {
+			//Check there is an enemy in the list:
+			if (SUEnemies->dequeue(enemy)) {
+
+				//Adding enemy to attackedByAM list
+				game->addAttacked(this, enemy);
+
+				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+				//Decrement enemy's health:
+				enemy->decHealth(damage);
+
+				//Set Ta:
+				enemy->setTa(game->getTimestep());
+
+				//If it's killed, add to killed list:
+				if (enemy->getHealth() <= 0) {
+					game->addToKilledList(enemy);
+				}
+
+				//If it's injured, add to UML:
+				else if (enemy->getHealth() <= 20)
+					game->addToUML1(enemy);
+
+				//Otherwise store in a temp list:
+				else
+					temp.enqueue(enemy);
+
+				i++;
+			}
+		}
 	}
 
 	//Add enemies back to their original lists:
 	while (temp.dequeue(enemy)) {
 		if (dynamic_cast<EarthSoldier*>(enemy))
 			ESEnemies->enqueue(enemy);
-		else
+		else if (dynamic_cast<EarthTank*>(enemy))
 			ETEnemies->push(enemy);
+		else
+			SUEnemies->enqueue(enemy);
 	}
 }
