@@ -39,6 +39,7 @@ public:
 	LinkedQueue<Unit*>* getESList();
 	ArrayStack<Unit*>* getETList();
 	priQueue<Unit*>* getEGList();
+	ArrayStack<Unit*>* getHUList();
 	~EarthArmy();
 };
 
