@@ -33,6 +33,11 @@ int AllyArmy::gettotCount()
 	return 0;
 }
 
+LinkedQueue<Unit*>* AllyArmy::getSUList()
+{
+	return &SUList;
+}
+
 AllyArmy::~AllyArmy()
 {
 	Unit* temp;

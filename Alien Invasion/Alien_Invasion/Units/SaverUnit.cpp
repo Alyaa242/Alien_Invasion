@@ -5,6 +5,58 @@ SaverUnit::SaverUnit(int heal, int pow, int cap, int t, Game* g) : Unit(heal, po
 	setAllyID();
 }
 
-void SaverUnit::attack()
+void SaverUnit::attack() 
 {
+	LinkedQueue<Unit*>* ASenemies = game->getASEnemies(); // Ask the game to get the list of enemies this class should attack
+	LinkedQueue<Unit*> tempList;
+	Unit* enemy;
+
+	//Setting this unit as a fighting unit for the current timestep
+	if (getCap() && !ASenemies->isEmpty())
+		game->setFightingUnit(this);
+ 
+	 
+	for (int i = 0; i < getCap(); i++)
+	{
+		 
+		// if not infected ==> attack AS
+		if (ASenemies->dequeue(enemy)) // get a unit from that list and attack it
+		{
+			//Adding enemy to attackedByAS list
+			game->addAttacked(this, enemy);
+
+			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+			//Adding enemy to attackedByES list
+			game->addAttacked(this, enemy);
+
+			enemy->decHealth(damage);
+
+			//Set Ta:
+			enemy->setTa(game->getTimestep());
+
+			//If it's killed, add to killed list:
+			if (enemy->getHealth() <= 0) {
+				cout << "ASKilled\n";
+				game->addToKilledList(enemy);
+
+				cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+			}
+			else
+			{
+				tempList.enqueue(enemy); // store at temp list
+			}
+
+		}
+
+	}
+
+	while (tempList.dequeue(enemy))  //move all items from the temp list back to thier original list
+	{ 
+		ASenemies->enqueue(enemy);
+	}
+
+
 }
+
+ 

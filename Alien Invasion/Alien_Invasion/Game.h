@@ -63,6 +63,7 @@ class Game
 	bool stop;
 	bool InteractiveM; 
 	bool noMoreSU;
+	bool IsSUgen;
 
 public:
 
@@ -82,6 +83,7 @@ public:
 	void printInter();
 	int getTimestep();
 	void chooseMode();
+	bool SUwithdrawal(); 
 	void Display();
 	
 	void setDfEarth(int t);

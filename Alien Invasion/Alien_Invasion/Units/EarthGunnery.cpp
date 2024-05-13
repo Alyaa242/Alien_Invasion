@@ -84,7 +84,6 @@ void EarthGunnery::attack()
 				if (enemy->getHealth() <= 0) {
 					cout << "ADKilled\n";
 					game->addToKilledList(enemy);
-				 
 					cout << "AD destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
 				}
 				else
