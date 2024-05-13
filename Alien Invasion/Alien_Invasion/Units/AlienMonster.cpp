@@ -67,15 +67,18 @@ void AlienMonster::attack()
 				//Infect ES by probability prob
 				int x = rand() % 100 + 1;
 
-				if (x <= prob && !(dynamic_cast<EarthSoldier*>(enemy)->isImmune())) {
-					dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
-					cout << "ES ==> infected\n";
+				if (x <= prob) {
+					if(!(dynamic_cast<EarthSoldier*>(enemy)->isImmune())){}
+						dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
 				}
 
-				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				//If it will not infect, it will attack
+				else {
+					int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
-				//Decrement enemy's health:
-				enemy->decHealth(damage);
+					//Decrement enemy's health:
+					enemy->decHealth(damage);
+				}
 
 				//Set Ta:
 				enemy->setTa(game->getTimestep());
