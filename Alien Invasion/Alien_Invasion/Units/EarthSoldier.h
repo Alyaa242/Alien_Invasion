@@ -6,6 +6,7 @@ class EarthSoldier : public Unit
 	bool infected;
 	bool immune;
 	static int infectedCount;
+	static int totalInfected;
 
 public:
 	EarthSoldier(int heal, int pow, int cap, int t, Game* g);
@@ -14,5 +15,6 @@ public:
 	bool isInfeced();
 	bool isImmune();
 	static int getInfectedCount();
+	static int getTotalInfected();
 };
 

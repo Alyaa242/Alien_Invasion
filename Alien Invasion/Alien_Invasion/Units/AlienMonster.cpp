@@ -11,8 +11,9 @@ AlienMonster::AlienMonster(int heal, int pow, int cap, int t, Game* g, int p) : 
 void AlienMonster::attack()
 {
 
-	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();
+	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();	
 	LinkedQueue<Unit*>* ESEnemies = game->getESEnemies();
+	LinkedQueue<Unit*>* SUEnemies;
 	Unit* enemy;
 	LinkedQueue<Unit*> temp;
 	

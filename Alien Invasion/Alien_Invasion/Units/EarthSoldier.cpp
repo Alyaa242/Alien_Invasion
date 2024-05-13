@@ -1,6 +1,7 @@
 #include "EarthSoldier.h"
 
 int EarthSoldier::infectedCount = 0;
+int EarthSoldier::totalInfected = 0;
 
 EarthSoldier::EarthSoldier(int heal, int pow, int cap, int t, Game* g) : Unit( heal, pow, cap, t, g)
 {
@@ -135,6 +136,7 @@ void EarthSoldier::setInfected(bool x)
 	if (x && !infected) {
 		infected = true;
 		infectedCount++;
+		totalInfected++;
 	}
 	else if (!x) {
 		infected = false;
@@ -155,4 +157,9 @@ bool EarthSoldier::isImmune()
 int EarthSoldier::getInfectedCount()
 {
 	return infectedCount;
+}
+
+int EarthSoldier::getTotalInfected()
+{
+	return totalInfected;
 }
