@@ -46,3 +46,13 @@ void EarthSoldier::setInfected(bool x)
 {
 	infected = x;
 }
+
+void EarthSoldier::setImmuned(bool x)
+{
+	immune = x;
+}
+
+bool EarthSoldier::getInfected()
+{
+	return infected;
+}
