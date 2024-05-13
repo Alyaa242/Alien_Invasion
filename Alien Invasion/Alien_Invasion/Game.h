@@ -49,6 +49,7 @@ class Game
 	Unit* fightingAM;
 	Unit* fightingAD1;
 	Unit* fightingAD2;
+	Unit* fightingSU;
 
 	//Units attacked this timestep:
 	LinkedQueue<Unit*>	attackedByES;
@@ -58,6 +59,7 @@ class Game
 	LinkedQueue<Unit*>	attackedByAM;
 	LinkedQueue<Unit*>	attackedByAD1;
 	LinkedQueue<Unit*>	attackedByAD2;
+	LinkedQueue<Unit*>	attackedBySU;
 
 	int n;		//number of units generated each timestep
 	bool stop;
@@ -106,6 +108,7 @@ public:
 	LinkedQueue<Unit*>* getASEnemies();
 	Array<Unit*>* getAMEnemies();
 	Deque<Unit*>* getADEnemies();
+	LinkedQueue<Unit*>* getSUEnemies();
 	
 	//Add printing UML, Ta, Td...
 	//Output file

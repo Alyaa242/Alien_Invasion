@@ -553,8 +553,11 @@ void Game::setFightingUnit(Unit* unit, int x)
 	else if (dynamic_cast<AlienDrone*>(unit) && x == 1) {
 		fightingAD1 = unit;
 	}
-	else {
+	else if (dynamic_cast<AlienDrone*>(unit) && x == 2) {
 		fightingAD2 = unit;
+	}
+	else {
+		fightingSU = unit;
 	}
 }
 
@@ -578,8 +581,11 @@ void Game::addAttacked(Unit* attacking, Unit* attacked, int x)
 	else if (dynamic_cast<AlienDrone*>(attacking) && x == 1) {
 		attackedByAD1.enqueue(attacked);
 	}
-	else {
+	else if (dynamic_cast<AlienDrone*>(attacking) && x == 2) {
 		attackedByAD2.enqueue(attacked);
+	}
+	else {
+		attackedBySU.enqueue(attacked);
 	}
 }
 
@@ -683,6 +689,11 @@ Array<Unit*>* Game::getAMEnemies()
 Deque<Unit*>* Game::getADEnemies()
 {
 	return alienArmy->getADList();
+}
+
+LinkedQueue<Unit*>* Game::getSUEnemies()
+{
+	return allyArmy->getSUList();
 }
 
 Game::~Game()
