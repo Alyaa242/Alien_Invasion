@@ -14,11 +14,12 @@ void AlienSoldier::attack()
 	LinkedQueue<Unit*> temp;
 
 	//Setting this unit as a fighting unit for the current timestep
-	if(getCap() && !ESEnemies->isEmpty())
+	if(capacity && !ESEnemies->isEmpty())
 		game->setFightingUnit(this);
 
 	int i = 0;
-	while (i < getCap() && (!ESEnemies->isEmpty() || !SUEnemies->isEmpty())) {
+
+	while (i < capacity && (!ESEnemies->isEmpty() || !SUEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ESEnemies->dequeue(enemy)) {
@@ -26,7 +27,7 @@ void AlienSoldier::attack()
 			//Adding enemy to attackedByAS list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -35,11 +36,8 @@ void AlienSoldier::attack()
 			enemy->setTa(game->getTimestep());
 
 			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				cout << "ESKilled\n";
-				game->addToKilledList(enemy);
-			 
-				cout << "ES destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+			if (enemy->getHealth() <= 0) { 
+				game->addToKilledList(enemy); 
 			}
 
 			//If it's injured, add to UML:
@@ -53,12 +51,12 @@ void AlienSoldier::attack()
 
 		//Check there is an enemy in the list:
 
-		if (i < getCap() && SUEnemies->dequeue(enemy)) {
+		if (i < capacity && SUEnemies->dequeue(enemy)) {
 			
 			//Adding enemy to attackedByAM list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -70,10 +68,6 @@ void AlienSoldier::attack()
 			if (enemy->getHealth() <= 0) {
 				game->addToKilledList(enemy);
 			}
-
-			//If it's injured, add to UML:
-			else if (enemy->getHealth() <= 20)
-				game->addToUML1(enemy);
 
 			//Otherwise store in a temp list:
 			else
@@ -89,6 +83,5 @@ void AlienSoldier::attack()
 			ESEnemies->enqueue(enemy);
 		else
 			SUEnemies->enqueue(enemy);
-		
 	}
 }

@@ -10,7 +10,6 @@ AlienMonster::AlienMonster(int heal, int pow, int cap, int t, Game* g, int p) : 
 
 void AlienMonster::attack()
 {
-
 	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();	
 	LinkedQueue<Unit*>* ESEnemies = game->getESEnemies();
 	LinkedQueue<Unit*>* SUEnemies = game->getSUEnemies();
@@ -18,11 +17,12 @@ void AlienMonster::attack()
 	LinkedQueue<Unit*> temp;
 	
 	//Setting this unit as a fighting unit for the current timestep
-	if (getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty() || !SUEnemies->isEmpty()))
+
+	if (capacity && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty() || !SUEnemies->isEmpty()))
 		game->setFightingUnit(this);
 	
 	int i = 0;
-	while(i < getCap() && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty() || !SUEnemies->isEmpty())) {
+	while(i < capacity && (!ETEnemies->isEmpty() || !ESEnemies->isEmpty() || !SUEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {
@@ -30,7 +30,7 @@ void AlienMonster::attack()
 			//Adding enemy to attackedByAM list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -39,11 +39,8 @@ void AlienMonster::attack()
 			enemy->setTa(game->getTimestep());
 
 			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				cout << "ETKilled\n";
-				game->addToKilledList(enemy);
-				 
-				cout << "ET destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+			if (enemy->getHealth() <= 0) { 
+				game->addToKilledList(enemy); 
 			}
 
 			//If it's injured, add to UML:
@@ -57,7 +54,8 @@ void AlienMonster::attack()
 			i++;
 		}
 		
-		if (i < getCap()) {
+
+		if (i < capacity) {
 			//Check there is an enemy in the list:
 			if (ESEnemies->dequeue(enemy)) {
 
@@ -67,25 +65,25 @@ void AlienMonster::attack()
 				//Infect ES by probability prob
 				int x = rand() % 100 + 1;
 
-				if (x <= prob && !(dynamic_cast<EarthSoldier*>(enemy)->isImmune())) {
-					dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
-					cout << "ES ==> infected\n";
+				if (x <= prob) {
+					if(!(dynamic_cast<EarthSoldier*>(enemy)->isImmune()))
+						dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
 				}
 
-				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				//If it will not infect, it will attack
+				else {
+					float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
-				//Decrement enemy's health:
-				enemy->decHealth(damage);
+					//Decrement enemy's health:
+					enemy->decHealth(damage);
+				}
 
 				//Set Ta:
 				enemy->setTa(game->getTimestep());
 
 				//If it's killed, add to killed list:
-				if (enemy->getHealth() <= 0) {
-					cout << "ESKilled\n";
-					game->addToKilledList(enemy);
-				 
-					cout << "ES destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+				if (enemy->getHealth() <= 0) { 
+					game->addToKilledList(enemy); 
 				}
 
 				//If it's injured, add to UML:
@@ -100,7 +98,35 @@ void AlienMonster::attack()
 			}
 		}
 
-		if (i < getCap()) {
+		if (i < capacity) {
+			//Check there is an enemy in the list:
+			if (SUEnemies->dequeue(enemy)) {
+
+				//Adding enemy to attackedByAM list
+				game->addAttacked(this, enemy);
+
+				float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+				//Decrement enemy's health:
+				enemy->decHealth(damage);
+
+				//Set Ta:
+				enemy->setTa(game->getTimestep());
+
+				//If it's killed, add to killed list:
+				if (enemy->getHealth() <= 0) {
+					game->addToKilledList(enemy);
+				}
+
+				//Otherwise store in a temp list:
+				else
+					temp.enqueue(enemy);
+
+				i++;
+			}
+		}
+
+		if (i < capacity) {
 			//Check there is an enemy in the list:
 			if (SUEnemies->dequeue(enemy)) {
 
@@ -119,10 +145,6 @@ void AlienMonster::attack()
 				if (enemy->getHealth() <= 0) {
 					game->addToKilledList(enemy);
 				}
-
-				//If it's injured, add to UML:
-				else if (enemy->getHealth() <= 20)
-					game->addToUML1(enemy);
 
 				//Otherwise store in a temp list:
 				else

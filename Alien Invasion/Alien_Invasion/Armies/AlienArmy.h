@@ -11,26 +11,24 @@ class AlienMonster;
 
 class AlienArmy : public Army
 {
+	//Lists of units
 	LinkedQueue<Unit*> ASList;
 	Array<Unit*> AMList;
 	Deque<Unit*> ADList;
 
 public:
 
-	//Getters for each list (return pointer)
-
 	virtual void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
 	virtual bool isKilled();
-	bool pickAS(Unit*& unit);
-	bool pickAM(Unit*& unit);
-	bool pickFrontAD(Unit*& front);
-	bool pickBackAD(Unit*& back);
-	int gettotCount();
+	virtual int gettotCount();
+
+	//Getters for each list
 	LinkedQueue<Unit*>* getASList();
 	Array<Unit*>* getAMList();
 	Deque<Unit*>* getADList();
+
 	~AlienArmy();
 };
 

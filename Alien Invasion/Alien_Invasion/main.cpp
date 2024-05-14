@@ -4,11 +4,8 @@
 int main() {
 
 	Game* g=new Game;
-
-	g->chooseMode();
-
 	g->start();
-	delete g;
- 
+	 
+	delete g; 
 	return 0;
 }

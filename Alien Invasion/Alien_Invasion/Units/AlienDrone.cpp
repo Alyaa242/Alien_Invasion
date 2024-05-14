@@ -17,7 +17,7 @@ void AlienDrone::attack()
 	int dummy;	//Dummy int to take pri value
 
 	//Setting this unit as a fighting unit for the current timestep
-	if (getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
+	if (capacity && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
 		if (isSecond)
 			game->setFightingUnit(this, 2);
 		else
@@ -26,7 +26,7 @@ void AlienDrone::attack()
 	
 
 	int i = 0;
-	while (i < getCap() && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
+	while (i < capacity && (!ETEnemies->isEmpty() || !EGEnemies->isEmpty())) {
 
 		//Check there is an enemy in the list:
 		if (ETEnemies->pop(enemy)) {
@@ -37,7 +37,7 @@ void AlienDrone::attack()
 			else
 				game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -46,11 +46,9 @@ void AlienDrone::attack()
 			enemy->setTa(game->getTimestep());
 
 			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				cout << "ETKilled\n";
+			if (enemy->getHealth() <= 0) { 
 				game->addToKilledList(enemy);
-			 
-				cout << "ET destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+			  
 			}
 
 			//If it's injured, add to UML:
@@ -65,7 +63,7 @@ void AlienDrone::attack()
 		}
 
 		//Check there is an enemy in the list:
-		if (i < getCap()) {
+		if (i < capacity) {
 			if (EGEnemies->dequeue(enemy, dummy)) {
 
 				//Adding enemy to attackedByAD list
@@ -74,7 +72,10 @@ void AlienDrone::attack()
 				else
 					game->addAttacked(this, enemy);
 
-				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				if (game->getTimestep() == 700)
+					int x = 0;
+				
+				float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Decrement enemy's health:
 				enemy->decHealth(damage);
@@ -83,11 +84,8 @@ void AlienDrone::attack()
 				enemy->setTa(game->getTimestep());
 
 				//If it's killed, add to killed list:
-				if (enemy->getHealth() <= 0) {
-					cout << "EGKilled\n";
-					game->addToKilledList(enemy);
-				 
-					cout << "EG destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+				if (enemy->getHealth() <= 0) { 
+					game->addToKilledList(enemy); 
 				}
 
 				//Otherwise store in a temp list:
@@ -106,8 +104,6 @@ void AlienDrone::attack()
 		else
 			ETEnemies->push(enemy);
 	}
-	
-
 }
 
 void AlienDrone::setIsSecond(bool x)

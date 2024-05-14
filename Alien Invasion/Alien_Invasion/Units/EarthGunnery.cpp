@@ -15,10 +15,10 @@ void EarthGunnery::attack()
 	int ADflag = 0;
 
 	//Setting this unit as a fighting unit for the current timestep
-	if(getCap() && (!AMEnemies->isEmpty() || !ADEnemies->isEmpty()))
+	if(capacity && (!AMEnemies->isEmpty() || !ADEnemies->isEmpty()))
 		game->setFightingUnit(this);
 
-	while (counter < getCap() && (!AMEnemies->isEmpty() || !ADEnemies->isEmpty()))
+	while (counter < capacity && (!AMEnemies->isEmpty() || !ADEnemies->isEmpty()))
 	{
 		// attack monster
 		int count = AMEnemies->getCount();
@@ -28,7 +28,7 @@ void EarthGunnery::attack()
 			index = rand() % count;
 			if (AMEnemies->remove(index, enemy))
 			{
-				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				float damageAM = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByEG list
 				game->addAttacked(this, enemy);
@@ -39,11 +39,8 @@ void EarthGunnery::attack()
 
 				//If it's killed, add to killed list:
 				if (enemy->getHealth() <= 0)
-				{
-					cout << "AMKilled\n";
-					game->addToKilledList(enemy);
-				 
-					cout << "AM destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+				{ 
+					game->addToKilledList(enemy); 
 				}
 				else
 				{
@@ -54,7 +51,7 @@ void EarthGunnery::attack()
 		}
 
 		/// attack drones
-		if (counter < getCap())
+		if (counter < capacity)
 		{
 			bool fromlast = false;
 			bool fromfront = false;
@@ -70,7 +67,7 @@ void EarthGunnery::attack()
 
 			if (fromlast || fromfront)
 			{
-				int damageAD = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				float damageAD = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByEG list
 				game->addAttacked(this, enemy);
@@ -81,10 +78,8 @@ void EarthGunnery::attack()
 				enemy->setTa(game->getTimestep());
 
 				//If it's killed, add to killed list:
-				if (enemy->getHealth() <= 0) {
-					cout << "ADKilled\n";
-					game->addToKilledList(enemy);
-					cout << "AD destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+				if (enemy->getHealth() <= 0) { 
+					game->addToKilledList(enemy); 
 				}
 				else
 				{

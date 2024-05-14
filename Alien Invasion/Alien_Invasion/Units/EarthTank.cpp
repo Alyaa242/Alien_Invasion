@@ -26,10 +26,10 @@ void EarthTank::attack()
 	int counter = 0;
 
 	//Setting this unit as a fighting unit for the current timestep
-	if (getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
+	if (capacity && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
 		game->setFightingUnit(this);
 	
-	while (counter < getCap() && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
+	while (counter < capacity && (!AMEnemies->isEmpty() || (Npass && !ASEnemies->isEmpty())))
 	{
 		// attack monster
 		int count = AMEnemies->getCount();
@@ -39,7 +39,7 @@ void EarthTank::attack()
 			index = rand() % count;
 			if (AMEnemies->remove(index, enemy))
 			{
-				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				float damageAM = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByET list
 				game->addAttacked(this, enemy);
@@ -49,11 +49,8 @@ void EarthTank::attack()
 				enemy->setTa(game->getTimestep());  //set the first time unit got shot
 
 				if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
-				{
-					cout << "AMKilled\n";
-					game->addToKilledList(enemy);
-					 
-					cout << "AM destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+				{ 
+					game->addToKilledList(enemy); 
 				}
 
 				else
@@ -64,12 +61,12 @@ void EarthTank::attack()
 			}
 		}
 		// attack alien soldier
-		if (counter < getCap())
+		if (counter < capacity)
 		{
 			if (Npass) {
 				if (ASEnemies->dequeue(enemy))
 				{
-					int damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+					float damageAS = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Adding enemy to attackedByET list
 					game->addAttacked(this, enemy);
@@ -80,15 +77,10 @@ void EarthTank::attack()
 
 
 					if (enemy->getHealth() <= 0) // ask the game to move it to the killed list
-					{
-						cout << "ASKilled\n";
-						game->addToKilledList(enemy);
-			
-						cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+					{ 
+						game->addToKilledList(enemy); 
 					}
 					else
-
-
 					{
 						tempList.enqueue(enemy); // store at temp list
 					}

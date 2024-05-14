@@ -4,14 +4,14 @@ class HealUnit : public Unit
 {
 
 	//int cap;
-
+	static int HealedCounter ;
 
 public:
 	virtual void attack();
 	HealUnit(int heal, int pow, int cap, int t, Game* g);
-	void UpdateHU();
+	 
 
-
+	static int getHealedCounter();
 
 };
 

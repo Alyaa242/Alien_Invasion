@@ -5,17 +5,15 @@ using namespace std;
 template <typename T>
 class Array {
 
-private:
-
 	T arr[1000];
-	int count;
+	int count;		//Counter of elements
 	
 public:
 
 	Array();
 	void insert(T item);
-	bool remove(int i, T& item);
-	bool atIndx(int i, T& item) const;
+	bool remove(int i, T& item);		//A function to get an element and remove it	
+	bool atIndx(int i, T& item) const;	//A function to get an element without removing it
 	void print() const;
 	int getCount() const;
 	bool isEmpty() const;
@@ -40,7 +38,7 @@ inline bool Array<T>::remove(int i, T& item)
 {
 	if (i < count) {
 		item = arr[i];
-		arr[i] = arr[count - 1];
+		arr[i] = arr[count - 1];	//Swap last element with the elemt we are removing
 		count--;
 		return true;
 	}
