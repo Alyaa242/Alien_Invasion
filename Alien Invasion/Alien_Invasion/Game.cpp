@@ -118,8 +118,8 @@ void Game::addUnits()
 	if (arrAlien)	//Check that GenerateAlienUnits() was performed successfully
 		for (int i = 0; i < n; i++)
 		{
-			if (arrAlien[i])//Check there are alien units generated at this timestep
-		          alienArmy->addUnit(arrAlien[i]);
+			if (arrAlien[i])	//Check there are alien units generated at this timestep
+				alienArmy->addUnit(arrAlien[i]);
 		}
 
 	if (arrSaver)	//Check that GenerateAlienUnits() was performed successfully
@@ -234,6 +234,9 @@ void Game::start()
 	while (stop)
 
 	{
+		if (timestep == 8)
+			int x = 0;
+
 		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
@@ -296,11 +299,6 @@ void Game::printInter()
 
 	cout << "=========================== Ally Army Alive Units ===========================\n";
 	allyArmy->print();
-
-	cout << "=========================== Killed/Destructed Units ===========================\n";
-	cout<< killedList.getCount()<<" units ";
-	killedList.print();
-	cout << endl << endl;
 
 	cout << "=========================== Units fighting at current step ===========================\n";
 
@@ -366,27 +364,16 @@ void Game::printInter()
 
 		}
 
-		if (fightingET)
-		{
-			cout << "ET " << fightingET->getID() << " shots ";
-			
-			attackedByET.print();
-			cout << endl;
-		}
-
-		if (fightingES)
-		{
-			cout << "ES " << fightingES->getID() << " shots ";
-			attackedByES.print();
-			cout << endl;
-		}
-
 	}
 	else
 		cout << "NO Units Attacking at this timestep\n";
 	cout << endl;
-	
 
+	cout << "=========================== Killed/Destructed Units ===========================\n";
+	cout << killedList.getCount() << " units ";
+	killedList.print();
+	cout << endl << endl;
+	
 	cout << "=========================== UML1 ===========================\n";
 	UML1.print();
 	cout << endl;

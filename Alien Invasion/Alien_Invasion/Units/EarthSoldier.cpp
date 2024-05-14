@@ -19,7 +19,7 @@ void EarthSoldier::attack()
 
 	//Setting this unit as a fighting unit for the current timestep
 	if(capacity && !ASenemies->isEmpty())
-	game->setFightingUnit(this);
+		game->setFightingUnit(this);
 
 	//Infect another ES if infected
 	if (infected) {
@@ -87,9 +87,6 @@ void EarthSoldier::attack()
 		 // if not infected ==> attack AS
 		else if (ASenemies->dequeue(enemy)) // get a unit from that list and attack it
 		{
-			//Adding enemy to attackedByAS list
-			game->addAttacked(this, enemy);
-
 			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Adding enemy to attackedByES list
