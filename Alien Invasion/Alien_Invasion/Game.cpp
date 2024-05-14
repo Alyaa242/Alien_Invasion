@@ -71,28 +71,35 @@ void Game::addToKilledList(Unit* unit)
 
 	if (dynamic_cast<AlienSoldier*>(unit)) {
 		tot_des_AS++;
+		AvgDfAlien += unit->getDf();
 	}
 	else if (dynamic_cast<AlienMonster*>(unit)) {
 		tot_des_AM++;
+		AvgDfAlien += unit->getDf();
 	}
 	else if (dynamic_cast<AlienDrone*>(unit)) {
 		tot_des_AD++;
+		AvgDfAlien += unit->getDf();
 	}
 
 	else if (dynamic_cast<EarthSoldier*>(unit)) {
 		tot_des_ES++;
+		AvgDfEarth += unit->getDf();
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
 		tot_des_ET++;
+		AvgDfEarth += unit->getDf();
 	}
 	else if (dynamic_cast<EarthGunnery*>(unit)) {
 		tot_des_EG++;
+		AvgDfEarth += unit->getDf();
 	}
 	else if (dynamic_cast<HealUnit*>(unit))
 	{
 		tot_des_HU++;
 	}
-	
+
+
 	unit->setTd(timestep);
 }
 
@@ -486,17 +493,34 @@ void Game::Display()
 	else
 		outfile << "There is no Earth Army\n";
 
-	if (AvgDbEarth)
-		outfile << "Df/Db = " << float(AvgDfEarth*1.0 / AvgDbEarth) * 100 << "     ";
-	if (AvgDbEarth)
-		outfile << "Dd/Db = " << float(AvgDdEarth*1.0 / AvgDbEarth) * 100<<endl;
+	AvgDfEarth /= (tot_des_earth- tot_des_HU);
+	AvgDbEarth /= (tot_des_earth - tot_des_HU);
+	AvgDdEarth /= (tot_des_earth- tot_des_HU);
 
-	if (earthArmy->gettotCount())
-		outfile << "Total Successful Healed Units / Total EarthUnits" << setw(10)  << float(HealUnit::getHealedCounter()*1.0 / earthArmy->gettotCount()) * 100<<"%";
+	outfile << "Average of Df : " << AvgDfEarth<<endl;
+	outfile << "Average of Dd : " << AvgDdEarth<<endl;
+	outfile << "Average of Db : " << AvgDbEarth<<endl;
+
+	if (AvgDbEarth)
+		outfile << "Df/Db = " << float(AvgDfEarth*1.0 / AvgDbEarth) *100 << "%     ";
+	if (AvgDbEarth)
+		outfile << "Dd/Db = " << float(AvgDdEarth*1.0 / AvgDbEarth) *100<<"%" << endl;
+
+	if (tot_earth)
+		outfile << "Total Successful Healed Units / Total EarthUnits" << setw(10)  << float(HealUnit::getHealedCounter()*1.0 / tot_earth) * 100<<"%\n";
 	else
 		outfile << "There is no Earth Army\n";
 
+	if (earthArmy->getTotES())
+		outfile << "Percentage of Infected to earthsoldiers" << setw(8) << float(EarthSoldier::getTotalInfected() * 1.0 / earthArmy->getTotES()) * 100 << "%";
+
+
+
 	outfile << endl << endl << endl;
+
+
+
+
 	outfile << "For Alien Army\n";
 	outfile << "Total number of AD : " << alienArmy->getTotAD() << endl;
 	outfile << "Total number of AM : " << alienArmy->getTotAM() << endl;
@@ -524,15 +548,22 @@ void Game::Display()
 	else
 		outfile << "There is no Alien Army\n";
 
+
+	AvgDfAlien/=tot_des_alien ;
+	AvgDbAlien/= tot_des_alien;
+	AvgDdAlien/= tot_des_alien ;
+
+	outfile << "Average of Df : " << AvgDfAlien<<endl;
+	outfile << "Average of Dd : " << AvgDdAlien<<endl;
+	outfile << "Average of Db : " << AvgDbAlien<<endl;
+
 	if (AvgDbAlien)
-		outfile << "Df/Db = " << float (AvgDfAlien*1.0 / AvgDbAlien) * 100 << "%     ";
+		outfile << "Df/Db = " << float (AvgDfAlien*1.0 / AvgDbAlien )*100  << "%     ";
 	if (AvgDbAlien)
 		outfile << "Dd/Db = " << float (AvgDdAlien*1.0 / AvgDbAlien)*100<<"%\n";
 
 
-	if (earthArmy->getTotES())
-	outfile << "Percentage of Infected to earthsoldiers" << setw(10) << float (EarthSoldier::getTotalInfected()*1.0/earthArmy->getTotES())*100 <<"%";
-
+	
 	outfile.close();
 }
 
@@ -710,7 +741,7 @@ LinkedQueue<Unit*>* Game::getSUEnemies()
 
 Game::~Game()
 {
-	cout << "DESTRUCTING GAME .... \n";
+	
 	delete alienArmy;
 	delete earthArmy;
 	delete allyArmy;

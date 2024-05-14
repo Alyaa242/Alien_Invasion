@@ -84,10 +84,7 @@ void Unit::setTa(int t)
 	}
 	Df = Ta - Tj;
 
-	if (dynamic_cast<AlienMonster*>(this) || dynamic_cast<AlienSoldier*>(this) || dynamic_cast<AlienDrone*>(this))
-		game->setDfAlien(Df);
-	else
-		game->setDfEarth(Df);
+	
 }
 
 void Unit::setTd(int t)
@@ -101,7 +98,8 @@ void Unit::setTd(int t)
 		game->setDdAlien(Dd);
 		game->setDbAlien(Db);
 	}
-	else
+	else if (dynamic_cast<EarthGunnery*>(this) || dynamic_cast<EarthSoldier*>(this) || dynamic_cast<EarthTank*>(this))
+	
 	{
 		game->setDdEarth(Dd);
 		game->setDbEarth(Db);
