@@ -79,8 +79,7 @@ public:
 	Unit* RemoveHU();
 	void addToUML2(Unit* unit);
 	Unit* pickfromUML1();
-	Unit* pickfromUML2();
-	//void Heal();
+	Unit* pickfromUML2(); ;
 	void start();	//The main function that implements the game logic
 	void printInter();
 	int getTimestep();
