@@ -144,7 +144,6 @@ inline void LinkedQueue<T>::print() const
 	Node <T>* ptr = frontPtr;
 	if (!ptr)
 	{
-		cout << "NULL";
 		return;
 	}
 	cout << '[';
