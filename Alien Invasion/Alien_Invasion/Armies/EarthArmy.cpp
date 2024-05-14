@@ -12,23 +12,21 @@ using namespace std;
 
 void EarthArmy::addUnit(Unit* unit)
 {
+	//Check that the unit exists
 	if (!unit)
 		return;
 
+	//Check the unit's type
 	if (dynamic_cast<EarthSoldier*>(unit)) {
 		ESList.enqueue(unit);
 	}
-	else if (dynamic_cast<EarthTank*>(unit)) {
-		cout << "ET\n";
+	else if (dynamic_cast<EarthTank*>(unit)) { 
 		ETList.push(unit);
 	}
-	else if (dynamic_cast<EarthGunnery*>(unit)) {
-		cout << "EG\n";
+	else if (dynamic_cast<EarthGunnery*>(unit)) { 
 		EGList.enqueue(unit, unit->getHealth() + unit->getPower());
 	}
-	else
-	{
-		cout << "HU\n";
+	else { 
 		HUList.push(unit);
 	}
 }
@@ -43,7 +41,6 @@ void EarthArmy::attack()
 	if (ETList.peek(ET))	//Call attack() of the last ET (peek of the stack)
 		ET->attack();
 
-		
 	Unit* EG = nullptr;
 	int maxpower_health;
 	if (EGList.peek(EG, maxpower_health))	//Call attack() of EG with the max power & health
@@ -51,8 +48,7 @@ void EarthArmy::attack()
 
 	Unit* HU = nullptr;
 	if (HUList.peek(HU))
-		HU->attack();
-		
+		HU->attack();		//Call attack() of HU to heal
 }
 
 void EarthArmy::print()
@@ -74,40 +70,17 @@ void EarthArmy::print()
 
 bool EarthArmy::isKilled()
 {
-	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty() && HUList.isEmpty()) // army killed
-
+	//Check if there are any units in the army
+	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty() && HUList.isEmpty())
 		return true;
 
 	else
-
 		return false;
 }
+
 int EarthArmy::gettotCount()
 {
 	return ESList.getCount() + ETList.getCount() + EGList.getCount()+ HUList.getCount();
-
-}
-
-bool EarthArmy::pickES(Unit*& unit)
-{
-	if (ESList.dequeue(unit))
-		return true;
-	return false;
-}
-
-bool EarthArmy::pickET(Unit*& unit)
-{
-	if (ETList.pop(unit))
-		return true;
-	return false;
-}
-
-bool EarthArmy::pickEG(Unit*& unit)
-{
-	int maxpower_health;
-	if (EGList.dequeue(unit, maxpower_health))
-		return true;
-	return false;
 }
 
 bool EarthArmy::pickHU(Unit*& unit)
@@ -149,6 +122,8 @@ EarthArmy::~EarthArmy()
 {
 	Unit* temp;
 
+	//Dequeue each unit in each list and delete it
+
 	while (ESList.dequeue(temp)) {
 		delete temp;
 	}
@@ -162,7 +137,6 @@ EarthArmy::~EarthArmy()
 		delete temp;
 	}
 
-	
 	while (HUList.pop(temp)) {
 		delete temp;
 	}

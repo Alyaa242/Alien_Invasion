@@ -12,11 +12,11 @@ void SaverUnit::attack()
 	Unit* enemy;
 
 	//Setting this unit as a fighting unit for the current timestep
-	if (getCap() && !ASenemies->isEmpty())
+	if (capacity && !ASenemies->isEmpty())
 		game->setFightingUnit(this);
  
 	 
-	for (int i = 0; i < getCap(); i++)
+	for (int i = 0; i < capacity; i++)
 	{
 		 
 		// if not infected ==> attack AS
@@ -36,27 +36,21 @@ void SaverUnit::attack()
 			enemy->setTa(game->getTimestep());
 
 			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				cout << "ASKilled\n";
+			if (enemy->getHealth() <= 0) { 
 				game->addToKilledList(enemy);
-
-				cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+				 
 			}
 			else
 			{
 				tempList.enqueue(enemy); // store at temp list
 			}
-
 		}
-
 	}
 
 	while (tempList.dequeue(enemy))  //move all items from the temp list back to thier original list
 	{ 
 		ASenemies->enqueue(enemy);
 	}
-
-
 }
 
  

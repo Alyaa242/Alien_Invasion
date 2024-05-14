@@ -18,7 +18,7 @@ void EarthSoldier::attack()
 	Unit* enemy;  
 
 	//Setting this unit as a fighting unit for the current timestep
-	if(getCap() && !ASenemies->isEmpty())
+	if(capacity && !ASenemies->isEmpty())
 	game->setFightingUnit(this);
 
 	//Infect another ES if infected
@@ -38,7 +38,7 @@ void EarthSoldier::attack()
 		}
 	}
 
-	for (int i = 0; i < getCap(); i++)
+	for (int i = 0; i < capacity; i++)
 	{
 		// attack itself if the unit is infected
 		if (infected)
@@ -48,13 +48,12 @@ void EarthSoldier::attack()
 				// Assume infected units attacks only non-infected units
 				if (dynamic_cast<EarthSoldier*>(enemy)->infected)
 				{
-					cout << "Add Infected to temp list\n";
 					tempList.enqueue(enemy);
 				}
 				else
 				{
 
-					float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+					float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Adding enemy to attackedByES list
 					game->addAttacked(this, enemy);
@@ -66,8 +65,7 @@ void EarthSoldier::attack()
 					enemy->setTa(game->getTimestep());
 
 					//If it's killed, add to killed list:
-					if (enemy->getHealth() <= 0) {
-						cout << "ESKilled infected\n";
+					if (enemy->getHealth() <= 0) { 
 						game->addToKilledList(enemy);
 					 
 					}
@@ -79,7 +77,7 @@ void EarthSoldier::attack()
 					else
 					{
 						tempList.enqueue(enemy);
-						cout << "tempES\n";
+					 
 					}
 
 				}
@@ -92,7 +90,7 @@ void EarthSoldier::attack()
 			//Adding enemy to attackedByAS list
 			game->addAttacked(this, enemy);
 
-			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Adding enemy to attackedByES list
 			game->addAttacked(this, enemy);
@@ -103,11 +101,8 @@ void EarthSoldier::attack()
 			enemy->setTa(game->getTimestep());
 
 			//If it's killed, add to killed list:
-			if (enemy->getHealth() <= 0) {
-				cout << "ASKilled\n";
-				game->addToKilledList(enemy);
-			 
-				cout << "AS destroyed at " << enemy->getTd() << " " << game->getTimestep() << endl;
+			if (enemy->getHealth() <= 0) { 
+				game->addToKilledList(enemy); 
 			}
 			else
 			{
@@ -125,10 +120,6 @@ void EarthSoldier::attack()
 		else
 			ASenemies->enqueue(enemy);
 	}
-
-
-
-
 }
 
 void EarthSoldier::setInfected(bool x)

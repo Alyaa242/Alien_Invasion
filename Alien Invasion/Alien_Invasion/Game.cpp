@@ -28,9 +28,8 @@ Game::Game()
 	AvgDfAlien = 0;
 	timestep = 0;
 	stop = true; 
-	InteractiveM = false;
-	noMoreSU = false;
-	IsSUgen = false;
+	InteractiveM = false; 
+	isSUGen = false;
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	allyArmy = new AllyArmy;
@@ -76,12 +75,12 @@ void Game::addUnits()
 	Unit** arrAlien = randGen->GenerateAlienUnits();		//To get array of created alien units at this timestep
 	Unit** arrSaver = nullptr;
 
-	SUwithdrawal();
-
-	if(!noMoreSU)
+	 
+	if (!SUwithdrawal()) {
 		arrSaver = randGen->GenerateSaverUnits(EarthSoldier::getInfectedCount() / float(earthArmy->gettotCount()) * 100);
+		isSUGen = true;
+	}
 	
-
 	//Adding each unit to its army:
 
 	if (arrEarth)	//Check that GenerateEarthUnits() was performed successfully
@@ -109,8 +108,6 @@ void Game::addUnits()
 	delete[] arrAlien;
 	delete[] arrSaver;
 
-
-
 }
 
 void Game::addToUML1(Unit* unit)
@@ -119,15 +116,16 @@ void Game::addToUML1(Unit* unit)
 
 	unit->setWait(timestep);
 
-
-
 }
+
+
 void Game::addToUML2(Unit* unit)
 {
 	UML2.enqueue(unit);
 
 	unit->setWait(timestep);
 }
+
 
 Unit* Game::pickfromUML1()
 {
@@ -139,6 +137,7 @@ Unit* Game::pickfromUML1()
 	else return nullptr;
 }
 
+
 Unit* Game::pickfromUML2()
 {
 	Unit* unit;
@@ -147,6 +146,7 @@ Unit* Game::pickfromUML2()
 		return unit;
 	else return nullptr;
 }
+
 
 void Game::UpdateUML()
 {
@@ -174,17 +174,14 @@ void Game::UpdateUML()
 }
 
 
-
-
-
 Unit* Game::PickHU()
 {
-	
 	Unit* picked;
 	if (earthArmy->pickHU(picked))
 		return picked;
 	else return nullptr;
 }
+
 
 Unit* Game::RemoveHU()
 {
@@ -197,6 +194,19 @@ Unit* Game::RemoveHU()
 
 void Game::start()
 { 
+	cout << "=========================== Select Mode ===========================\n";
+	cout << "Press S for Silent Mode\n";
+	cout << "Press I for Interactive Mode\n";
+
+	cin >> choosen;
+	if (choosen == 'S')
+	{
+		cout << "Silent Mode\nSimulationStarts . . .\n";
+	}
+	else
+		InteractiveM = true;
+
+
 	while (stop)
 	{
 		resetFightingUnits();	//Reset current fighting units to null
@@ -238,7 +248,7 @@ void Game::start()
 			}
 			else {
 				if (alienArmy->isKilled() || earthArmy->isKilled()) {
-					cout << "Simulation ended...\n";
+					cout << "Simulation ended . . .\n";
 					Display();
 					cout << "Output File created.\n";
 					stop = false;
@@ -247,7 +257,6 @@ void Game::start()
 		}
 
 		timestep++;
-
 	}
 }
 
@@ -352,32 +361,17 @@ void Game::printInter()
 
 }
 
+
 int Game::getTimestep()
 {
 	return timestep;
 }
 
-void Game::chooseMode()
-{
-	cout << "=========================== Select Mode ===========================\n";
-	cout << "Press S for Silent Mode\n";
-	cout << "Press I for Interactive Mode\n";
-
-	cin >> choosen;
-	if (choosen == 'S')
-	{
-		cout << "Silent Mode\nSimulationStarts . . .\n";
-	}
-	else
-		InteractiveM = true;
-
-}
 
 bool Game::SUwithdrawal()
 {
-	if (EarthSoldier::getInfectedCount() == 0 && IsSUgen)
-	{
-		noMoreSU = true;
+	if (EarthSoldier::getInfectedCount() == 0 && isSUGen)
+	{ 
 		LinkedQueue<Unit*>* Sulist = allyArmy->getSUList();
 		Unit* unit;
 		while (Sulist->dequeue(unit))
@@ -394,17 +388,17 @@ bool Game::SUwithdrawal()
 void Game::Display()
 {
 	ofstream outfile;
-	outfile.open("output.txt");
-	//outfile << setw(6);
+	outfile.open("output.txt"); 
 	outfile << "Td";outfile << setw(6);
 	outfile << "ID";outfile << setw(6);
 	outfile << "Tj";outfile << setw(6);
 	outfile << "Df";outfile << setw(6);
 	outfile << "Dd";outfile << setw(6);
-	outfile << "Db";outfile << setw(6);
-	outfile << endl;
+	outfile << "Db" << endl;
+	 
 
 	int countKL = killedList.getCount();
+
 	while (countKL--)
 	{
 		Unit* unit;
@@ -506,8 +500,6 @@ void Game::Display()
 
 	outfile.close();
 
-	//SU ATTACK WHO
-	//PERCENT OF INFECTED
 }
 
 
@@ -685,6 +677,7 @@ Game::~Game()
 	cout << "DESTRUCTING GAME .... \n";
 	delete alienArmy;
 	delete earthArmy;
+	delete allyArmy;
 	delete randGen;
 
 	Unit* temp;

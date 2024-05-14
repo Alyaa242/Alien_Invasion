@@ -13,13 +13,12 @@ class EarthArmy;
 class AlienArmy;
 class AllyArmy;
 class RandGen;
-//UML priQueue
 
 class Game
 {
 	LinkedQueue<Unit*> killedList;
-	priQueue <Unit*> UML1; //soldiers
-	LinkedQueue <Unit*> UML2; //tanks
+	priQueue <Unit*> UML1;	 //UML for soldiers
+	LinkedQueue <Unit*> UML2;	//UML for tanks
 	EarthArmy* earthArmy;
     AlienArmy* alienArmy;
 	AllyArmy* allyArmy;
@@ -32,7 +31,7 @@ class Game
 	int healcap=0;
 	Unit* picked;
 
-
+	//Total destroyed Units
 	int tot_des_AD = 0;
 	int tot_des_AM = 0;
 	int tot_des_AS = 0;
@@ -63,9 +62,8 @@ class Game
 
 	int n;		//number of units generated each timestep
 	bool stop;
-	bool InteractiveM; 
-	bool noMoreSU;
-	bool IsSUgen;
+	bool InteractiveM;  
+	bool isSUGen;
 
 public:
 
@@ -82,8 +80,7 @@ public:
 	Unit* pickfromUML2(); ;
 	void start();	//The main function that implements the game logic
 	void printInter();
-	int getTimestep();
-	void chooseMode();
+	int getTimestep(); 
 	bool SUwithdrawal(); 
 	void Display();
 	

@@ -14,7 +14,7 @@ public:
     Deque();
     bool isEmpty() const;
     bool addLast(const T& item);
-    bool insert(const T& entry);    //Function that insert and handle wether to enqueue or addLast
+    bool insert(const T& entry);    //Function that insert and handle whether to enqueue or addLast
     bool removeLast(T& oldValue);
     bool enqueue(const T& newEntry);
     bool dequeue(T& frntEntry);
@@ -64,6 +64,7 @@ inline bool Deque<T>::addLast(const T& item)
 template<typename T>
 inline bool Deque<T>::insert(const T& entry)
 {
+    //Check whether the last element was inserted from front or back
     if (!last) {
         enqueue(entry);
         last = true;
@@ -72,7 +73,6 @@ inline bool Deque<T>::insert(const T& entry)
         addLast(entry);
         last = false;
     }
-
     return true;
 }
 
@@ -84,12 +84,9 @@ bool Deque<T>::removeLast(T& oldValue)
         return false;
     }
 
-
-
     Node <T>* ptr = LinkedQueue<T>::backPtr;
     if (!ptr)
         return false;
-
 
     oldValue = ptr->getItem();
     LinkedQueue<T>::backPtr = LinkedQueue<T>::backPtr->getPrev();
@@ -108,12 +105,6 @@ bool Deque<T>::removeLast(T& oldValue)
         ptr = nullptr;
 
     }
-
-
-
-
-
-
 
     LinkedQueue<T>::counter--;
 

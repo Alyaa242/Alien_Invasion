@@ -4,31 +4,32 @@
 class Game;
 class Unit
 {
-	float health, power, capacity;
+	float health;
 	int ID;
 	
 	int wait;
 
 	int Tj, Ta, Td , Dd , Db , Df;
 
+	//Last ID to know the next ID
 	static int lastEarthID;
 	static int lastAlienID;
 	static int lastAllyID;
-	bool attacked;
+
+	bool attacked;		//Bool to konw if this unit was attacked before
 
 protected:
+	float capacity, power;
 	Game* game;
 
 public:
 
-	//We need to add game ptr to constructor
 	Unit(int heal, int pow, int cap, int t, Game* g);	//Initializing basic members in constructor
 	virtual void attack() = 0;
 
 	//Getters to members:
-	int getHealth() const;
-	int getPower() const;
-	int getCap() const;
+	float getHealth() const;
+	float getPower() const;
 	int getTj() const;
 	int getTa() const;
 	int getTd() const;
@@ -48,8 +49,10 @@ public:
 	void setEarthID();		//A function that sets units IDs automatically
 	void setAlienID();
 	void setAllyID();
+
 	void decHealth(float damage);		//Decrement health
 	void incHealth(float increment);		//increment health
+
 	int getWait();
 	void setWait(int w);
 

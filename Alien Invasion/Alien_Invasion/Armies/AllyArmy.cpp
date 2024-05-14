@@ -30,7 +30,7 @@ bool AllyArmy::isKilled()
 
 int AllyArmy::gettotCount()
 {
-	return 0;
+	return SUList.getCount();
 }
 
 LinkedQueue<Unit*>* AllyArmy::getSUList()

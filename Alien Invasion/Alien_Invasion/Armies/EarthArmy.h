@@ -11,35 +11,29 @@ class EarthTank;
 
 class EarthArmy : public Army
 {
-
+	//Lists of units
 	LinkedQueue<Unit*> ESList;
 	ArrayStack<Unit*> ETList;
 	priQueue<Unit*> EGList;
 	ArrayStack<Unit*> HUList;
 
-
-	//priQueue<Unit*> HUList;
-
 public:
-
-	//Getters for each list (return pointer)
 
 	virtual void addUnit(Unit* unit);
 	virtual void attack();
 	virtual void print();
 	virtual bool isKilled();
- 
-	int gettotCount();
- 
-	bool pickES(Unit*& unit);
-	bool pickET(Unit*& unit);
-	bool pickEG(Unit*& unit);
+	virtual int gettotCount();
+
 	bool pickHU(Unit*& unit);
 	bool RemoveHU(Unit*& unit);
+
+	//Getters for each list
 	LinkedQueue<Unit*>* getESList();
 	ArrayStack<Unit*>* getETList();
 	priQueue<Unit*>* getEGList();
 	ArrayStack<Unit*>* getHUList();
+
 	~EarthArmy();
 };
 

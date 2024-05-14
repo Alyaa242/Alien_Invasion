@@ -12,19 +12,18 @@ using namespace std;
 
 void AlienArmy::addUnit(Unit* unit)
 {
+	//Check that the unit exists
 	if (!unit)
 		return;
 
-	if (dynamic_cast<AlienSoldier*>(unit)) {
-		cout << "AS\n";
+	//Check the unit's type
+	if (dynamic_cast<AlienSoldier*>(unit)) { 
 		ASList.enqueue(unit);
 	}
-	else if (dynamic_cast<AlienMonster*>(unit)) {
-		cout << "AM\n";
+	else if (dynamic_cast<AlienMonster*>(unit)) { 
 		AMList.insert(unit);
 	}
-	else {
-		cout << "AD\n";
+	else { 
 		ADList.insert(unit);
 	}
 }
@@ -53,7 +52,6 @@ void AlienArmy::attack()
 		AD2->attack();
 		dynamic_cast<AlienDrone*>(AD2)->setIsSecond(false);
 	}
-	
 }
 
 void AlienArmy::print()
@@ -72,49 +70,14 @@ void AlienArmy::print()
 bool AlienArmy::isKilled()
 {
 	if (ASList.isEmpty() && AMList.isEmpty() && ADList.isEmpty())
-
 		return true;
 
 	else
-
 		return false;
 }
 int AlienArmy::gettotCount()
 {
 	return ASList.getCount() + AMList.getCount() + ADList.getCount();
-}
-
-bool AlienArmy::pickAS(Unit*& unit)
-{
-	if (ASList.dequeue(unit)) {
-		return true;
-	}
-	return false;
-}
-
-bool AlienArmy::pickAM(Unit*& unit)
-{
-	int count = AMList.getCount();
-	if (count == 0)
-		return false;
-	int index = rand() % count;
-	if (AMList.remove(index, unit))
-		return true;
-	return false;
-}
-
-bool AlienArmy::pickFrontAD(Unit*& front)
-{
-	if (ADList.dequeue(front))
-		return true;
-	return false;
-}
-
-bool AlienArmy::pickBackAD(Unit*& back)
-{
-	if (ADList.removeLast(back))
-		return true;
-	return false;
 }
 
 LinkedQueue<Unit*>* AlienArmy::getASList()
@@ -135,6 +98,8 @@ Deque<Unit*>* AlienArmy::getADList()
 AlienArmy::~AlienArmy()
 {
 	Unit* temp;
+
+	//Dequeue each unit in each list and delete it
 
 	while (ASList.dequeue(temp)) {
 		delete temp;
