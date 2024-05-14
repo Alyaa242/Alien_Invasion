@@ -33,6 +33,8 @@ Game::Game()
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	allyArmy = new AllyArmy;
+	cout << "Enter File Name: \n";
+	cin >> fileName;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
 }
 
@@ -41,7 +43,7 @@ int* Game::ReadInputParameters()
 	int* arr = new int[29];
 
 	ifstream InFile;
-	InFile.open("read.txt");
+	InFile.open(fileName);
 	if (!InFile.is_open())	return nullptr;
 	for (int i = 0; i < 9; i++)
 	{

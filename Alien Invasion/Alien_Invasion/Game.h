@@ -64,6 +64,7 @@ class Game
 	bool stop;
 	bool InteractiveM;  
 	bool isSUGen;
+	string fileName;
 
 public:
 
