@@ -23,7 +23,7 @@ void HealUnit::attack()
 
 			if (dynamic_cast <EarthSoldier*> (healed1)->getInfected())
 			{
-				healed1->incHealth(h / 2); HealedCounter++;
+				healed1->incHealth(h / 2); HealedCounter++; // heal the infected ones in double the time
 			}
 			else
 			{
@@ -32,17 +32,17 @@ void HealUnit::attack()
 
 
 			if (healed1)
-			{
-				if (healed1->getHealth() <= 20)
+				if (healed1->getHealth() <= 20) // if health after incrementation exceeds 20 return it to the battle
 					tempList1.enqueue(healed1);
 				else
 				{
 					dynamic_cast <EarthSoldier*> (healed1)->setImmuned(true);
 					game->addES(healed1);
 				}
-			}
+			
 		}
 	}
+
 	for (int j = i; j < capacity; j++)
 	{
 		Unit* healed2 = game->pickfromUML2();
@@ -63,21 +63,22 @@ void HealUnit::attack()
 		}
 	}
 
-	while (!tempList1.isEmpty())
-	{
-		if (tempList1.dequeue(unit))
-			game->addToUML1(unit);
-	}
+	
+		
+		while (!tempList1.isEmpty())  //Return from templists
+		{
+			if (tempList1.dequeue(unit))
+				game->addToUML1(unit);
+		}
+		Unit* unit2;
+		while (!tempList2.isEmpty())
+		{
+			if (tempList2.dequeue(unit2))
+				game->addToUML2(unit2);
 
-	Unit* unit2;
-	while (!tempList2.isEmpty())
-	{
-		if (tempList2.dequeue(unit2))
-			game->addToUML2(unit2);
+		}
 
-	}
-
-	if (game->RemoveHU())
+	if (game->RemoveHU()) //Kill the Heal Unit 
 	{
 		game->addToKilledList(this);
 

@@ -16,6 +16,10 @@ class AlienArmy : public Army
 	Array<Unit*> AMList;
 	Deque<Unit*> ADList;
 
+	int static totalAS;
+	int static totalAM;
+	int static totalAD;
+
 public:
 
 	virtual void addUnit(Unit* unit);
@@ -23,6 +27,10 @@ public:
 	virtual void print();
 	virtual bool isKilled();
 	virtual int gettotCount();
+
+	int getTotAS();
+	int getTotAM();
+	int getTotAD();
 
 	//Getters for each list
 	LinkedQueue<Unit*>* getASList();

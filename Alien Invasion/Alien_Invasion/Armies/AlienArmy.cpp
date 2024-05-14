@@ -10,6 +10,10 @@
 #include "..\DS\Array.h"
 using namespace std;
 
+int AlienArmy::totalAS=0;
+int AlienArmy::totalAM=0;
+int AlienArmy::totalAD=0;
+
 void AlienArmy::addUnit(Unit* unit)
 {
 	//Check that the unit exists
@@ -17,13 +21,16 @@ void AlienArmy::addUnit(Unit* unit)
 		return;
 
 	//Check the unit's type
-	if (dynamic_cast<AlienSoldier*>(unit)) { 
+	if (dynamic_cast<AlienSoldier*>(unit)) {
+		totalAS++;
 		ASList.enqueue(unit);
 	}
-	else if (dynamic_cast<AlienMonster*>(unit)) { 
+	else if (dynamic_cast<AlienMonster*>(unit)) {
+		totalAM++;
 		AMList.insert(unit);
 	}
-	else { 
+	else {
+		totalAD++;
 		ADList.insert(unit);
 	}
 }
@@ -74,6 +81,18 @@ bool AlienArmy::isKilled()
 
 	else
 		return false;
+}
+int AlienArmy::getTotAS()
+{
+	return totalAS;
+}
+int AlienArmy::getTotAM()
+{
+	return totalAM;
+}
+int AlienArmy::getTotAD()
+{
+	return totalAD;
 }
 int AlienArmy::gettotCount()
 {
