@@ -148,8 +148,7 @@ Unit* Game::pickfromUML2()
 
 void Game::UpdateUML()
 {
-	Unit* unit;int max_health;
-	//cout << "UUUMMMMMMMMMMMMLLLLLLLLL";
+	Unit* unit;int max_health; 
 	for (int i{};i< UML1.getCount();i++)
 	{
 		UML1.peek(unit, max_health);
@@ -192,7 +191,7 @@ Unit* Game::RemoveHU()
 		return picked;
 	else return nullptr;
 }
-
+ 
 
 void Game::start()
 { 
@@ -211,12 +210,19 @@ void Game::start()
 		//Call attack for each army	
 		earthArmy->attack();
 		alienArmy->attack();
+		allyArmy->attack();
 		UpdateUML();
 	 
 		if (timestep >= 40)
 		{
 			if (InteractiveM) {
-				if (alienArmy->isKilled())
+				if (alienArmy->isKilled() && earthArmy->isKilled())
+				{
+					cout << "=========================== The Earth Army Parity with The Alien Army ===========================\n";
+					Display();
+					stop = false;
+				}
+				else if (alienArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Earth Army ===========================\n";
 					Display();
@@ -238,7 +244,6 @@ void Game::start()
 				}
 			}
 		}
-
 
 		timestep++;
 
@@ -402,8 +407,10 @@ void Game::Display()
 		outfile << unit->getDd();outfile << setw(6);
 		outfile<< unit->getDb() << "\n";
 	}
+ 
 	outfile << endl << endl;
 	outfile << "Battle Result . . .\n\n\n";//
+ 
 	if (alienArmy->isKilled())
 		outfile << "EARTH ARMY WIN ! ! !\n";
 	else
@@ -611,7 +618,7 @@ void Game::setDbAlien(int t)
 
 void Game::addES(Unit* unit)
 {
-	earthArmy->addUnit(unit);//cout << "addddddddddd";
+	earthArmy->addUnit(unit); 
 }
 
 void Game::addET(Unit* unit)
