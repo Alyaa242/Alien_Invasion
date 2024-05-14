@@ -123,10 +123,6 @@ void AlienMonster::attack()
 					game->addToKilledList(enemy);
 				}
 
-				//If it's injured, add to UML:
-				else if (enemy->getHealth() <= 20)
-					game->addToUML1(enemy);
-
 				//Otherwise store in a temp list:
 				else
 					temp.enqueue(enemy);
