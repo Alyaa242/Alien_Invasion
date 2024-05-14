@@ -54,7 +54,7 @@ void EarthSoldier::attack()
 				else
 				{
 
-					int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+					float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Adding enemy to attackedByES list
 					game->addAttacked(this, enemy);
@@ -92,7 +92,7 @@ void EarthSoldier::attack()
 			//Adding enemy to attackedByAS list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Adding enemy to attackedByES list
 			game->addAttacked(this, enemy);

@@ -8,7 +8,7 @@ int main() {
 	g->chooseMode();
 
 	g->start();
-	g->Display();
+	 
 	delete g;
  
 	return 0;

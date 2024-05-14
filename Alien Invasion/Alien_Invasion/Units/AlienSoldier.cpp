@@ -26,7 +26,7 @@ void AlienSoldier::attack()
 			//Adding enemy to attackedByAS list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -58,7 +58,7 @@ void AlienSoldier::attack()
 			//Adding enemy to attackedByAM list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);

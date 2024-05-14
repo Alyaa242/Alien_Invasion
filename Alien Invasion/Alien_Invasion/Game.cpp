@@ -51,8 +51,10 @@ int* Game::ReadInputParameters()
 	char c;
 	for (int i = 9; i < 27; i++)
 	{
-		if (i % 2) InFile >> arr[i];
-		else InFile >> c >> arr[i];
+		if (i % 2)
+			InFile >> arr[i];
+		else
+			InFile >> c >> arr[i];
 	}
 	InFile >> arr[27] >> arr[28];
 	InFile.close();
@@ -220,17 +222,13 @@ Unit* Game::RemoveHU()
 
 void Game::start()
 { 
-	while (timestep<10)
+
+	while (stop)
+
 	{
+		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
-
-		if (InteractiveM) {
-			printInter();
-			cin.get();	//Wait for user to press enter
-		}
-
-		resetFightingUnits();	//Reset current fighting units to null
 
 		//Call attack for each army	
 		earthArmy->attack();
@@ -238,6 +236,11 @@ void Game::start()
 		allyArmy->attack();
 		UpdateUML();
 	 
+		if (InteractiveM) {
+			printInter();
+			cin.get();	//Wait for user to press enter
+		}
+
 		if (timestep >= 40)
 		{
 			if (InteractiveM) {
@@ -280,21 +283,45 @@ void Game::printInter()
 	cout << "Current TimeStep " << timestep << endl;
 	cout << "=========================== Earth Army Alive Units ===========================\n";
 	earthArmy->print();
+
 	cout << "=========================== Alien Army Alive Units ===========================\n";
     alienArmy->print();
-	if (allyArmy) {
-		cout << "=========================== Ally Army Alive Units ===========================\n";
-		allyArmy->print();
-	}
+
+	cout << "=========================== Ally Army Alive Units ===========================\n";
+	allyArmy->print();
+
 	cout << "=========================== Killed/Destructed Units ===========================\n";
 	cout<< killedList.getCount()<<" units ";
 	killedList.print();
-	cout << endl;
-
+	cout << endl << endl;
 
 	cout << "=========================== Units fighting at current step ===========================\n";
+
 	if (fightingAD1 || fightingAD2 || fightingAS|| fightingAM|| fightingES|| fightingEG|| fightingET || fightingSU)
+
 	{
+		if (fightingES)
+		{
+			cout << "ES " << fightingES->getID() << " shots ";
+			attackedByES.print();
+			cout << endl;
+		}
+
+		if (fightingET)
+		{
+			cout << "ET " << fightingET->getID() << " shots ";
+
+			attackedByET.print();
+			cout << endl;
+		}
+
+		if (fightingEG)
+		{
+			cout << "EG " << fightingEG->getID() << " shots ";
+			attackedByEG.print();
+			cout << endl;
+		}
+
 		if (fightingAS)
 		{
 			cout << "AS " << fightingAS->getID() << " shots ";
@@ -324,13 +351,12 @@ void Game::printInter()
 			cout << endl;
 		}
 
-
-
-		if (fightingEG)
+		if (fightingSU)
 		{
-			cout << "EG " << fightingEG->getID() << " shots ";
-			attackedByEG.print();
+			cout << "SU " << fightingSU->getID() << " shots ";
+			attackedBySU.print();
 			cout << endl;
+
 		}
 
 		if (fightingET)
@@ -348,26 +374,22 @@ void Game::printInter()
 			cout << endl;
 		}
 
-		if (fightingSU)
-		{
-			cout << "SU " << fightingSU->getID() << " shots ";
-			attackedBySU.print();
-			cout << endl;
-
-		}
-
 	}
 	else
-	cout << "NO Units Attacking at this timestep\n";
+		cout << "NO Units Attacking at this timestep\n";
+	cout << endl;
 	
 
 	cout << "=========================== UML1 ===========================\n";
-	UML1.print();cout << endl;
+	UML1.print();
+	cout << endl;
 	cout << "=========================== UML2 ===========================\n";
-	UML2.print();cout << endl;
+	UML2.print();
+	cout << endl;
+
 	cout << "=============Current percentage of infected soldiers=============\n";
 	if (total_ES())
-		cout << float(EarthSoldier::getInfectedCount() * 1.0 / (total_ES()+ UML1.getCount() +UML2.getCount()))*100 <<"%";
+		cout << (float(EarthSoldier::getInfectedCount()) / (total_ES()+ UML1.getCount()) * 100) <<"%\n";
 	else
 		cout << "There is No EarthSoldiers \n";
 
@@ -431,18 +453,22 @@ void Game::Display()
 
 	while (killedList.dequeue(unit))
 	{
+
 		
 		
-		outfile << unit->getTd();outfile << setw(6);
-		outfile << unit->getID();outfile << setw(6);
-		outfile << unit->getTj();outfile << setw(6);
-		outfile << unit->getDf();outfile << setw(6);
-		outfile << unit->getDd();outfile << setw(6);
-		outfile<< unit->getDb() << "\n";
+	
+
+		outfile << unit->getTd(); outfile << setw(6);
+		outfile << unit->getID(); outfile << setw(6);
+		outfile << unit->getTj(); outfile << setw(6);
+		outfile << unit->getDf(); outfile << setw(6);
+		outfile << unit->getDd(); outfile << setw(6);
+		outfile << unit->getDb() << "\n";
+
 	}
  
 	outfile << endl << endl;
-	outfile << "Battle Result . . .\n\n\n";//
+	outfile << "Battle Result . . .\n\n\n";
  
 	if (alienArmy->isKilled())
 		outfile << "EARTH ARMY WIN ! ! !\n";
