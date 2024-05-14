@@ -17,7 +17,10 @@ class EarthArmy : public Army
 	priQueue<Unit*> EGList;
 	ArrayStack<Unit*> HUList;
 
-
+	int static totalES;
+	int static totalET;
+	int static totalEG;
+	int static totalHU;
 	//priQueue<Unit*> HUList;
 
 public:
@@ -30,12 +33,16 @@ public:
 	virtual bool isKilled();
  
 	int gettotCount();
- 
+    
 	bool pickES(Unit*& unit);
 	bool pickET(Unit*& unit);
 	bool pickEG(Unit*& unit);
 	bool pickHU(Unit*& unit);
 	bool RemoveHU(Unit*& unit);
+	int getTotES();
+	int getTotET();
+	int getTotEG();
+	int getTotHU();
 	LinkedQueue<Unit*>* getESList();
 	ArrayStack<Unit*>* getETList();
 	priQueue<Unit*>* getEGList();

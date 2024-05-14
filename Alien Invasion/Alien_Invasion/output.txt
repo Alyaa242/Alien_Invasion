@@ -1,5 +1,5 @@
 Td    ID    Tj    Df    Dd    Db
-     7  2008     2     5     0     5
+7  2008     2     5     0     5
 8  2015     7     0     1     1
 8  2012     6     1     1     2
 8  2018     7     0     1     1
@@ -8,80 +8,6 @@ Td    ID    Tj    Df    Dd    Db
 9  2011     6     2     1     3
 9  2003     1     7     1     8
 9  2013     6     1     2     3
-10  2006     2     6     2     8
-10  2004     1     6     3     9
-10  2000     1     6     3     9
-10  2001     1     7     2     9
-10  2017     7     0     3     3
-10  2007     2     5     3     8
-10  2016     7     0     3     3
-10     1     7     0     3     3
-11    13    11     0    11     0
-12    16    12     0    12     0
-13  2019     7     0     6     6
-13    24    13     0    13     0
-14  2021    14     0     0     0
-14    22    13     0    14     1
-15  2010     6     1     8     9
-16  2014     6     1     9    10
-16  4001    10     4     2     6
-16  4002    10     4     2     6
-16  2023    14     0     2     2
-17  2020    14     0     3     3
-17  2002     1     6    10    16
-17    32    17     0    17     0
-17  4005    11     3     3     6
-17  4006    11     3     3     6
-18  2029    18     0     0     0
-18  2026    18     0     0     0
-18  2024    14     0     4     4
-18    31    17     0    18     1
-19  2028    18     0     1     1
-20  2039    20     0     0     0
-20  2031    19     0     1     1
-20  2035    20     0     0     0
-21  2037    20     0     1     1
-21  2034    19     0     2     2
-22  4020    20     0     2     2
-23  2027    18     0     5     5
-24  2040    23     0     1     1
-24  2036    20     0     4     4
-24  2044    23     0     1     1
-25  2045    25     0     0     0
-25  2048    25     0     0     0
-25  2025    18     0     7     7
-25  4021    20     0     5     5
-26  4024    20     0     6     6
-27  2047    25     0     2     2
-27  2052    26     0     1     1
-27  2042    23     0     4     4
-28  2043    23     0     5     5
-28  2033    19     0     9     9
-28  2038    20     0     8     8
-28    28    15     0    13    13
-29  2054    26     0     3     3
-29  2051    26     0     3     3
-30  2041    23     0     7     7
-32    59    32     0    32     0
-33  2053    26     0     7     7
-34    45    24     0    10    10
-34    65    34     0    34     0
-35  2058    35     0     0     0
-35    69    35     0    35     0
-35  2022    14     0    21    21
-35  2059    35     0     0     0
-36    64    34     0    36     2
-37  2057    35     0     2     2
-37    75    37     0    37     0
-38  2049    25     0    13    13
-38  2061    37     0     1     1
-38  2055    35     0     3     3
-38  2064    37     0     1     1
-38    72    37     0    38     1
-39  2069    38     0     1     1
-39  2062    37     0     2     2
-39  2070    39     0     0     0
-39  2073    39     0     0     0
 
 
 Battle Result . . .
@@ -89,24 +15,25 @@ Battle Result . . .
 
 ALIEN ARMY WIN ! ! !
 For Earth Army
-Total number of ES : 25
-Total number of ET : 16
-Total number of EG : 11
+Total number of ES : 7
+Total number of ET : 1
+Total number of EG : 2
 Total number of HU : 0
-Total Destructed_ES / Total ES 0%
-Total Destructed_ET / Total ET 0%
-Total Destructed_EG / Total EG 0%
+Total Destructed_ES / Total ES          0%
+Total Destructed_ET / Total ET          0%
+Total Destructed_EG / Total EG          0%
 There is no HealUnits
-Total Destructed Units / Total Units 0  52
-Df/Db = 12     Dd/Db = 5 Total Successful Healed Units / Total EarthUnits 1
+Total Destructed Units / Total Units 0%
+Total Successful Healed Units / Total EarthUnits         0%
 
 
 For Alien Army
-Total number of AD : 4
-Total number of AM : 0
-Total number of AS : 10
- Total Destructed_AS  Total AS 0%
-There is no AlienMonster 
-Total Destructed_AG  Total AG 0%
-Total Destructed Units  Total Units 0
-Df/Db = 1     Dd/Db = 0
+Total number of AD : 5
+Total number of AM : 13
+Total number of AS : 2
+Total Destructed_AS / Total AS          0%
+Total Destructed_AM / Total AM    53.8462%
+Total Destructed_AG / Total AG        100%
+Total Destructed Units / Total Units 45%
+Df/Db = 677.143%     Dd/Db = 25.7143%
+Percentage of Infected to earthsoldiers   71.4286%

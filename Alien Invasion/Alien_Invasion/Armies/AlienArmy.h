@@ -15,6 +15,10 @@ class AlienArmy : public Army
 	Array<Unit*> AMList;
 	Deque<Unit*> ADList;
 
+	int static totalAS;
+	int static totalAM;
+	int static totalAD;
+
 public:
 
 	//Getters for each list (return pointer)
@@ -23,6 +27,9 @@ public:
 	virtual void attack();
 	virtual void print();
 	virtual bool isKilled();
+	int getTotAS();
+	int getTotAM();
+	int getTotAD();
 	bool pickAS(Unit*& unit);
 	bool pickAM(Unit*& unit);
 	bool pickFrontAD(Unit*& front);

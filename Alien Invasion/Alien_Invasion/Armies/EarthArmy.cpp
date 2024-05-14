@@ -10,24 +10,33 @@
 #include "..\DS\Array.h"
 using namespace std;
 
+int EarthArmy::totalES=0;
+int EarthArmy::totalET=0;
+int EarthArmy::totalEG=0;
+int EarthArmy::totalHU=0;
+
 void EarthArmy::addUnit(Unit* unit)
 {
 	if (!unit)
 		return;
 
 	if (dynamic_cast<EarthSoldier*>(unit)) {
+		totalES++;
 		ESList.enqueue(unit);
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
+		totalET++;
 		cout << "ET\n";
 		ETList.push(unit);
 	}
 	else if (dynamic_cast<EarthGunnery*>(unit)) {
+		totalEG++;
 		cout << "EG\n";
 		EGList.enqueue(unit, unit->getHealth() + unit->getPower());
 	}
 	else
 	{
+		totalHU++;
 		cout << "HU\n";
 		HUList.push(unit);
 	}
@@ -88,6 +97,7 @@ int EarthArmy::gettotCount()
 
 }
 
+
 bool EarthArmy::pickES(Unit*& unit)
 {
 	if (ESList.dequeue(unit))
@@ -122,6 +132,26 @@ bool EarthArmy::RemoveHU(Unit*& unit)
 	if (HUList.pop(unit))
 		return true;
 	return false;
+}
+
+int EarthArmy::getTotES()
+{
+	return totalES ;
+}
+
+int EarthArmy::getTotET()
+{
+	return totalET ;
+}
+
+int EarthArmy::getTotEG()
+{
+	return totalEG ;
+}
+
+int EarthArmy::getTotHU()
+{
+	return totalHU;
 }
 
 LinkedQueue<Unit*>* EarthArmy::getESList()
