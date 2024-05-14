@@ -67,7 +67,7 @@ void AlienMonster::attack()
 				int x = rand() % 100 + 1;
 
 				if (x <= prob) {
-					if(!(dynamic_cast<EarthSoldier*>(enemy)->isImmune())){}
+					if(!(dynamic_cast<EarthSoldier*>(enemy)->isImmune()))
 						dynamic_cast<EarthSoldier*>(enemy)->setInfected(true);
 				}
 

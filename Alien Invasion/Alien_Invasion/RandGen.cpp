@@ -55,6 +55,7 @@ Unit* RandGen::CreateAlienUnit()
 			return new AlienSoldier(health, power, capacity, game->getTimestep(), game);
 		}
 		else if (B <= parameters[ASPer] + parameters[AMPer]) {
+
 			return new AlienMonster(health, power, capacity, game->getTimestep(), game, parameters[prob_infect]);
 		}
 		else {
