@@ -37,7 +37,7 @@ void AlienDrone::attack()
 			else
 				game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -74,7 +74,10 @@ void AlienDrone::attack()
 				else
 					game->addAttacked(this, enemy);
 
-				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				if (game->getTimestep() == 700)
+					int x = 0;
+				
+				float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Decrement enemy's health:
 				enemy->decHealth(damage);

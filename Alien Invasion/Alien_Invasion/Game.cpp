@@ -195,17 +195,11 @@ Unit* Game::RemoveHU()
 
 void Game::start()
 { 
-	while (timestep<40)
+	while (stop)
 	{
+		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
-
-		if (InteractiveM) {
-			printInter();
-			cin.get();	//Wait for user to press enter
-		}
-
-		resetFightingUnits();	//Reset current fighting units to null
 
 		//Call attack for each army	
 		earthArmy->attack();
@@ -213,6 +207,11 @@ void Game::start()
 		allyArmy->attack();
 		UpdateUML();
 	 
+		if (InteractiveM) {
+			printInter();
+			cin.get();	//Wait for user to press enter
+		}
+
 		if (timestep >= 40)
 		{
 			if (InteractiveM) {
@@ -255,21 +254,43 @@ void Game::printInter()
 	cout << "Current TimeStep " << timestep << endl;
 	cout << "=========================== Earth Army Alive Units ===========================\n";
 	earthArmy->print();
+
 	cout << "=========================== Alien Army Alive Units ===========================\n";
     alienArmy->print();
-	if (allyArmy) {
-		cout << "=========================== Ally Army Alive Units ===========================\n";
-		allyArmy->print();
-	}
+
+	cout << "=========================== Ally Army Alive Units ===========================\n";
+	allyArmy->print();
+
 	cout << "=========================== Killed/Destructed Units ===========================\n";
 	cout<< killedList.getCount()<<" units ";
 	killedList.print();
-	cout << endl;
-
+	cout << endl << endl;
 
 	cout << "=========================== Units fighting at current step ===========================\n";
-	if (fightingAD1 || fightingAD2 || fightingAS|| fightingAM|| fightingES|| fightingEG|| fightingET)
+	if (fightingAD1 || fightingAD2 || fightingAS || fightingAM || fightingES || fightingEG || fightingET || fightingSU)
 	{
+		if (fightingES)
+		{
+			cout << "ES " << fightingES->getID() << " shots ";
+			attackedByES.print();
+			cout << endl;
+		}
+
+		if (fightingET)
+		{
+			cout << "ET " << fightingET->getID() << " shots ";
+
+			attackedByET.print();
+			cout << endl;
+		}
+
+		if (fightingEG)
+		{
+			cout << "EG " << fightingEG->getID() << " shots ";
+			attackedByEG.print();
+			cout << endl;
+		}
+
 		if (fightingAS)
 		{
 			cout << "AS " << fightingAS->getID() << " shots ";
@@ -299,43 +320,30 @@ void Game::printInter()
 			cout << endl;
 		}
 
-
-
-		if (fightingEG)
+		if (fightingSU)
 		{
-			cout << "EG " << fightingEG->getID() << " shots ";
-			attackedByEG.print();
+			cout << "SU " << fightingSU->getID() << " shots ";
+			attackedBySU.print();
 			cout << endl;
-		}
-
-		if (fightingET)
-		{
-			cout << "ET " << fightingET->getID() << " shots ";
-			
-			attackedByET.print();
-			cout << endl;
-		}
-
-		if (fightingES)
-		{
-			cout << "ES " << fightingES->getID() << " shots ";
-			attackedByES.print();
-			cout << endl;
-		}
-
+		}	
 
 	}
 	else
-	cout << "NO Units Attacking at this timestep\n";
+		cout << "NO Units Attacking at this timestep\n";
+	cout << endl;
 	
 
 	cout << "=========================== UML1 ===========================\n";
-	UML1.print();cout << endl;
+	UML1.print();
+	cout << endl;
 	cout << "=========================== UML2 ===========================\n";
-	UML2.print();cout << endl;
+	UML2.print();
+	cout << endl;
+
 	cout << "=============Current percentage of infected soldiers=============\n";
 	if (total_ES())
-		cout << EarthSoldier::getInfectedCount() / total_ES();
+
+		cout << (EarthSoldier::getInfectedCount() / (float(total_ES()) + UML1.getCount()) * 100) << "%\n";
 	else
 		cout << "There is No EarthSoldiers \n";
 

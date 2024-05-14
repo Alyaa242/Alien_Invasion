@@ -10,7 +10,6 @@ AlienMonster::AlienMonster(int heal, int pow, int cap, int t, Game* g, int p) : 
 
 void AlienMonster::attack()
 {
-
 	ArrayStack<Unit*>* ETEnemies = game->getETEnemies();	
 	LinkedQueue<Unit*>* ESEnemies = game->getESEnemies();
 	LinkedQueue<Unit*>* SUEnemies = game->getSUEnemies();
@@ -30,7 +29,7 @@ void AlienMonster::attack()
 			//Adding enemy to attackedByAM list
 			game->addAttacked(this, enemy);
 
-			int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -74,7 +73,7 @@ void AlienMonster::attack()
 
 				//If it will not infect, it will attack
 				else {
-					int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+					float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Decrement enemy's health:
 					enemy->decHealth(damage);
@@ -110,7 +109,7 @@ void AlienMonster::attack()
 				//Adding enemy to attackedByAM list
 				game->addAttacked(this, enemy);
 
-				int damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Decrement enemy's health:
 				enemy->decHealth(damage);

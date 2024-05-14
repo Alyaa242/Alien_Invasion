@@ -144,12 +144,12 @@ void Unit::setAllyID()
 }
 //
 
-void Unit::decHealth(int damage)
+void Unit::decHealth(float damage)
 {
 	health -= damage;
 }
 
-void Unit::incHealth(int increment)
+void Unit::incHealth(float increment)
 {
 	health += increment;
 	return;

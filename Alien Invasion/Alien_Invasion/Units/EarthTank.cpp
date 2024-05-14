@@ -39,7 +39,7 @@ void EarthTank::attack()
 			index = rand() % count;
 			if (AMEnemies->remove(index, enemy))
 			{
-				int damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+				float damageAM = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByET list
 				game->addAttacked(this, enemy);
@@ -69,7 +69,7 @@ void EarthTank::attack()
 			if (Npass) {
 				if (ASEnemies->dequeue(enemy))
 				{
-					int damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+					float damageAS = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Adding enemy to attackedByET list
 					game->addAttacked(this, enemy);

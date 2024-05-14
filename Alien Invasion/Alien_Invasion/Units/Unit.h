@@ -4,7 +4,7 @@
 class Game;
 class Unit
 {
-	int health, power, capacity;
+	float health, power, capacity;
 	int ID;
 	
 	int wait;
@@ -48,8 +48,8 @@ public:
 	void setEarthID();		//A function that sets units IDs automatically
 	void setAlienID();
 	void setAllyID();
-	void decHealth(int damage);		//Decrement health
-	void incHealth(int increment);		//increment health
+	void decHealth(float damage);		//Decrement health
+	void incHealth(float increment);		//increment health
 	int getWait();
 	void setWait(int w);
 
