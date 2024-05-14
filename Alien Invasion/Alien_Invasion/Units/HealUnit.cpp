@@ -1,12 +1,13 @@
 #include "HealUnit.h"
-
+#include "EarthSoldier.h"
+int HealUnit::HealedCounter = 0;
 void HealUnit::attack()
 {
 
 	Unit* unit;
 	int max_health;
 	int h;
- 
+
 	LinkedQueue <Unit*> tempList1;
 	LinkedQueue <Unit*> tempList2;
 	Unit* picked;
@@ -25,9 +26,21 @@ void HealUnit::attack()
 		Unit* healed1 = game->pickfromUML1();
 		if (healed1)
 		{
+
+	    	h = (float((getPower()) * (getHealth()))) / 100 / sqrt(healed1->getHealth());
+
+			if (dynamic_cast <EarthSoldier*> (healed1)->getInfected())
 			{
-				h = (float((getPower()) * (getHealth()))) / 100 / sqrt(healed1->getHealth());
-				healed1->incHealth(h);
+				
+				healed1->incHealth(h / 2); HealedCounter++;
+			
+
+			}
+			else
+			
+			{
+				
+				healed1->incHealth(h); HealedCounter++;
 
 			}
 
@@ -38,7 +51,10 @@ void HealUnit::attack()
 
 					tempList1.enqueue(healed1);
 				else
+				{
+					dynamic_cast <EarthSoldier*> (healed1)->setImmuned(true);
 					game->addES(healed1);
+				}
 		}
 	}
 	for (int j = i; j < healcap; j++)
@@ -104,5 +120,10 @@ void HealUnit::UpdateHU()
 {
 	//if (getTj() +10 < game->getTimestep())
 	//	game->addToKilledList(this);
+}
+
+int HealUnit::getHealedCounter()
+{
+	return HealedCounter;
 }
 

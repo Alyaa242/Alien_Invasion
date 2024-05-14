@@ -163,3 +163,14 @@ int EarthSoldier::getTotalInfected()
 {
 	return totalInfected;
 }
+
+void EarthSoldier::setImmuned(bool x)
+{
+	immune = x;
+}
+
+bool EarthSoldier::getInfected()
+{
+	return infected;
+
+}

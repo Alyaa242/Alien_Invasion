@@ -139,6 +139,11 @@ priQueue<Unit*>* EarthArmy::getEGList()
 	return &EGList;
 }
 
+ArrayStack<Unit*>* EarthArmy::getHUList()
+{
+	return &HUList;
+}
+
 
 EarthArmy::~EarthArmy()
 {

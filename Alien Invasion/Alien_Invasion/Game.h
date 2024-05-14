@@ -96,7 +96,9 @@ public:
 	void setDbAlien(int t);
 	void addES(Unit* unit);
 	void addET(Unit* unit);
-
+	int total_ES();
+	
+	
 	void setFightingUnit(Unit* unit, int x = 1);	//A function that sets current units fighting
 	void addAttacked(Unit* attacking, Unit* attacked, int x = 1);	//A function that adds each attacked unit to the appropriate list
 	void resetFightingUnits();	//A function for reseting fighting units each timestep

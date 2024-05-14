@@ -1,4 +1,5 @@
 Td    ID    Tj    Df    Dd    Db
+
 7    2008    2     5     0     5
 8    2015    7     0     1     1
 8    2012    6     1     1     2
@@ -1328,21 +1329,37 @@ Td    ID    Tj    Df    Dd    Db
 243    2324    239     0     4     4
 243    2324    239     0     4     4
 243    2324    239     0     4     4
+
 Battle Result . . .
-EARTH ARMY WIN ! ! !For Earth Army
-Total number of ES : 293
-Total number of ET : 158
-Total number of EG : 182
-Total number of HU :  Total Destructed_ES  Total ES0  293
- Total Destructed_ET  Total ET0  158
- Total Destructed_EG  Total EG0  182
- Total Destructed_HU  Total HUTotal Destructed Units  Total Units 0  941
-Df/Db = 86689 / 2597     Dd/Db = 87648 / 2597
+
+
+ALIEN ARMY WIN ! ! !
+For Earth Army
+Total number of ES : 23
+Total number of ET : 3
+Total number of EG : 10
+Total number of HU : 0
+Total Destructed_ES / Total ES 0%
+Total Destructed_ET / Total ET 0%
+Total Destructed_EG / Total EG 0%
+There is no HealUnits
+Total Destructed Units / Total Units 0  36
+Df/Db = 2     Dd/Db = 15 Total Successful Healed Units / Total EarthUnits 2
+
 
 
 For Alien Army
 Total number of AD : 0
 Total number of AM : 0
+
 Total number of AS : 0
  Total Destructed_AS  Total AD0  0 Total Destructed_AM  Total AM0  0 Total Destructed_AG  Total AS0  0Total Destructed Units  Total Units 0  0
 Df/Db = 5824 / 8341     Dd/Db = 7904 / 8341
+
+Total number of AS : 11
+There is no AlienSoldiers 
+There is no AlienMonster 
+Total Destructed_AG  Total AG 0%
+Total Destructed Units  Total Units 0
+Df/Db = 1     Dd/Db = 0
+
