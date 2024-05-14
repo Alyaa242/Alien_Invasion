@@ -195,7 +195,7 @@ Unit* Game::RemoveHU()
 
 void Game::start()
 { 
-	while (timestep<40)
+	while (stop)
 	{
 
 		addUnits();		//Adding units generated from randGen	
@@ -400,16 +400,17 @@ void Game::Display()
 	{
 		Unit* unit;
 		killedList.dequeue(unit);
-		outfile << unit->getTd();outfile << setw(6);
-		outfile << unit->getID();outfile << setw(6);
-		outfile << unit->getTj();outfile << setw(6);
-		outfile << unit->getDf();outfile << setw(6);
-		outfile << unit->getDd();outfile << setw(6);
-		outfile<< unit->getDb() << "\n";
+
+		outfile << unit->getTd(); outfile << setw(6);
+		outfile << unit->getID(); outfile << setw(6);
+		outfile << unit->getTj(); outfile << setw(6);
+		outfile << unit->getDf(); outfile << setw(6);
+		outfile << unit->getDd(); outfile << setw(6);
+		outfile << unit->getDb() << "\n";
 	}
  
 	outfile << endl << endl;
-	outfile << "Battle Result . . .\n\n\n";//
+	outfile << "Battle Result . . .\n\n\n";
  
 	if (alienArmy->isKilled())
 		outfile << "EARTH ARMY WIN ! ! !\n";
