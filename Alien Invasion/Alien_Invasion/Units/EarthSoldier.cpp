@@ -132,8 +132,9 @@ void EarthSoldier::setInfected(bool x)
 		totalInfected++;
 	}
 	else if (!x) {
+		if (infected)
+			infectedCount--;
 		infected = false;
-		infectedCount--;
 	}
 }
 
