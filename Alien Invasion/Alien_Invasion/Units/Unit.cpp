@@ -5,6 +5,7 @@
 #include "AlienDrone.h"
 #include "AlienMonster.h"
 #include "AlienSoldier.h"
+#include "HealUnit.h"
 
 //Initializing IDs:
 int Unit::lastEarthID = 1;
@@ -171,10 +172,12 @@ int Unit::getLastAlienID()
 
 std::ostream& operator<<(std::ostream& out, Unit* u)
 {
-	out << u->getID();
-	if (dynamic_cast<EarthSoldier*>(u)) {
-		if(dynamic_cast<EarthSoldier*>(u)->isInfeced())
-			out << "*";
+	if (dynamic_cast<EarthSoldier*>(u) && dynamic_cast<EarthSoldier*>(u)->isInfeced()) {
+		out << "\033[31m" << u->getID() << "*" << "\033[0m";
 	}
+	else if(dynamic_cast<HealUnit*>(u))
+		out << "\033[32m" << u->getID() << "\033[0m";
+	else
+		out << u->getID();
 	return out;
 }

@@ -385,12 +385,12 @@ void Game::printInter()
 	
 	cout << "=========================== UML1 ===========================\n";
 	UML1.print();
-	cout << endl;
+	cout << endl << endl;
 	cout << "=========================== UML2 ===========================\n";
 	UML2.print();
-	cout << endl;
+	cout << endl << endl;
 
-	cout << "=============Current percentage of infected soldiers=============\n";
+	cout << "============= Current Percentage of Infected Soldiers =============\n";
 	if (total_ES())
 		cout << (float(EarthSoldier::getInfectedCount()) / (total_ES()+ UML1.getCount()) * 100) <<"%\n";
 	else
