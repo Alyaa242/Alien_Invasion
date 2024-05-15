@@ -10,6 +10,11 @@
 #include "..\DS\Array.h"
 using namespace std;
 
+int EarthArmy::totalES=0;
+int EarthArmy::totalET=0;
+int EarthArmy::totalEG=0;
+int EarthArmy::totalHU=0;
+
 void EarthArmy::addUnit(Unit* unit)
 {
 	//Check that the unit exists
@@ -18,15 +23,21 @@ void EarthArmy::addUnit(Unit* unit)
 
 	//Check the unit's type
 	if (dynamic_cast<EarthSoldier*>(unit)) {
+		totalES++;
 		ESList.enqueue(unit);
 	}
-	else if (dynamic_cast<EarthTank*>(unit)) { 
+
+	else if (dynamic_cast<EarthTank*>(unit)) {
+		totalET++;
 		ETList.push(unit);
 	}
-	else if (dynamic_cast<EarthGunnery*>(unit)) { 
+	else if (dynamic_cast<EarthGunnery*>(unit)) {
+		totalEG++;
 		EGList.enqueue(unit, unit->getHealth() + unit->getPower());
 	}
-	else { 
+	else
+	{
+		totalHU++;
 		HUList.push(unit);
 	}
 }
@@ -71,7 +82,7 @@ void EarthArmy::print()
 bool EarthArmy::isKilled()
 {
 	//Check if there are any units in the army
-	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty() && HUList.isEmpty())
+	if (ESList.isEmpty() && ETList.isEmpty() && EGList.isEmpty())
 		return true;
 
 	else
@@ -82,6 +93,7 @@ int EarthArmy::gettotCount()
 {
 	return ESList.getCount() + ETList.getCount() + EGList.getCount()+ HUList.getCount();
 }
+
 
 bool EarthArmy::pickHU(Unit*& unit)
 {
@@ -95,6 +107,26 @@ bool EarthArmy::RemoveHU(Unit*& unit)
 	if (HUList.pop(unit))
 		return true;
 	return false;
+}
+
+int EarthArmy::getTotES()
+{
+	return totalES ;
+}
+
+int EarthArmy::getTotET()
+{
+	return totalET ;
+}
+
+int EarthArmy::getTotEG()
+{
+	return totalEG ;
+}
+
+int EarthArmy::getTotHU()
+{
+	return totalHU;
 }
 
 LinkedQueue<Unit*>* EarthArmy::getESList()

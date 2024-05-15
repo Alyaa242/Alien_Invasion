@@ -24,8 +24,8 @@ class Game
 	AllyArmy* allyArmy;
 	RandGen* randGen;
 	// Average Df , Dd , Db for eath and alien
-	int AvgDfEarth, AvgDbEarth, AvgDdEarth;
-	int AvgDfAlien, AvgDbAlien, AvgDdAlien;
+	float AvgDfEarth, AvgDbEarth, AvgDdEarth;
+	float AvgDfAlien, AvgDbAlien, AvgDdAlien;
 	int timestep;
 	char choosen;
 	int healcap=0;
@@ -64,6 +64,7 @@ class Game
 	bool stop;
 	bool InteractiveM;  
 	bool isSUGen;
+	string fileName;
 
 public:
 

@@ -33,6 +33,8 @@ Game::Game()
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	allyArmy = new AllyArmy;
+	cout << "Enter File Name: \n";
+	cin >> fileName;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
 }
 
@@ -41,7 +43,7 @@ int* Game::ReadInputParameters()
 	int* arr = new int[29];
 
 	ifstream InFile;
-	InFile.open("read.txt");
+	InFile.open(fileName);
 	if (!InFile.is_open())	return nullptr;
 	for (int i = 0; i < 9; i++)
 	{
@@ -66,6 +68,38 @@ int* Game::ReadInputParameters()
 void Game::addToKilledList(Unit* unit)
 {
 	killedList.enqueue(unit);
+
+	if (dynamic_cast<AlienSoldier*>(unit)) {
+		tot_des_AS++;
+		AvgDfAlien += unit->getDf();
+	}
+	else if (dynamic_cast<AlienMonster*>(unit)) {
+		tot_des_AM++;
+		AvgDfAlien += unit->getDf();
+	}
+	else if (dynamic_cast<AlienDrone*>(unit)) {
+		tot_des_AD++;
+		AvgDfAlien += unit->getDf();
+	}
+
+	else if (dynamic_cast<EarthSoldier*>(unit)) {
+		tot_des_ES++;
+		AvgDfEarth += unit->getDf();
+	}
+	else if (dynamic_cast<EarthTank*>(unit)) {
+		tot_des_ET++;
+		AvgDfEarth += unit->getDf();
+	}
+	else if (dynamic_cast<EarthGunnery*>(unit)) {
+		tot_des_EG++;
+		AvgDfEarth += unit->getDf();
+	}
+	else if (dynamic_cast<HealUnit*>(unit))
+	{
+		tot_des_HU++;
+	}
+
+
 	unit->setTd(timestep);
 }
 
@@ -93,8 +127,8 @@ void Game::addUnits()
 	if (arrAlien)	//Check that GenerateAlienUnits() was performed successfully
 		for (int i = 0; i < n; i++)
 		{
-			if (arrAlien[i])//Check there are alien units generated at this timestep
-		          alienArmy->addUnit(arrAlien[i]);
+			if (arrAlien[i])	//Check there are alien units generated at this timestep
+				alienArmy->addUnit(arrAlien[i]);
 		}
 
 	if (arrSaver)	//Check that GenerateAlienUnits() was performed successfully
@@ -206,9 +240,12 @@ void Game::start()
 	else
 		InteractiveM = true;
 
-
 	while (stop)
+
 	{
+		if (timestep == 8)
+			int x = 0;
+
 		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
@@ -272,13 +309,10 @@ void Game::printInter()
 	cout << "=========================== Ally Army Alive Units ===========================\n";
 	allyArmy->print();
 
-	cout << "=========================== Killed/Destructed Units ===========================\n";
-	cout<< killedList.getCount()<<" units ";
-	killedList.print();
-	cout << endl << endl;
-
 	cout << "=========================== Units fighting at current step ===========================\n";
-	if (fightingAD1 || fightingAD2 || fightingAS || fightingAM || fightingES || fightingEG || fightingET || fightingSU)
+
+	if (fightingAD1 || fightingAD2 || fightingAS|| fightingAM|| fightingES|| fightingEG|| fightingET || fightingSU)
+
 	{
 		if (fightingES)
 		{
@@ -336,22 +370,27 @@ void Game::printInter()
 			cout << "SU " << fightingSU->getID() << " shots ";
 			attackedBySU.print();
 			cout << endl;
-		}	
+
+		}
 
 	}
 	else
 		cout << "NO Units Attacking at this timestep\n";
 	cout << endl;
-	
 
+	cout << "=========================== Killed/Destructed Units ===========================\n";
+	cout << killedList.getCount() << " units ";
+	killedList.print();
+	cout << endl << endl;
+	
 	cout << "=========================== UML1 ===========================\n";
 	UML1.print();
-	cout << endl;
+	cout << endl << endl;
 	cout << "=========================== UML2 ===========================\n";
 	UML2.print();
-	cout << endl;
+	cout << endl << endl;
 
-	cout << "=============Current percentage of infected soldiers=============\n";
+	cout << "============= Current Percentage of Infected Soldiers =============\n";
 	if (total_ES())
 		cout << (float(EarthSoldier::getInfectedCount()) / (total_ES()+ UML1.getCount()) * 100) <<"%\n";
 	else
@@ -394,16 +433,13 @@ void Game::Display()
 	outfile << "Tj";outfile << setw(6);
 	outfile << "Df";outfile << setw(6);
 	outfile << "Dd";outfile << setw(6);
-	outfile << "Db" << endl;
-	 
+	outfile << "Db";
+	outfile << endl;
 
-	int countKL = killedList.getCount();
+	Unit* unit;
 
-	while (countKL--)
+	while (killedList.dequeue(unit))
 	{
-		Unit* unit;
-		killedList.dequeue(unit);
-
 		outfile << unit->getTd(); outfile << setw(6);
 		outfile << unit->getID(); outfile << setw(6);
 		outfile << unit->getTj(); outfile << setw(6);
@@ -420,86 +456,115 @@ void Game::Display()
 	else
 		outfile << "ALIEN ARMY WIN ! ! !\n";
 
+
 	outfile << "For Earth Army\n";
 
-	outfile << "Total number of ES : " << earthArmy->getESList()->getCount() << endl;
-	outfile << "Total number of ET : " << earthArmy->getETList()->getCount() << endl;
-	outfile << "Total number of EG : " << earthArmy->getEGList()->getCount() << endl;
-	outfile << "Total number of HU : " << earthArmy->getHUList()->getCount() << endl;
+	outfile << "Total number of ES : " << earthArmy->getTotES() << endl;
+	outfile << "Total number of ET : " << earthArmy->getTotET() << endl;
+	outfile << "Total number of EG : " << earthArmy->getTotEG() << endl;
+	outfile << "Total number of HU : " << earthArmy->getTotHU() << endl;
 
-	if (earthArmy->getESList()->getCount())
-		outfile << "Total Destructed_ES / Total ES " << float(tot_des_ES *1.0/ earthArmy->getESList()->getCount()) * 100 << "%" << endl;
+	if (earthArmy->getTotES())
+		outfile << "Total Destructed_ES / Total ES "<<  setw(10) << float(tot_des_ES *1.0/ earthArmy->getTotES()) * 100 << "%" << setw(10) << endl;
 	else
 		outfile << "There is no EarthSoldiers \n";
 
-	if (earthArmy->getETList()->getCount())
-		outfile << "Total Destructed_ET / Total ET " << float(tot_des_ET*1.0 / earthArmy->getETList()->getCount()) * 100 << "%" << endl;
+	if  (earthArmy->getTotET())
+		outfile << "Total Destructed_ET / Total ET " << setw(10) << float(tot_des_ET*1.0 / earthArmy->getTotET()) * 100 << "%" << setw(10) << endl;
 	else
 		outfile << "There is no EarthTanks \n";
 
-	if (earthArmy->getEGList()->getCount())
-		outfile << "Total Destructed_EG / Total EG " << float(tot_des_ES*1.0 / earthArmy->getEGList()->getCount()) * 100 << "%" << endl;
+	if (earthArmy->getTotEG())
+		outfile << "Total Destructed_EG / Total EG " << setw(10) << float(tot_des_ES*1.0 / earthArmy->getTotEG()) * 100 << "%" << setw(10) << endl;
 	else
 		outfile << "There is no EarthGunnery \n";
 
-	if (earthArmy->getHUList()->getCount())
-		outfile << "Total Destructed_HU / Total HU " << float(tot_des_HU *1.0 / earthArmy->getHUList()->getCount()) * 100 << "%" << endl;
+	if (earthArmy->getTotHU())
+		outfile << "Total Destructed_HU / Total HU " << setw(10) << float(tot_des_HU *1.0 / earthArmy->getTotHU()) * 100 << "%" << endl;
 	else
 		outfile << "There is no HealUnits\n";
 
 	outfile << "Total Destructed Units / Total Units ";
 	int tot_des_earth = tot_des_ET + tot_des_ES + tot_des_EG + tot_des_HU;
-	if (earthArmy->gettotCount())
-		outfile << float(tot_des_earth*1.0 / earthArmy->gettotCount()) * 100 << endl;
+	int tot_earth = earthArmy->getTotES()+ earthArmy->getTotET()+ earthArmy->getTotEG()+ earthArmy->getTotHU();
+
+	if (tot_earth)
+		outfile << float(tot_des_earth*1.0 / tot_earth ) * 100<<"%" << endl;
 	else
 		outfile << "There is no Earth Army\n";
 
-	if (AvgDbEarth)
-		outfile << "Df/Db = " << float(AvgDfEarth*1.0 / AvgDbEarth) * 100 << "     ";
-	if (AvgDbEarth)
-		outfile << "Dd/Db = " << float(AvgDdEarth*1.0 / AvgDbEarth) * 100;
+	AvgDfEarth /= (tot_des_earth- tot_des_HU);
+	AvgDbEarth /= (tot_des_earth - tot_des_HU);
+	AvgDdEarth /= (tot_des_earth- tot_des_HU);
 
-	if (earthArmy->gettotCount())
-		outfile << " Total Successful Healed Units / Total EarthUnits " << float(HealUnit::getHealedCounter()*1.0 / earthArmy->gettotCount()) * 100;
+	outfile << "Average of Df : " << AvgDfEarth<<endl;
+	outfile << "Average of Dd : " << AvgDdEarth<<endl;
+	outfile << "Average of Db : " << AvgDbEarth<<endl;
+
+	if (AvgDbEarth)
+		outfile << "Df/Db = " << float(AvgDfEarth*1.0 / AvgDbEarth) *100 << "%     ";
+	if (AvgDbEarth)
+		outfile << "Dd/Db = " << float(AvgDdEarth*1.0 / AvgDbEarth) *100<<"%" << endl;
+
+	if (tot_earth)
+		outfile << "Total Successful Healed Units / Total EarthUnits" << setw(10)  << float(HealUnit::getHealedCounter()*1.0 / tot_earth) * 100<<"%\n";
 	else
 		outfile << "There is no Earth Army\n";
+
+	if (earthArmy->getTotES())
+		outfile << "Percentage of Infected to earthsoldiers" << setw(8) << float(EarthSoldier::getTotalInfected() * 1.0 / earthArmy->getTotES()) * 100 << "%";
+
+
 
 	outfile << endl << endl << endl;
 
+
+
+
 	outfile << "For Alien Army\n";
-	outfile << "Total number of AD : " << alienArmy->getADList()->getCount() << endl;
-	outfile << "Total number of AM : " << alienArmy->getAMList()->getCount() << endl;
-	outfile << "Total number of AS : " << alienArmy->getASList()->getCount() << endl;
-	if (alienArmy->getADList()->getCount())
-		outfile << " Total Destructed_AS \ Total AS " << float(tot_des_AD*1.0 / alienArmy->getADList()->getCount()) * 100 << "%" << endl;
+	outfile << "Total number of AD : " << alienArmy->getTotAD() << endl;
+	outfile << "Total number of AM : " << alienArmy->getTotAM() << endl;
+	outfile << "Total number of AS : " << alienArmy->getTotAS() << endl;
+	if (alienArmy->getTotAD())
+		outfile << "Total Destructed_AS / Total AS " << setw(10) << float(tot_des_AD*1.0 / alienArmy->getTotAD()) * 100 <<  "%" << endl;
 	else
 		outfile << "There is no AlienSoldiers \n";
 
-	if (alienArmy->getAMList()->getCount())
-		outfile << "Total Destructed_AM \ Total AM " << float(tot_des_AM*1.0 / alienArmy->getAMList()->getCount()) * 100 << "%" << endl;
+	if (alienArmy->getTotAM())
+		outfile << "Total Destructed_AM / Total AM " << setw(10) << float(tot_des_AM*1.0 / alienArmy->getTotAM() ) * 100 << "%" << endl;
 	else
 		outfile << "There is no AlienMonster \n";
 
-	if (alienArmy->getASList()->getCount())
-		outfile << "Total Destructed_AG \ Total AG " << float(tot_des_AS*1.0 / alienArmy->getASList()->getCount()) * 100 << "%" << endl;
+	if (alienArmy->getTotAS())
+		outfile << "Total Destructed_AG / Total AG " << setw(10)<< float(tot_des_AS*1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
 	else
 		outfile << "There is no AlienGunnery \n";
 
-	outfile << "Total Destructed Units \ Total Units ";
+	outfile << "Total Destructed Units / Total Units ";
 	int tot_des_alien = tot_des_AD + tot_des_AM + tot_des_AS;
-
-	if (alienArmy->gettotCount())
-		outfile << float (tot_des_alien*1.0 / alienArmy->gettotCount()) * 100<<"%" << endl;
+	int tot_alien = alienArmy->getTotAD() + alienArmy->getTotAS() + alienArmy->getTotAM();
+	if (tot_alien)
+		outfile << float (tot_des_alien*1.0 / tot_alien) * 100<<"%" << endl;
 	else
 		outfile << "There is no Alien Army\n";
 
-	if (AvgDbAlien)
-		outfile << "Df/Db = " << float (AvgDfAlien*1.0 / AvgDbAlien) * 100 << "%     ";
-	if (AvgDbAlien)
-		outfile << "Dd/Db = " << float (AvgDdAlien*1.0 / AvgDbAlien)*100;
 
+	AvgDfAlien/=tot_des_alien ;
+	AvgDbAlien/= tot_des_alien;
+	AvgDdAlien/= tot_des_alien ;
+
+	outfile << "Average of Df : " << AvgDfAlien<<endl;
+	outfile << "Average of Dd : " << AvgDdAlien<<endl;
+	outfile << "Average of Db : " << AvgDbAlien<<endl;
+
+	if (AvgDbAlien)
+		outfile << "Df/Db = " << float (AvgDfAlien*1.0 / AvgDbAlien )*100  << "%     ";
+	if (AvgDbAlien)
+		outfile << "Dd/Db = " << float (AvgDdAlien*1.0 / AvgDbAlien)*100<<"%\n";
+
+
+	
 	outfile.close();
-
 }
 
 
@@ -572,16 +637,22 @@ void Game::resetFightingUnits()
 	Unit* temp;
 	while (!attackedByET.isEmpty())
 		attackedByET.dequeue(temp);
+
 	while (!attackedByES.isEmpty())
 		attackedByES.dequeue(temp);
+
 	while (!attackedByEG.isEmpty())
 		attackedByEG.dequeue(temp);
+
 	while (!attackedByAS.isEmpty())
 		attackedByAS.dequeue(temp);
+
 	while (!attackedByAM.isEmpty())
 		attackedByAM.dequeue(temp);
+
 	while (!attackedByAD1.isEmpty())
 		attackedByAD1.dequeue(temp);
+
 	while (!attackedByAD2.isEmpty())
 		attackedByAD2.dequeue(temp);
 }
@@ -633,10 +704,6 @@ int Game::total_ES()
 	return earthArmy->getESList()->getCount();
 }
 
-
-
-
-
 LinkedQueue<Unit*>* Game::getESEnemies()
 {
 	return earthArmy->getESList();
@@ -674,7 +741,7 @@ LinkedQueue<Unit*>* Game::getSUEnemies()
 
 Game::~Game()
 {
-	cout << "DESTRUCTING GAME .... \n";
+	
 	delete alienArmy;
 	delete earthArmy;
 	delete allyArmy;
@@ -694,5 +761,4 @@ Game::~Game()
 	while (UML2.dequeue(temp)) {
 		delete temp;
 	}
-
 }
