@@ -33,6 +33,7 @@ Game::Game()
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	allyArmy = new AllyArmy;
+	winner = false;
 	cout << "Enter File Name: \n";
 	cin >> fileName;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
@@ -242,12 +243,11 @@ void Game::start()
 	else
 		InteractiveM = true;
 
+	bool tie = false;
+
 	while (stop)
 
 	{
-		if (timestep == 8)
-			int x = 0;
-
 		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
@@ -265,8 +265,14 @@ void Game::start()
 
 		if (timestep >= 40)
 		{
+			if (Unit::getLastEarthID() >= 999 && Unit::getLastAlienID() >= 1999 && !(fightingES || fightingET || fightingEG || fightingAM || fightingAS || fightingAD1 || fightingAD2))
+				tie = true;
+
+			if (alienArmy->isKilled() && earthArmy->isKilled())
+				tie = true;
+
 			if (InteractiveM) {
-				if (alienArmy->isKilled() && earthArmy->isKilled())
+				if (tie)
 				{
 					cout << "=========================== The Earth Army Parity with The Alien Army ===========================\n";
 					Display();
@@ -277,20 +283,23 @@ void Game::start()
 					cout << "=========================== The winner is the Earth Army ===========================\n";
 					Display();
 					stop = false;
+					winner = true;
 				}
 				else if (earthArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Alien Army ===========================\n";
 					Display();
 					stop = false;
+					winner = true;
 				}
 			}
 			else {
-				if (alienArmy->isKilled() || earthArmy->isKilled()) {
+				if (alienArmy->isKilled() || earthArmy->isKilled() || tie) {
 					cout << "Simulation ended . . .\n";
 					Display();
 					cout << "Output File created.\n";
 					stop = false;
+					winner = true;
 				}
 			}
 		}
@@ -412,7 +421,7 @@ int Game::getTimestep()
 bool Game::SUwithdrawal()
 {
 	if (EarthSoldier::getInfectedCount() == 0 && isSUGen)
-	{ 
+	{
 		LinkedQueue<Unit*>* Sulist = allyArmy->getSUList();
 		Unit* unit;
 		while (Sulist->dequeue(unit))
