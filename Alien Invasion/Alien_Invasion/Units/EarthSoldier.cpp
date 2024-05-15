@@ -16,10 +16,7 @@ void EarthSoldier::attack()
 	LinkedQueue<Unit*>* ESenemies = game->getESEnemies();
 	LinkedQueue<Unit*> tempList;
 	Unit* enemy;  
-
-	//Setting this unit as a fighting unit for the current timestep
-	if(capacity && !ASenemies->isEmpty())
-		game->setFightingUnit(this);
+	bool attacking = false;
 
 	//Infect another ES if infected
 	if (infected) {
@@ -54,6 +51,8 @@ void EarthSoldier::attack()
 				{
 
 					float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+
+					attacking = true;	//To print if it's shooting at this timestep
 
 					//Adding enemy to attackedByES list
 					game->addAttacked(this, enemy);
@@ -91,6 +90,8 @@ void EarthSoldier::attack()
 
 			//Adding enemy to attackedByES list
 			game->addAttacked(this, enemy);
+			
+			attacking = true;
 
 			enemy->decHealth(damage);
 
@@ -109,6 +110,10 @@ void EarthSoldier::attack()
 		}
 
 	}
+
+	//Setting this unit as a fighting unit for the current timestep
+	if (attacking)
+		game->setFightingUnit(this);
 
 	while (tempList.dequeue(enemy))  //move all items from the temp list back to thier original list
 	{
