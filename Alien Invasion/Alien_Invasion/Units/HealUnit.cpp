@@ -37,6 +37,7 @@ void HealUnit::attack()
 				else
 				{
 					dynamic_cast <EarthSoldier*> (healed1)->setImmuned(true);
+					dynamic_cast <EarthSoldier*> (healed1)->setInfected(false);
 					game->addES(healed1);
 				}
 			
