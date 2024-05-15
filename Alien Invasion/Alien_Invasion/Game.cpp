@@ -404,8 +404,8 @@ void Game::printInter()
 	cout << endl << endl;
 
 	cout << "============= Current Percentage of Infected Soldiers =============\n";
-	if (total_ES() + UML1.getCount())
-		cout << (long double(EarthSoldier::getInfectedCount()) / (total_ES()+ UML1.getCount()) * 100) <<"%\n";
+	if (earthArmy->gettotCount())
+		cout << (long double(EarthSoldier::getInfectedCount()) / (earthArmy->gettotCount()) * 100) <<"%\n";
 	else
 		cout << "There is No EarthSoldiers \n";
 
