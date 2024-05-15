@@ -354,7 +354,7 @@ Td    ID    Tj    Df    Dd    Db
 Battle Result . . .
 
 
-TIE ! ! !
+ALIEN ARMY WIN ! ! !
 For Earth Army
 Total number of ES : 152
 Total number of ET : 84

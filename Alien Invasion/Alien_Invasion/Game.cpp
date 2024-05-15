@@ -281,26 +281,27 @@ void Game::start()
 				else if (alienArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Earth Army ===========================\n";
+					winner = true;
 					Display();
 					stop = false;
-					winner = true;
 				}
 				else if (earthArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Alien Army ===========================\n";
+					winner = true;
 					Display();
 					stop = false;
-					winner = true;
 				}
 			}
 			else {
 				if (alienArmy->isKilled() || earthArmy->isKilled() || tie) {
 					cout << "Simulation ended . . .\n";
+					if (!tie)
+						winner = true;
 					Display();
 					cout << "Output File created.\n";
 					stop = false;
-					if(!tie)
-						winner = true;
+					
 				}
 			}
 		}
