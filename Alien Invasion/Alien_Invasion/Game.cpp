@@ -453,11 +453,12 @@ void Game::Display()
 	outfile << endl << endl;
 	outfile << "Battle Result . . .\n\n\n";
  
-	if (alienArmy->isKilled())
+	if (alienArmy->isKilled()&&!earthArmy->isKilled())
 		outfile << "EARTH ARMY WIN ! ! !\n";
-	else
+	else if (!alienArmy->isKilled() && earthArmy->isKilled())
 		outfile << "ALIEN ARMY WIN ! ! !\n";
-
+	else
+		outfile << "TIE ! ! !\n";
 
 	outfile << "For Earth Army\n";
 
