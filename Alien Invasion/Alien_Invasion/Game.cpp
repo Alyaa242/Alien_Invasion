@@ -553,7 +553,7 @@ void Game::Display()
 		outfile << "There is no AlienMonster \n";
 
 	if (alienArmy->getTotAS())
-		outfile << "Total Destructed_AG / Total AG " << setw(10)<< float(tot_des_AS*1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
+		outfile << "Total Destructed_AD / Total AD " << setw(10)<< float(tot_des_AS*1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
 	else
 		outfile << "There is no AlienGunnery \n";
 
