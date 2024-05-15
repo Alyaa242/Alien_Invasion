@@ -24,8 +24,8 @@ class Game
 	AllyArmy* allyArmy;
 	RandGen* randGen;
 	// Average Df , Dd , Db for eath and alien
-	float AvgDfEarth, AvgDbEarth, AvgDdEarth;
-	float AvgDfAlien, AvgDbAlien, AvgDdAlien;
+	long double AvgDfEarth, AvgDbEarth, AvgDdEarth;
+	long double AvgDfAlien, AvgDbAlien, AvgDdAlien;
 	int timestep;
 	char choosen;
 	int healcap=0;

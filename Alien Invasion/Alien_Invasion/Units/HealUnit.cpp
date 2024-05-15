@@ -5,7 +5,7 @@ void HealUnit::attack()
 {
 	Unit* unit;
 	int max_health;
-	float h;
+	long double h;
 	LinkedQueue <Unit*> tempList1;
 	LinkedQueue <Unit*> tempList2;
 	
@@ -19,7 +19,7 @@ void HealUnit::attack()
 		if (healed1)
 		{
 
-			h = (float((getPower()) * (getHealth()))) / 100 / sqrt(healed1->getHealth());
+			h = (long double((getPower()) * (getHealth()))) / 100 / sqrt(healed1->getHealth());
 
 			if (dynamic_cast <EarthSoldier*> (healed1)->getInfected())
 			{
@@ -36,7 +36,9 @@ void HealUnit::attack()
 					tempList1.enqueue(healed1);
 				else
 				{
+
 					dynamic_cast <EarthSoldier*> (healed1)->setImmuned(true);
+					dynamic_cast <EarthSoldier*> (healed1)->setInfected(false);
 					game->addES(healed1);
 				}
 			
@@ -49,7 +51,7 @@ void HealUnit::attack()
 		if (healed2)
 		{
 
-			h = (float((getPower()) * (getHealth()) / 100)) / sqrt(healed2->getHealth());
+			h = (long double((getPower()) * (getHealth()) / 100)) / sqrt(healed2->getHealth());
 			healed2->incHealth(h);
 
 			if (healed2)
