@@ -4,7 +4,7 @@
 class Game;
 class Unit
 {
-	float health;
+	long double health;
 	int ID;
 	
 	int wait;
@@ -19,7 +19,7 @@ class Unit
 	bool attacked;		//Bool to konw if this unit was attacked before
 
 protected:
-	float capacity, power;
+	long double capacity, power;
 	Game* game;
 
 public:
@@ -28,8 +28,8 @@ public:
 	virtual void attack() = 0;
 
 	//Getters to members:
-	float getHealth() const;
-	float getPower() const;
+	long double getHealth() const;
+	long double getPower() const;
 	int getTj() const;
 	int getTa() const;
 	int getTd() const;
@@ -50,8 +50,8 @@ public:
 	void setAlienID();
 	void setAllyID();
 
-	void decHealth(float damage);		//Decrement health
-	void incHealth(float increment);		//increment health
+	void decHealth(long double damage);		//Decrement health
+	void incHealth(long double increment);		//increment health
 
 	int getWait();
 	void setWait(int w);

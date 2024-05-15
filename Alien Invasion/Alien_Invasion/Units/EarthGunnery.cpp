@@ -28,7 +28,7 @@ void EarthGunnery::attack()
 			index = rand() % count;
 			if (AMEnemies->remove(index, enemy))
 			{
-				float damageAM = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+				long double damageAM = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByEG list
 				game->addAttacked(this, enemy);
@@ -67,7 +67,7 @@ void EarthGunnery::attack()
 
 			if (fromlast || fromfront)
 			{
-				float damageAD = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+				long double damageAD = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByEG list
 				game->addAttacked(this, enemy);

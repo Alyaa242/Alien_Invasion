@@ -29,7 +29,7 @@ void AlienMonster::attack()
 			//Adding enemy to attackedByAM list
 			game->addAttacked(this, enemy);
 
-			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+			long double damage = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Decrement enemy's health:
 			enemy->decHealth(damage);
@@ -70,7 +70,7 @@ void AlienMonster::attack()
 
 				//If it will not infect, it will attack
 				else {
-					float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+					long double damage = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Decrement enemy's health:
 					enemy->decHealth(damage);
@@ -103,7 +103,7 @@ void AlienMonster::attack()
 				//Adding enemy to attackedByAM list
 				game->addAttacked(this, enemy);
 
-				float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+				long double damage = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Decrement enemy's health:
 				enemy->decHealth(damage);

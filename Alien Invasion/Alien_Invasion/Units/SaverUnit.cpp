@@ -24,7 +24,7 @@ void SaverUnit::attack()
 			//Adding enemy to attackedByAS list
 			game->addAttacked(this, enemy);
 
-			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
+			long double damage = (long double(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			enemy->decHealth(damage);
 
