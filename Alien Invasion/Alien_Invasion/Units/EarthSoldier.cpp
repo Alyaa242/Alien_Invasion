@@ -50,7 +50,7 @@ void EarthSoldier::attack()
 				else
 				{
 
-					float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+					long double damage = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					attacking = true;	//To print if it's shooting at this timestep
 
@@ -86,7 +86,7 @@ void EarthSoldier::attack()
 		 // if not infected ==> attack AS
 		else if (ASenemies->dequeue(enemy)) // get a unit from that list and attack it
 		{
-			float damage = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+			long double damage = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 			//Adding enemy to attackedByES list
 			game->addAttacked(this, enemy);
@@ -132,8 +132,9 @@ void EarthSoldier::setInfected(bool x)
 		totalInfected++;
 	}
 	else if (!x) {
+		if (infected)
+			infectedCount--;
 		infected = false;
-		infectedCount--;
 	}
 }
 

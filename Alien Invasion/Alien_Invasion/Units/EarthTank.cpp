@@ -13,7 +13,7 @@ void EarthTank::attack()
 	LinkedQueue<Unit*> tempList;
 
 	Unit* enemy;
-	float percentage = (ASEnemies->getCount() != 0)? ((float((ESlist->getCount()))) / (ASEnemies->getCount())) * 100 : INT_MIN;
+	long double percentage = (ASEnemies->getCount() != 0)? ((long double((ESlist->getCount()))) / (ASEnemies->getCount())) * 100 : INT_MIN;
 
 	bool Npass; // check if the percentage of ES reaches 80 of AS to stop attack AS
 
@@ -39,7 +39,7 @@ void EarthTank::attack()
 			index = rand() % count;
 			if (AMEnemies->remove(index, enemy))
 			{
-				float damageAM = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+				long double damageAM = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 				//Adding enemy to attackedByET list
 				game->addAttacked(this, enemy);
@@ -66,7 +66,7 @@ void EarthTank::attack()
 			if (Npass) {
 				if (ASEnemies->dequeue(enemy))
 				{
-					float damageAS = (float(power * getHealth()) / 100) / sqrt(enemy->getHealth());
+					long double damageAS = (long double(power * getHealth()) / 100) / sqrt(enemy->getHealth());
 
 					//Adding enemy to attackedByET list
 					game->addAttacked(this, enemy);
@@ -89,7 +89,7 @@ void EarthTank::attack()
 				}
 			}
 
-			if (!ASEnemies->isEmpty() && ((float((ESlist->getCount())) / (ASEnemies->getCount())) * 100 >= 80))
+			if (!ASEnemies->isEmpty() && ((long double((ESlist->getCount())) / (ASEnemies->getCount())) * 100 >= 80))
 			{
 				Npass = false;
 			}

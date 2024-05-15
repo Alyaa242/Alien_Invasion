@@ -22,12 +22,12 @@ Unit::Unit(int heal, int pow, int cap, int t, Game* g)
 	attacked = false;
 }
 
-float Unit::getHealth() const
+long double Unit::getHealth() const
 {
 	return health;
 }
 
-float Unit::getPower() const
+long double Unit::getPower() const
 {
 	return power;
 }
@@ -138,12 +138,12 @@ void Unit::setAllyID()
 }
 //
 
-void Unit::decHealth(float damage)
+void Unit::decHealth(long double damage)
 {
 	health -= damage;
 }
 
-void Unit::incHealth(float increment)
+void Unit::incHealth(long double increment)
 {
 	health += increment;
 	return;
