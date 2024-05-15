@@ -142,6 +142,11 @@ bool EarthSoldier::isImmune()
 	return immune;
 }
 
+void EarthSoldier::decInfectedCount()
+{
+	infectedCount--;
+}
+
 int EarthSoldier::getInfectedCount()
 {
 	return infectedCount;

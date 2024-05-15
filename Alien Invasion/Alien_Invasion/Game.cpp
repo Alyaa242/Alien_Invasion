@@ -84,6 +84,8 @@ void Game::addToKilledList(Unit* unit)
 
 	else if (dynamic_cast<EarthSoldier*>(unit)) {
 		tot_des_ES++;
+		if (dynamic_cast<EarthSoldier*>(unit)->isInfeced())
+			EarthSoldier::decInfectedCount();
 		AvgDfEarth += unit->getDf();
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
@@ -633,6 +635,7 @@ void Game::resetFightingUnits()
 	fightingAM = nullptr;
 	fightingAD1 = nullptr;
 	fightingAD2 = nullptr;
+	fightingSU = nullptr;
 
 	Unit* temp;
 	while (!attackedByET.isEmpty())
@@ -655,6 +658,9 @@ void Game::resetFightingUnits()
 
 	while (!attackedByAD2.isEmpty())
 		attackedByAD2.dequeue(temp);
+	
+	while (!attackedBySU.isEmpty())
+		attackedBySU.dequeue(temp);
 }
 
 

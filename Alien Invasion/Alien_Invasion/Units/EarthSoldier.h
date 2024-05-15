@@ -19,6 +19,7 @@ public:
 	bool isInfeced();
 	bool isImmune();
 
+	static void decInfectedCount();
 	static int getInfectedCount();
 	static int getTotalInfected();
 
