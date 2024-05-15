@@ -299,7 +299,7 @@ void Game::start()
 					Display();
 					cout << "Output File created.\n";
 					stop = false;
-					if(tie)
+					if(!tie)
 						winner = true;
 				}
 			}
