@@ -33,6 +33,7 @@ Game::Game()
 	earthArmy = new EarthArmy;
 	alienArmy = new AlienArmy;
 	allyArmy = new AllyArmy;
+	winner = false;
 	cout << "Enter File Name: \n";
 	cin >> fileName;
 	randGen = new RandGen(ReadInputParameters(), this);		//passing the parameters and pointer to game to randGen
@@ -84,6 +85,8 @@ void Game::addToKilledList(Unit* unit)
 
 	else if (dynamic_cast<EarthSoldier*>(unit)) {
 		tot_des_ES++;
+		if (dynamic_cast<EarthSoldier*>(unit)->isInfeced())
+			EarthSoldier::decInfectedCount();
 		AvgDfEarth += unit->getDf();
 	}
 	else if (dynamic_cast<EarthTank*>(unit)) {
@@ -240,12 +243,11 @@ void Game::start()
 	else
 		InteractiveM = true;
 
+	bool tie = false;
+
 	while (stop)
 
 	{
-		if (timestep == 8)
-			int x = 0;
-
 		resetFightingUnits();	//Reset current fighting units to null
 
 		addUnits();		//Adding units generated from randGen	
@@ -263,8 +265,14 @@ void Game::start()
 
 		if (timestep >= 40)
 		{
+			if (Unit::getLastEarthID() >= 999 && Unit::getLastAlienID() >= 1999 && !(fightingES || fightingET || fightingEG || fightingAM || fightingAS || fightingAD1 || fightingAD2))
+				tie = true;
+
+			if (alienArmy->isKilled() && earthArmy->isKilled())
+				tie = true;
+
 			if (InteractiveM) {
-				if (alienArmy->isKilled() && earthArmy->isKilled())
+				if (tie)
 				{
 					cout << "=========================== The Earth Army Parity with The Alien Army ===========================\n";
 					Display();
@@ -273,22 +281,27 @@ void Game::start()
 				else if (alienArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Earth Army ===========================\n";
+					winner = true;
 					Display();
 					stop = false;
 				}
 				else if (earthArmy->isKilled())
 				{
 					cout << "=========================== The winner is the Alien Army ===========================\n";
+					winner = true;
 					Display();
 					stop = false;
 				}
 			}
 			else {
-				if (alienArmy->isKilled() || earthArmy->isKilled()) {
+				if (alienArmy->isKilled() || earthArmy->isKilled() || tie) {
 					cout << "Simulation ended . . .\n";
+					if (!tie)
+						winner = true;
 					Display();
 					cout << "Output File created.\n";
 					stop = false;
+					
 				}
 			}
 		}
@@ -410,7 +423,7 @@ int Game::getTimestep()
 bool Game::SUwithdrawal()
 {
 	if (EarthSoldier::getInfectedCount() == 0 && isSUGen)
-	{ 
+	{
 		LinkedQueue<Unit*>* Sulist = allyArmy->getSUList();
 		Unit* unit;
 		while (Sulist->dequeue(unit))
@@ -450,12 +463,16 @@ void Game::Display()
  
 	outfile << endl << endl;
 	outfile << "Battle Result . . .\n\n\n";
- 
-	if (alienArmy->isKilled())
-		outfile << "EARTH ARMY WIN ! ! !\n";
-	else
-		outfile << "ALIEN ARMY WIN ! ! !\n";
 
+ if (winner)
+ {
+	 if (alienArmy->isKilled() && !earthArmy->isKilled())
+		 outfile << "EARTH ARMY WIN ! ! !\n";
+	 else if (!alienArmy->isKilled() && earthArmy->isKilled())
+		 outfile << "ALIEN ARMY WIN ! ! !\n";
+ }
+	else
+		outfile << "TIE ! ! !\n";
 
 	outfile << "For Earth Army\n";
 
@@ -536,7 +553,7 @@ void Game::Display()
 		outfile << "There is no AlienMonster \n";
 
 	if (alienArmy->getTotAS())
-		outfile << "Total Destructed_AG / Total AG " << setw(10)<< float(tot_des_AS*1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
+		outfile << "Total Destructed_AD / Total AD " << setw(10)<< float(tot_des_AS*1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
 	else
 		outfile << "There is no AlienGunnery \n";
 
@@ -633,6 +650,7 @@ void Game::resetFightingUnits()
 	fightingAM = nullptr;
 	fightingAD1 = nullptr;
 	fightingAD2 = nullptr;
+	fightingSU = nullptr;
 
 	Unit* temp;
 	while (!attackedByET.isEmpty())
@@ -655,6 +673,9 @@ void Game::resetFightingUnits()
 
 	while (!attackedByAD2.isEmpty())
 		attackedByAD2.dequeue(temp);
+	
+	while (!attackedBySU.isEmpty())
+		attackedBySU.dequeue(temp);
 }
 
 

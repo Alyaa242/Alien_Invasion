@@ -173,10 +173,10 @@ int Unit::getLastAlienID()
 std::ostream& operator<<(std::ostream& out, Unit* u)
 {
 	if (dynamic_cast<EarthSoldier*>(u) && dynamic_cast<EarthSoldier*>(u)->isInfeced()) {
-		out << "\033[31m" << u->getID() << "*" << "\033[0m";
+		out << "\033[31m" << u->getID() << "*" << "\033[0m";		//Color infected ES red
 	}
 	else if(dynamic_cast<HealUnit*>(u))
-		out << "\033[32m" << u->getID() << "\033[0m";
+		out << "\033[32m" << u->getID() << "\033[0m";		//Color HU green
 	else
 		out << u->getID();
 	return out;

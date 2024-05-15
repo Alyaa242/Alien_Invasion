@@ -15,7 +15,6 @@ void SaverUnit::attack()
 	if (capacity && !ASenemies->isEmpty())
 		game->setFightingUnit(this);
  
-	 
 	for (int i = 0; i < capacity; i++)
 	{
 		 
@@ -26,9 +25,6 @@ void SaverUnit::attack()
 			game->addAttacked(this, enemy);
 
 			float damage = (float(getPower() * getHealth()) / 100) / sqrt(enemy->getHealth());
-
-			//Adding enemy to attackedByES list
-			game->addAttacked(this, enemy);
 
 			enemy->decHealth(damage);
 

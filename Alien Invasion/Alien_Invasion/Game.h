@@ -65,6 +65,7 @@ class Game
 	bool InteractiveM;  
 	bool isSUGen;
 	string fileName;
+	bool winner;
 
 public:
 
