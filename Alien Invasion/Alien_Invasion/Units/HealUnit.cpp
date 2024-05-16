@@ -8,6 +8,9 @@ void HealUnit::attack()
 	long double h;
 	LinkedQueue <Unit*> tempList1;
 	LinkedQueue <Unit*> tempList2;
+	LinkedQueue <Unit*>* ESlist = game->getESEnemies();
+	ArrayStack <Unit*>* ETlist = game->getETEnemies();
+	
 	
 
 	game->UpdateUML();
@@ -39,8 +42,7 @@ void HealUnit::attack()
 
 					dynamic_cast <EarthSoldier*> (healed1)->setImmuned(true);
 					dynamic_cast <EarthSoldier*> (healed1)->setInfected(false);
-					cout << "\n addedddddds" << healed1;
-					game->addES(healed1);
+					ESlist->enqueue(healed1);
 				}
 			
 		}
@@ -61,7 +63,7 @@ void HealUnit::attack()
 
 					tempList2.enqueue(healed2);
 				else
-					game->addET(healed2);
+					ETlist->push(healed2);
 
 		}
 	}

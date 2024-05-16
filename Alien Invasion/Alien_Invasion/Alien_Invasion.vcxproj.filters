@@ -140,14 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="output.txt" />
-    <Text Include="lowH-I.txt" />
-    <Text Include="test2.txt" />
-    <Text Include="test3.txt" />
     <Text Include="tie.txt" />
-    <Text Include="test5.txt" />
-    <Text Include="test6.txt" />
-    <Text Include="medA.txt" />
+    <Text Include="ww.txt" />
     <Text Include="strongA.txt" />
-    <Text Include="strongE .txt" />
+    <Text Include="extreme.txt" />
+    <Text Include="ss.txt" />
+    <Text Include="strongE.txt" />
   </ItemGroup>
 </Project>

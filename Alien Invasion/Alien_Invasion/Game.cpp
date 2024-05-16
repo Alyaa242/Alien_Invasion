@@ -413,7 +413,7 @@ void Game::printInter()
 	cout << endl << endl;
 
 	cout << "============= Current Percentage of Infected Soldiers =============\n";
-	if (earthArmy->gettotCount() + UML1.getCount() + UML2.getCount())
+	if (earthArmy->getESList()->getCount() + UML1.getCount())
 		cout << (long double(EarthSoldier::getInfectedCount()) / (earthArmy->getESList()->getCount() + UML1.getCount()) * 100) << "%\n";
 	else
 		cout << "There is No EarthSoldiers \n";
@@ -501,7 +501,7 @@ void Game::Display()
 		outfile << "There is no EarthTanks \n";
 
 	if (earthArmy->getTotEG() > .0000001)
-		outfile << "Total Destructed_EG / Total EG " << setw(10) << long double(tot_des_ES*1.0 / earthArmy->getTotEG()) * 100 << "%" << setw(10) << endl;
+		outfile << "Total Destructed_EG / Total EG " << setw(10) << long double(tot_des_EG*1.0 / earthArmy->getTotEG()) * 100 << "%" << setw(10) << endl;
 	else
 		outfile << "There is no EarthGunnery \n";
 
@@ -561,7 +561,7 @@ void Game::Display()
 	outfile << "Total number of AM : " << alienArmy->getTotAM() << endl;
 	outfile << "Total number of AS : " << alienArmy->getTotAS() << endl;
 	if (alienArmy->getTotAD() > .0000001)
-		outfile << "Total Destructed_AS / Total AS " << setw(10) << long double(tot_des_AD*1.0 / alienArmy->getTotAD()) * 100 <<  "%" << endl;
+		outfile << "Total Destructed_AD / Total AD " << setw(10) << long double(tot_des_AD * 1.0 / alienArmy->getTotAD()) * 100 << "%" << endl;
 	else
 		outfile << "There is no AlienSoldiers \n";
 
@@ -571,7 +571,7 @@ void Game::Display()
 		outfile << "There is no AlienMonster \n";
 
 	if (alienArmy->getTotAS() > .0000001)
-		outfile << "Total Destructed_AD / Total AD " << setw(10)<< long double(tot_des_AS*1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
+		outfile << "Total Destructed_AS / Total AS " << setw(10) << long double(tot_des_AS * 1.0 / alienArmy->getTotAS()) * 100 << "%" << endl;
 	else
 		outfile << "There is no AlienGunnery \n";
 
@@ -734,16 +734,6 @@ void Game::setDdAlien(int t)
 void Game::setDbAlien(int t)
 {
 	AvgDbAlien += t;
-}
-
-void Game::addES(Unit* unit)
-{
-	earthArmy->addUnit(unit); 
-}
-
-void Game::addET(Unit* unit)
-{
-	earthArmy->addUnit(unit);
 }
 
 int Game::total_ES()

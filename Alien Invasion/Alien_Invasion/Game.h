@@ -92,8 +92,6 @@ public:
 	void setDfAlien(int t);
 	void setDdAlien(int t);
 	void setDbAlien(int t);
-	void addES(Unit* unit);
-	void addET(Unit* unit);
 	int total_ES();
 	
 	
