@@ -69,7 +69,7 @@ int* Game::ReadInputParameters()
 void Game::addToKilledList(Unit* unit)
 {
 	killedList.enqueue(unit);
-
+	
 	if (dynamic_cast<AlienSoldier*>(unit)) {
 		tot_des_AS++;
 		AvgDfAlien += unit->getDf();
@@ -188,14 +188,23 @@ Unit* Game::pickfromUML2()
 void Game::UpdateUML()
 {
 	Unit* unit;int max_health; 
-	for (int i{};i< UML1.getCount();i++)
+	LinkedQueue <Unit*> tmp;
+
+	while (UML1.dequeue(unit, max_health))
 	{
-		UML1.peek(unit, max_health);
-		if (timestep- unit->getWait() > 9)
+		
+		if ((timestep - unit->getWait()) > 9)
 		{
-			UML1.dequeue(unit,max_health);
+			
+			
 			addToKilledList(unit);
 		}
+		else 
+			tmp.enqueue(unit);
+	}
+	while (tmp.dequeue(unit))
+	{
+		UML1.enqueue(unit, max_health);
 	}
 
 

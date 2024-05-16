@@ -24,6 +24,7 @@ void EarthArmy::addUnit(Unit* unit)
 	//Check the unit's type
 	if (dynamic_cast<EarthSoldier*>(unit)) {
 		totalES++;
+
 		ESList.enqueue(unit);
 	}
 
