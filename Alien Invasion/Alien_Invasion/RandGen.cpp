@@ -18,8 +18,6 @@ RandGen::RandGen(int* param, Game* g)
 Unit* RandGen::CreateEarthUnit()
 {
 	if (Unit::getLastEarthID() < 1000) {
-		if (game->getTimestep() == 9)
-			int x = 0;
 		int power = rand() % (parameters[upPowE] - parameters[lowPowE] + 1) + parameters[lowPowE];
 		int health = rand() % (parameters[upHealE] - parameters[lowHealE] + 1) + parameters[lowHealE];
 		int capacity = rand() % (parameters[upCapE] - parameters[lowCapE] + 1) + parameters[lowCapE];
