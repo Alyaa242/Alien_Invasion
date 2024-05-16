@@ -1,98 +1,44 @@
 Td    ID    Tj    Df    Dd    Db
-0  2000     0     0     0     0
-0  2002     0     0     0     0
-1  2001     0     1     0     1
-1  2003     1     0     0     0
-1  2004     1     0     0     0
-1  2005     1     0     0     0
-2  2006     2     0     0     0
-2  2007     2     0     0     0
-2  2008     2     0     0     0
-4  2009     4     0     0     0
-4  2010     4     0     0     0
-4  2011     4     0     0     0
-5  2012     5     0     0     0
-5  2013     5     0     0     0
-5  2014     5     0     0     0
-7  2016     7     0     0     0
-7  2017     7     0     0     0
-7  2015     7     0     0     0
-8  2018     8     0     0     0
-8  2019     8     0     0     0
-8  2020     8     0     0     0
-10  2022    10     0     0     0
-10  2023    10     0     0     0
-10  2021    10     0     0     0
-13    21    13     0    13     0
-14  2024    14     0     0     0
-14  2025    14     0     0     0
-14  2026    14     0     0     0
-14    19    13     0    14     1
-17  2027    17     0     0     0
-17  2029    17     0     0     0
-17  2028    17     0     0     0
-21  2032    21     0     0     0
-21  2031    21     0     0     0
-21  2030    21     0     0     0
-22    32    22     0    22     0
-23  2033    23     0     0     0
-23  2034    23     0     0     0
-23  2035    23     0     0     0
-24  2037    24     0     0     0
-24  2038    24     0     0     0
-24  2036    24     0     0     0
-25  2039    25     0     0     0
-25  2040    25     0     0     0
-25  2041    25     0     0     0
-30    50    30     0    30     0
-31  2043    31     0     0     0
-31  2042    31     0     0     0
-31  2044    31     0     0     0
-32  2045    32     0     0     0
-32  2047    32     0     0     0
-32  2046    32     0     0     0
-36  2048    36     0     0     0
-36  2050    36     0     0     0
-36  2049    36     0     0     0
-36    54    36     0    36     0
-40  2051    40     0     0     0
-40  2052    40     0     0     0
-40  2053    40     0     0     0
+23     1    14     0     9     9
+24     2    14     0    10    10
+26     3    16     0    10    10
+38     7    28     0    10    10
+38     6    26     0    12    12
+38     8    28     0    10    10
+38     4    16     0    22    22
+38    12    38     0    38     0
 
 
 Battle Result . . .
 
 
-EARTH ARMY WIN ! ! !
+ALIEN ARMY WIN ! ! !
 For Earth Army
-Total number of ES : 25
-Total number of ET : 25
-Total number of EG : 11
-Total number of HU : 5
-Total Destructed_ES / Total ES          0%
-Total Destructed_ET / Total ET          0%
-Total Destructed_EG / Total EG          0%
+Total number of ES : 10
+Total number of ET : 0
+Total number of EG : 1
+Total number of HU : 1
+Total Destructed_ES / Total ES         60%
+There is no EarthTanks 
+Total Destructed_EG / Total EG        600%
 Total Destructed_HU / Total HU        100%
-Total Destructed Units / Total Units 7.57576%
-Average of Df undefined
- Average of Dd undefined
-Average of Db undefined
-AvgDbEarth equal zero
-AvgDbEarth equal zero
-Total Successful Healed Units / Total EarthUnits         0%
+Total Destructed Units / Total Units 66.6667%
+Average of Df : 0
+Average of Dd : 11.8571
+Average of Db : 11.8571
+Df/Db = 0%
+Dd/Db = 100%
+
+Total Successful Healed Units / Total EarthUnits        25%
 Percentage of Infected to earthsoldiers              0%
 
 
 For Alien Army
-Total number of AD : 9
-Total number of AM : 20
-Total number of AS : 25
-Total Destructed_AS / Total AS        100%
-Total Destructed_AM / Total AM        100%
-Total Destructed_AD / Total AD        100%
-Total Destructed Units / Total Units 100%
-Average of Df : 0.0185185
-Average of Dd : 0
-Average of Db : 0.0185185
-Df/Db = 100%
-Dd/Db = 0%
+Total number of AD : 4
+Total number of AM : 3
+Total number of AS : 11
+Total Destructed_AS / Total AS          0%
+Total Destructed_AM / Total AM          0%
+Total Destructed_AD / Total AD          0%
+Total Destructed Units / Total Units 0%
+Average of Df undefined Average of Dd undefined Average of Db undefined 
