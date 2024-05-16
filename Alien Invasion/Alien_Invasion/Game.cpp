@@ -114,7 +114,7 @@ void Game::addUnits()
 
 	 
 	if (!SUwithdrawal()) {
-		arrSaver = randGen->GenerateSaverUnits(EarthSoldier::getInfectedCount() / long double(earthArmy->gettotCount()) * 100);
+		arrSaver = randGen->GenerateSaverUnits(EarthSoldier::getInfectedCount() / long double(earthArmy->gettotCount() + UML1.getCount() + UML2.getCount()) * 100);
 		isSUGen = true;
 	}
 	
@@ -413,8 +413,8 @@ void Game::printInter()
 	cout << endl << endl;
 
 	cout << "============= Current Percentage of Infected Soldiers =============\n";
-	if (earthArmy->gettotCount())
-		cout << (long double(EarthSoldier::getInfectedCount()) / (earthArmy->gettotCount()) * 100) <<"%\n";
+	if (earthArmy->gettotCount() + UML1.getCount() + UML2.getCount())
+		cout << (long double(EarthSoldier::getInfectedCount()) / (earthArmy->gettotCount() + UML1.getCount() + UML2.getCount()) * 100) <<"%\n";
 	else
 		cout << "There is No EarthSoldiers \n";
 
