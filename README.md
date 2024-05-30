@@ -1,6 +1,6 @@
 # Alien Invasion :flying_saucer:
 
-### A game that simulates a war between $\color{rgba(70, 88, 207)}{\textsf{Earth Army}}$ and $\color{rgba(242, 53, 85)}{\textsf{**Alien Army**}}$.
+### A game that simulates a war between $\color{rgba(70, 88, 207)}{\textsf{Earth Army}}$ and $\color{rgba(242, 53, 85)}{\textsf{Alien Army}}$.
 
 - The game shows the statistics of the war between earth and alien armies according to given parameteres of both armies.
 - The game has 2 modes; ***interactive*** and ***silent***.
